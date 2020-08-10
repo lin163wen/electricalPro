@@ -2,7 +2,8 @@
 	<div>
     <!-- 'title','hasRight','back','parting','search','upload' -->
     <my-header title="工作"></my-header>
-    This is work
+    <div>素材</div>
+    <div>审稿</div>
     <navigate-bar></navigate-bar>
   </div>
 

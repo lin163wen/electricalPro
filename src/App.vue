@@ -17,6 +17,8 @@
     -moz-osx-font-smoothing: grayscale;
     text-align: center;
     color: #2c3e50;
+    height: 100%;
+    width: 100%;
   }
 /* 底部导航样式 */
   .van-tabbar-item {
@@ -31,9 +33,19 @@
     font-size: 24px !important;
     right: unset !important;
   }
-
+/*头部title样式*/
   .van-nav-bar__title{
-    font-size: 30px;
-
+    font-size: 30px !important;
+  }
+/*任务详情Tab样式*/
+  .van-tab{
+    font-size: 32px !important;
+    color:#ccc
+  }
+  .van-tabs{
+    height: 93% !important;
+  }
+  .van-tab--active{
+    color: #323233 !important;
   }
 </style>

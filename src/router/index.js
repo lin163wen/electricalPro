@@ -6,6 +6,7 @@ import Work from '../components/wok/work.vue'
 import Connection from '../components/connection/connection.vue'
 import Mine from '../components/mine/mine.vue'
 import MissionDetail from '../components/mission/MissionDetail.vue'
+import MissionBack from '../components/mission/MissionBack.vue'
 Vue.use(Router)
 
 export default new Router({
@@ -34,6 +35,10 @@ export default new Router({
       path: '/MissionDetail',
       name: 'MissionDetail',
       component: MissionDetail
+    },{
+      path: '/MissionBack',
+      name: 'MissionBack',
+      component: MissionBack
     }
   ]
 })

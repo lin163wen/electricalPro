@@ -1,17 +1,31 @@
 <template>
-	<div>
+	<div style="height: 100%;">
     <!-- 'title','hasRight','back','parting','search','upload' -->
-    <my-header title="任务详情" back="true"></my-header>
-    <van-tabs v-model="active">
-      <van-tab title="标签 1">正文内容</van-tab>
-      <van-tab title="标签 2">基础信息</van-tab>
+    <my-header title="任务详情" back="true" ref="header" backUrl='/Mission'></my-header>
+    <van-tabs v-model="active" color="#FFF">
+      <van-tab title="正文内容">
+        <div class="content">
+          <div class="zw">
+            正文内容
+          </div>
+          <div class="btn_div">
+            <div @click="nextStep()">下一步</div>
+          </div>
+        </div>
+      </van-tab>
+      <van-tab title="基础信息">
+        <div class="content">
+          <div class="jc">
+            基础信息
+          </div>
+          <div class="btn_div">
+            <div>发布</div>
+            <div>审核通过</div>
+            <div @click="back()">退回</div>
+          </div>
+        </div>
+      </van-tab>
     </van-tabs>
-    <div v-if="active==0">
-      正文内容
-    </div>
-    <div v-if="active==1">
-      基础信息
-    </div>
   </div>
 
 </template>
@@ -27,6 +41,12 @@ export default{
     }
   },
   methods:{
+    nextStep(){
+      this.active=1;
+    },
+    back(){
+      this.$router.push('/MissionBack')
+    }
   }
 }
 </script>
@@ -34,23 +54,15 @@ export default{
 <style scoped lang="less">
   .content{
     display: flex;
-    flex-wrap: nowrap;
-    padding: 50px;
-    height: 120px;
-    .icon{
-      height: 100px;
-      width: 100px;
+    flex-direction: row;
+    padding-top: 50px;
+    .zw{
+
     }
-    .text{
-      padding-left: 20px;
-      text-align: left;
-      .text_title{
-        font-size: 32px;
-      }
-    }
-    .author{
-      padding-left: 30px;
-      line-height: 120px;
+    .btn_div{
+      display: flex;
+      position: absolute;
+      bottom: 30px;
     }
   }
 </style>

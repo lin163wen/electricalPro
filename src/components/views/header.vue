@@ -2,7 +2,7 @@
   <van-nav-bar :title="title" class="header">
     1111
     <template #left v-if="back">
-      <img src="../../assets/back.png" class="back" />
+      <img src="../../assets/back.png" class="back" @click="goBack()"/>
     </template>
     <template #right v-if='hasRight'>
         <div v-if="parting">分类</div>
@@ -15,11 +15,19 @@
 <script>
   export default{
     name:'MyHeader',
-    props:['title','hasRight','back','parting','search','upload'],
+    props:['title','hasRight','back','parting','search','upload','backUrl'],
+    data () {
+      return {
+        msg: 'Welcome to Your Vue.js App'
+      }
+    },
     created() {
-      console.log(this.title);
+      console.log(this.backUrl);
     },
     methods:{
+      goBack(){
+        this.$router.push(this.backUrl);
+      },
       onClickLeft(){
         console.log('left')
       }
