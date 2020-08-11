@@ -5,13 +5,13 @@
     <div class="mission_back">
       <div class="mission_back_text">退回节点</div>
       <select>
-        <option value="1">草稿1</option>
+        <option value="1" selected="selected">草稿1</option>
         <option value="2">草稿2</option>
         <option value="3">草稿3</option>
       </select>
 
       <div class="mission_back_text">回退理由</div>
-      <textarea class="mission_back_textarea"></textarea>
+      <textarea id='reason' class="mission_back_textarea"></textarea>
       <span class="text_length">{{textLength}}<span>/200</span></span>
     </div>
   </div>
@@ -48,6 +48,23 @@
         ]
       }
     },
+    mounted() {
+      console.log('mounted',$('#reason'))
+      var _this = this;
+      $("#reason").on("input propertychange", function() {
+        console.log(11111)
+        var $this = $(this),
+          _val = $this.val(),
+          count = "";
+        if (_val.length > 200) {
+          $this.val(_val.substring(0, 200));
+        }
+        count = $this.val().length;
+        _this.textLength = count;
+      });
+    },
+    created() {
+    },
     methods: {}
   }
 </script>
@@ -59,9 +76,42 @@
     text-align: left;
     padding-left: 50px;
     padding-top: 100px;
+
     .mission_back_text {
       font-size: 24px;
       font-weight: 800;
     }
+
+    .mission_back_textarea {
+      width: 90%;
+      height: 300px;
+      max-width: 90%;
+      max-height: 300px;
+      margin: 20px 0;
+    }
+  }
+
+  select {
+    font-family: "微软雅黑";
+    margin: 20px 0;
+    width: 90%;
+    height: 60px;
+    font-size: 24px;
+    text-align: center;
+  }
+
+  option {
+    color: black;
+    background: #A6E1EC;
+    line-height: 20px;
+  }
+
+  select:focus {
+    border: 2px #ddd solid;
+    box-shadow: 0 0 15px 1px #DDDDDD;
+  }
+
+  option:hover {
+    background: #EBCCD1;
   }
 </style>

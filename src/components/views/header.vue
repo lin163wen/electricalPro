@@ -1,12 +1,15 @@
 <template>
   <van-nav-bar :title="title" class="header">
-    1111
     <template #left v-if="back">
       <img src="../../assets/back.png" class="back" @click="goBack()"/>
     </template>
     <template #right v-if='hasRight'>
-        <div v-if="parting">分类</div>
-        <div v-if="search">搜索</div>
+        <div v-if="parting">
+          <img src="../../assets/parting.png" class="back" @click="goParting()"/>
+        </div>
+        <div v-if="search">
+          <img src="../../assets/search.png" class="back" @click="goSearch()"/>
+        </div>
         <div v-if="upload">上传</div>
     </template>
   </van-nav-bar>
@@ -26,7 +29,12 @@
     },
     methods:{
       goBack(){
-        this.$router.push(this.backUrl);
+        if(this.backUrl){
+          this.$router.push(this.backUrl);
+        }else{
+          this.$router.back();
+        }
+
       },
       onClickLeft(){
         console.log('left')
@@ -41,6 +49,12 @@
   height: 60px;
   .back{
     height: 40px;
+  }
+  div{
+    width: 40px;
+    height: 40px;
+    font-size: 22px;
+    margin: 0 10px;
   }
 }
 </style>

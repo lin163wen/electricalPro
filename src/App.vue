@@ -48,4 +48,17 @@
   .van-tab--active{
     color: #323233 !important;
   }
+
+  .van-grid-item__icon{
+    font-size: 32px !important;
+  }
+  .van-grid-item__text{
+    font-size: 32px !important;
+  }
+  .van-grid{
+    margin-top: 50px !important;
+  }
+  .van-grid-item__content--center{
+    border: solid #2C3E50 1px;
+  }
 </style>

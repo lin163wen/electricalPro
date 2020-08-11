@@ -1,10 +1,8 @@
 <template>
 	<div>
     <!-- 'title','hasRight','back','parting','search','upload' -->
-    <my-header title="工作"></my-header>
-    <div>素材</div>
-    <div>审稿</div>
-    <navigate-bar></navigate-bar>
+    <my-header title="联系人" back="true"></my-header>
+    connectDetail
   </div>
 
 </template>
@@ -13,8 +11,8 @@
 import NavigateBar from '../views/navigateBar.vue'
 import MyHeader from '../views/header.vue'
 export default{
-  name:'Work',
-  components:{NavigateBar,MyHeader}
+  name:'ConnectDetails',
+  components:{MyHeader}
 }
 </script>
 
