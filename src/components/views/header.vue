@@ -45,8 +45,8 @@
 
 <style scoped="scoped" lang="less">
 .header{
-  padding: 30px 0;
-  height: 60px;
+  height: 111px;
+  background: linear-gradient(#7c5dfb 0%, #41abff 100%);
   .back{
     height: 40px;
   }

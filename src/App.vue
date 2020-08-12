@@ -31,7 +31,7 @@
     font-size: 32px !important;
   }
   .van-tabbar {
-    height: 100px !important;
+    height: 112px !important;
   }
 /* 底部导航样式‘任务’右上角任务数样式 */
   .van-info{
@@ -41,7 +41,13 @@
   }
 /*头部title样式*/
   .van-nav-bar__title{
-    font-size: 30px !important;
+  	height: 43px !important;
+	font-size: 42px !important;
+	font-family: Microsoft YaHei Regular, Microsoft YaHei Regular-Regular !important;
+	font-weight: 400 !important;
+	color: #ffffff !important;
+	line-height: 43px !important;
+	letter-spacing: 3px !important;
   }
 /*任务详情Tab样式*/
   .van-tab{
