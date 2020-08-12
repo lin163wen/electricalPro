@@ -12,13 +12,19 @@
 
 <style>
   #app {
-    font-family: 'Avenir', Helvetica, Arial, sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    text-align: center;
-    color: #2c3e50;
-    height: 100%;
     width: 100%;
+    position: relative;
+    overflow-x: hidden;
+    height: 100%;
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
+    background-attachment: local;
+    overflow-y: auto;
+    -moz-user-select:none;/*火狐*/
+    -webkit-user-select:none;/*webkit浏览器*/
+    -ms-user-select:none;/*IE10*/
+    -khtml-user-select:none;/*早期浏览器*/
+    user-select:none;
   }
 /* 底部导航样式 */
   .van-tabbar-item {
@@ -61,4 +67,11 @@
   .van-grid-item__content--center{
     border: solid #2C3E50 1px;
   }
+
+  /* .van-swipe{
+    width: 100% !important;
+  }
+  .van-swipe-item{
+    width: 100% !important;
+  } */
 </style>

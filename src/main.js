@@ -7,6 +7,8 @@ import $ from 'jquery'
 import App from './App'
 import router from './router'
 import 'lib-flexible'
+import { Lazyload } from 'vant';
+Vue.use(Lazyload);
 Vue.config.productionTip = false
 Vue.use(Vant)
 /* eslint-disable no-new */

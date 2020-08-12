@@ -1,16 +1,16 @@
 <template>
   <van-nav-bar :title="title" class="header">
     <template #left v-if="back">
-      <img src="../../assets/back.png" class="back" @click="goBack()"/>
+      <img src="" class="back" @click="goBack()"/>
     </template>
     <template #right v-if='hasRight'>
         <div v-if="parting">
-          <img src="../../assets/parting.png" class="back" @click="goParting()"/>
+          <img src="" class="back" @click="goParting()"/>
         </div>
         <div v-if="search">
-          <img src="../../assets/search.png" class="back" @click="goSearch()"/>
+          <img src="" class="back" @click="goSearch()"/>
         </div>
-        <div v-if="upload">上传</div>
+        <div v-if="upload" class="upload">上传</div>
     </template>
   </van-nav-bar>
 </template>
@@ -49,6 +49,12 @@
   height: 60px;
   .back{
     height: 40px;
+  }
+  .upload{
+    width: 60px;
+    height: 40px;
+    font-size: 22px;
+    margin: 0 10px;
   }
   div{
     width: 40px;

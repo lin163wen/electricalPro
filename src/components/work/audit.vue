@@ -3,7 +3,7 @@
     <!-- 'title','hasRight','back','parting','search','upload' -->
     <my-header title="审稿"></my-header>
     <div class="content" @click="missionDetail()">
-      <img class="icon" src="../../assets/parting.png"/>
+      <img class="icon" src=""/>
       <div class="text">
         <div class="text_title">稿件标题稿件标题稿件标题</div>
         <div class="text_lanmu">渠道-栏目</div>
@@ -12,7 +12,7 @@
       <div class="author">作者</div>
     </div>
     <div class="content">
-      <img class="icon" src="../../assets/parting.png"/>
+      <img class="icon" src=""/>
       <div class="text">
         <div class="text_title">稿件标题稿件标题稿件标题</div>
         <div class="text_lanmu">渠道-栏目</div>
