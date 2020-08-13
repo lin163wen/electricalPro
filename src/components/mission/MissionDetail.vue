@@ -55,7 +55,7 @@
               <div class="channel_title">
                 <span>渠道信息</span>
               </div>
-              <div class="basic_info" v-if="basicInfoType==1">
+              <div class="channel_info" v-if="basicInfoType==1">
                 <ul class="basic_name">
                   <li>上标题</li>
                   <li>下标题</li>
@@ -65,7 +65,7 @@
                   <li>我是下标题</li>
                 </ul>
               </div>
-              <div class="basic_info" v-if="basicInfoType==2">
+              <div class="channel_info" v-if="basicInfoType==2">
                 <ul class="basic_name">
                   <li>附件<img src="../../assets/accessory@2x.png" /></li>
                 </ul>
@@ -73,7 +73,7 @@
                   <li>附件名称</li>
                 </ul>
               </div>
-              <div class="basic_info" v-if="basicInfoType==3">
+              <div class="channel_info" v-if="basicInfoType==3">
                 <ul class="basic_name">
                   <li>视频</li>
                 </ul>
@@ -109,7 +109,7 @@ export default{
   data(){
     return{
       active:1,
-      basicInfoType:2
+      basicInfoType:3
     }
   },
   methods:{
@@ -229,6 +229,7 @@ export default{
         flex-direction: row;
         margin-left: 46px;
         margin-top: 35px;
+        min-height: 434px;
         .basic_name{
           font-size: 26px;
           font-family: Microsoft YaHei Bold-Bold;
@@ -279,6 +280,45 @@ export default{
           margin-left: 43px;
         }
       }
+      .channel_info{
+        display: flex;
+        flex-direction: row;
+        margin-left: 46px;
+        margin-top: 35px;
+        min-height: 124px;
+        .basic_name{
+          font-size: 26px;
+          font-family: Microsoft YaHei Bold-Bold;
+          font-weight: 700;
+          color: #333333;
+          letter-spacing: 1px;
+          li{
+            margin-bottom: 25px;
+            text-align: right;
+            img{
+              width: 36px;
+              height: 36px;
+              margin-left: 15px;
+            }
+          }
+        }
+        .basic_value{
+          margin-left: 80px;
+          font-size: 26px;
+          font-family: Microsoft YaHei Bold;
+          font-weight: 400;
+          color: #333333;
+          letter-spacing: 1px;
+          li{
+            margin-bottom: 25px;
+            img{
+              width: 28px;
+              height: 28px;
+              margin-left: 10px;
+            }
+          }
+        }
+      }
     }
     .btn_div{
       background-color: #e5e5e5;
@@ -289,7 +329,7 @@ export default{
       color: #ffffff;
       letter-spacing: 1px;
       display: flex;
-      margin-top: 147px;
+      margin-top: 127px;
       .publish_btn{
         margin-left: 20px;
         margin-top: 8px;
