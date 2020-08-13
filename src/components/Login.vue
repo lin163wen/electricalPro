@@ -122,7 +122,6 @@
 			}
 		}
 		.no_login{
-			width: 254px;
 			font-size: 24px;
 			font-family: Microsoft YaHei Regular, Microsoft YaHei Regular-Regular;
 			font-weight: 400;

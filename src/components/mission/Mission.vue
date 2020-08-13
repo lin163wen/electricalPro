@@ -47,7 +47,7 @@
 		},
 		data(){
 			return{
-				missionNum:0
+				missionNum:5
 			}
 		},
 		methods: {

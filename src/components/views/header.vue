@@ -1,7 +1,7 @@
 <template>
   <van-nav-bar :title="title" class="header">
     <template #left v-if="back">
-      <img src="" class="back" @click="goBack()"/>
+      <img src="../../assets/back@2x.png" class="back" @click="goBack()"/>
     </template>
     <template #right v-if='hasRight'>
         <div v-if="parting">
@@ -48,7 +48,8 @@
   height: 111px;
   background: linear-gradient(#7c5dfb 0%, #41abff 100%);
   .back{
-    height: 40px;
+    height: 47px;
+    width: 25px;
   }
   .upload{
     width: 60px;
