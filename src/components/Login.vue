@@ -7,12 +7,12 @@
         <div class="password">密码</div>
         <!--秘文密码-->
         <div class="password_div" v-show="!showPwdInput">
-          <img class="password_img" src="../assets/login_copy@3x.png" @click="showPwd()" />
+          <img class="password_img" src="../assets/pwd_hide@2x.png" @click="showPwd()" />
           <input type="password" v-model="passwordCoven" class="password_input"></input>
         </div>
         <!--明文秘密-->
         <div class="password_div" v-show="showPwdInput">
-          <img class="password_img" src="../assets/login_copy@3x.png" @click="hidenPwd()" />
+          <img class="password_img" src="../assets/pwd_show@3x.png" @click="hidenPwd()" />
           <input type="text" v-model="password" class="password_input"></input>
         </div>
 
