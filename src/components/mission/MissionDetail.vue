@@ -6,17 +6,17 @@
       <van-tab title="正文内容">
         <div class="content_div">
           <div class="content">
-            <div class="content_title">新闻标题</div>
+            <div class="content_title">{{missionDetail.title}}</div>
             <div class="content_info">
-              <span>署名作者</span>
-              <span style="margin-left: 72px;">2020-02-02 22:22</span>
+              <span>{{missionDetail.signature}}</span>
+              <span style="margin-left: 72px;">{{missionDetail.lastModifyTime}}</span>
             </div>
-            <div class="content_detail">内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容</div>
+            <div class="content_detail" v-html="missionDetail.content"></div>
           </div>
           <div class="author_div">
-            <span>署名作者</span>
-            <span>作者:名字名字</span>
-            <span>编辑:名字名字</span>
+            <span>{{missionDetail.signature}}</span>
+            <span>作者:{{authorsStr}}</span>
+            <span>编辑:{{editorsStr}}</span>
           </div>
           <div class="btn_div">
             <div @click="nextStep()" class="next_btn">
@@ -42,13 +42,21 @@
                   <li>再要</li>
                 </ul>
                 <ul class="basic_value">
-                  <li>渠道名称</li>
-                  <li>名称</li>
-                  <li>钱嘉琛<img src="../../assets/basic_icon@2x.png" /> 钱嘉诚<img src="../../assets/basic_icon@2x.png" /></li>
-                  <li>钱嘉琛<img src="../../assets/basic_icon@2x.png" /> 钱嘉诚<img src="../../assets/basic_icon@2x.png" /></li>
-                  <li>阿巴阿巴</li>
-                  <li>暴富、发财、富婆</li>
-                  <li></li>
+                  <li>{{missionDetail.channelName}}</li>
+                  <li>{{missionDetail.columnName}}</li>
+                  <li>
+                  	<template v-for="(item,index) in missionDetail.authors">
+                  		{{item}}<img src="../../assets/basic_icon@2x.png" />
+                  	</template>
+                  </li>
+                  <li>
+                  	<template v-for="(item,index) in missionDetail.editors">
+                  		{{item}}<img src="../../assets/basic_icon@2x.png" />
+                  	</template>
+                  </li>
+                  <li>{{missionDetail.signature}}</li>
+                  <li>{{missionDetail.keyword}}</li>
+                  <li>{{missionDetail.summary}}</li>
                 </ul>
               </div>
 
@@ -61,8 +69,8 @@
                   <li>下标题</li>
                 </ul>
                 <ul class="basic_value">
-                  <li>我是上标题</li>
-                  <li>我是下标题</li>
+                  <li>{{missionDetail.channelProperty ? missionDetail.channelProperty.headerTitle:""}}</li>
+                  <li>{{missionDetail.channelProperty ? missionDetail.channelProperty.footerTitle:""}}</li>
                 </ul>
               </div>
               <div class="channel_info" v-if="basicInfoType==2">
@@ -103,22 +111,61 @@
 
 <script>
 import MyHeader from '../views/header.vue'
+import {MissionDetail} from '../../utils/request.js'
+import { Toast } from 'vant';
 export default{
   name:'MissionDetail',
   components:{MyHeader},
   data(){
     return{
-      active:1,
-      basicInfoType:3
+      active:0,
+      basicInfoType:1,
+      storyId:this.$route.params.storyId,
+      auditId:this.$route.params.auditId,
+      missionDetail:{}
     }
   },
+  created(){
+  	console.log(this.$route.params.storyId);
+  	this.getMissionDetail();
+  },
+  computed:{
+  	editorsStr:function(){
+  		if(this.missionDetail && this.missionDetail.editors){
+  			return this.missionDetail.editors.join(',')
+  		}
+  		return "";
+  	},
+  	authorsStr:function(){
+  		if(this.missionDetail && this.missionDetail.authors){
+  			return this.missionDetail.authors.join(',')
+  		}
+  		return "";
+  	}
+  },
   methods:{
+  	getMissionDetail(){
+  		var _this = this;
+  		MissionDetail({
+  			storyId:this.storyId,
+  			auditId:this.auditId
+  		}).then(response => {
+  			if(response.code==0){
+  				_this.missionDetail = response.data;
+  			}else{
+  				Toast(response.message);
+  			}
+  		}).catch(err => {
+  			console.log(err);
+  		})
+  	},
     nextStep(){
       this.active=1;
     },
     back(){
       this.$router.push('/MissionBack')
     }
+    
   }
 }
 </script>
@@ -253,7 +300,9 @@ export default{
           font-weight: 400;
           color: #333333;
           letter-spacing: 1px;
+          
           li{
+          	min-height: 37px;
             margin-bottom: 25px;
             img{
               width: 28px;

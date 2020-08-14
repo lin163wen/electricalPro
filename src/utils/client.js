@@ -5,8 +5,10 @@ import QS from 'qs';
 axios.interceptors.request.use(function (config) {
   //config.url = domain+config.url;
   //console.log(config.url);
-
   config.headers['Access-Control-Allow-Origin']='*';
+  if(config.url.indexOf('login')<0){
+  	config.headers['token'] = localStorage.getItem('token');
+  }
   if (config.data && config.method == 'post') {
     config.data = QS.stringify(config.data);
   }
@@ -20,7 +22,7 @@ axios.interceptors.request.use(function (config) {
 axios.interceptors.response.use(function (response) {
   return response.data;
 }, function (response) {
-  return Promise.reject(response.response);
+  return Promise.reject(response);
 });
 
 export const get = (url, params) => {

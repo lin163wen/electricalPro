@@ -1,33 +1,22 @@
 <template>
-	<div style="height: 84%;">
+	<div style="height: 84%;" :key="missionListNum">
 		<!-- 'title','hasRight','back','parting','search','upload' -->
 		<my-header title="任务"></my-header>
-		<div class="mission_num" v-if="missionNum>0">任务数量（{{missionNum}}）</div>
-		<div class="mission_list" v-if="missionNum>0">
-			<div class="mission">
-				<div class="content" @click="missionDetail()">
+		<div class="mission_num" v-if="missionListNum>0">任务数量（{{missionListNum}}）</div>
+		<div class="mission_list" v-if="missionListNum>0">
+			<div class="mission" v-for="(item,index) in missionList">
+				<div class="content" @click="missionDetail(item)">
 					<img class="icon" src="../../assets/check@2x.png" />
 					<div class="text">
-						<div class="text_title">稿件标题稿件标题稿件标题稿件标题</div>
-						<div class="text_lanmu">渠道-栏目</div>
-						<div class="text_time">2020-02-02 22:22</div>
+						<div class="text_title">{{item.title}}</div>
+						<div class="text_lanmu">{{item.channelName}}</div>
+						<div class="text_time">{{item.updateTime}}</div>
 					</div>
 				</div>
-				<div class="author">作者：伊娃懦夫 白瞎等</div>
-			</div>
-			<div class="mission">
-				<div class="content" @click="missionDetail()">
-					<img class="icon" src="../../assets/check@2x.png" />
-					<div class="text">
-						<div class="text_title">稿件标题稿件标题稿件标题稿件标题标题稿件稿件标题稿件标题稿件标题稿件标题标题稿件稿件标题稿件标题稿件标题稿件标题标题稿件</div>
-						<div class="text_lanmu">渠道-栏目</div>
-						<div class="text_time">2020-02-02 22:22</div>
-					</div>
-				</div>
-				<div class="author">作者：张霞 无需等</div>
+				<div class="author">作者：{{item.author}}</div>
 			</div>
 		</div>
-		<div class="no_mission" v-if="missionNum<=0">
+		<div class="no_mission" v-if="missionListNum<=0">
 			<div class="no_mission_img"></div>
 			<div class="no_mission_text"></div>
 		</div>
@@ -39,6 +28,8 @@
 <script>
 	import NavigateBar from '../views/navigateBar.vue'
 	import MyHeader from '../views/header.vue'
+	import {Missions} from '../../utils/request.js'
+	import { Toast } from 'vant';
 	export default {
 		name: 'Mission',
 		components: {
@@ -47,12 +38,43 @@
 		},
 		data(){
 			return{
-				missionNum:5
+				missionListNum:this.common.missionNum,
+				missionList:[],
+				componentKey:0
 			}
 		},
+		created(){
+			this.queryMissions();
+		},
 		methods: {
-			missionDetail() {
-				this.$router.push('/MissionDetail')
+			missionDetail(item) {
+				console.log(item);
+				this.$router.push({
+					name:'MissionDetail',
+					params:{
+						storyId:item.storyId,
+						auditId:item.auditId
+					}
+				});
+			},
+			queryMissions(){
+				console.log(this.missionListNum);
+				var _this = this;
+				Missions({}).then((response) =>{
+					console.log(response);
+					if(response.code==0){
+						_this.missionList = response.data.storyTaskListResponseList;
+						_this.common.setMissionNum(response.data.storyTaskListResponseList.length);
+						_this.missionListNum = response.data.storyTaskListResponseList.length;
+						console.log(_this.missionListNum);
+					}else{
+						Toast(response.message);
+					}
+				}).catch((response) => {
+					console.log(4444);
+					console.log(response);
+				})
+				
 			}
 		}
 	}
@@ -90,7 +112,8 @@
 		background-color: #f4f4f4;
 		display: flex;
 		flex-direction: column;
-		height: 100%;
+		height: 92%;
+		overflow: scroll;
 		.mission {
 			background-color: #ffffff;
 			display: flex;

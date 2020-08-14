@@ -18,6 +18,8 @@ Vue.config.productionTip = false
 Vue.use(Vant)
 import plusExtends from './utils/plusextends.js'
 Vue.prototype.$plusExtends = plusExtends
+import common from './utils/common.js'
+Vue.prototype.common = common;
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

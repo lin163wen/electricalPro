@@ -1,23 +1,23 @@
 <template>
-	<van-tabbar v-model="active" @change="change">
-		<van-tabbar-item to='/Mission' badge="99">
+	<van-tabbar v-model="navigateBarIndex" @change="change">
+		<van-tabbar-item to='/Mission' :badge="missionNum" :key="missionNum">
 			<template #icon="props">
-				<img :src="active==0 ? icon_mission.active : icon_mission.inactive" class="navigateBar_icon" />
+				<img :src="navigateBarIndex==0 ? icon_mission.active : icon_mission.inactive" class="navigateBar_icon" />
 			</template>
 		</van-tabbar-item>
 		<van-tabbar-item to="/Work">
 			<template #icon="props">
-				<img :src="active==1 ? icon_work.active : icon_work.inactive" class="navigateBar_icon" />
+				<img :src="navigateBarIndex==1 ? icon_work.active : icon_work.inactive" class="navigateBar_icon" />
 			</template>
 		</van-tabbar-item>
 		<van-tabbar-item to="/Connection">
 			<template #icon="props">
-				<img :src="active==2 ? icon_communication.active : icon_communication.inactive" class="navigateBar_icon" />
+				<img :src="navigateBarIndex==2 ? icon_communication.active : icon_communication.inactive" class="navigateBar_icon" />
 			</template>
 		</van-tabbar-item>
 		<van-tabbar-item to="/Mine">
 			<template #icon="props">
-				<img :src="active==3 ? icon_mine.active : icon_mine.inactive" class="navigateBar_icon" />
+				<img :src="navigateBarIndex==3 ? icon_mine.active : icon_mine.inactive" class="navigateBar_icon" />
 			</template>
 		</van-tabbar-item>
 	</van-tabbar>
@@ -25,7 +25,6 @@
 
 <script>
 	import { NavBar } from 'vant';
-	import navigateBarIndex from '../../utils/common.js'
 	import mission_unselected from '../../assets/mission@2x.png'
 	import mission_selected from '../../assets/mission_selected@2x.png'
 	import work_unselected from '../../assets/work@2x.png'
@@ -38,9 +37,8 @@
 		name: "NavigateBar",
 		data() {
 			return {
-				active: navigateBarIndex.navigateBarIndex,
-				missionNum: 0,
-				num: true,
+				navigateBarIndex:this.common.navigateBarIndex,
+				missionNum:this.common.missionNum,
 				icon_mission: {
 					active: mission_selected,
 					inactive: mission_unselected,
@@ -62,9 +60,9 @@
 
 		methods: {
 			change(index){
-				navigateBarIndex.navigateBarIndex = index;
-				console.log(index);
-				console.log(this.active);
+				this.navigateBarIndex = index;
+				this.common.setNavigateBarIndex(index);
+				console.log(this.navigateBarIndex);
 			},
 			addClassName: function(path) {
 				this.$router.replace(path);

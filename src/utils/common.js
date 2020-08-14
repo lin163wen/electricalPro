@@ -1,5 +1,12 @@
-const navigateBarIndex = 0;
 
 export default {
-	navigateBarIndex:navigateBarIndex
+	navigateBarIndex:0,
+	setNavigateBarIndex(index){
+		this.navigateBarIndex = index;
+	},
+	
+	missionNum:0,
+	setMissionNum(num){
+		this.missionNum = num;
+	}
 }

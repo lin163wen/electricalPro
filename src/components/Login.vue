@@ -75,7 +75,7 @@
                         clearInterval(_this.comfirmLoginInterval);
                         _this.loginToast.clear()
                         localStorage.setItem('token',response.data.token);
-                        this.$router.push('/Mission')
+                        _this.$router.push('/Mission')
                       }else{
                         _this.comfirmLoginCount++;
                       }
