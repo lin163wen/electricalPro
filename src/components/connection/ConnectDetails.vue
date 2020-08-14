@@ -1,20 +1,155 @@
 <template>
-	<div>
-    <!-- 'title','hasRight','back','parting','search','upload' -->
-    <my-header title="联系人" back="true"></my-header>
-    connectDetail
+  <div>
+    <div class="connector">
+      <!-- 'title','hasRight','back','parting','search','upload' -->
+      <div class="header">
+        <img src="../../assets/back@2x.png" class="back" @click="goBack()" />
+        <span>联系人</span>
+      </div>
+      <div class="connector_info">
+        <div class="connector_first_name">
+          <span>熊</span>
+        </div>
+        <div class="connector_name">
+          <span>熊大</span>
+        </div>
+        <div class="connector_info_details">
+          <div class="phone">
+            <span>电话</span>
+            <br />
+            <span>15869754821</span>
+          </div>
+          <div class="separator">
+          </div>
+          <div class="section">
+            <span>部门</span>
+            <br />
+            <span>科技财务中心部</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="call_btn"></div>
   </div>
 
 </template>
 
 <script>
-import NavigateBar from '../views/navigateBar.vue'
-import MyHeader from '../views/header.vue'
-export default{
-  name:'ConnectDetails',
-  components:{MyHeader}
-}
+  import NavigateBar from '../views/navigateBar.vue'
+  import MyHeader from '../views/header.vue'
+  export default {
+    name: 'ConnectDetails',
+    components: {
+      MyHeader
+    }
+  }
 </script>
 
-<style>
+<style scoped lang="less">
+  .connector {
+    background: url(../../assets/connection_bg@2x.png) no-repeat center center;
+    width: 100%;
+    height: 770px;
+
+    .header {
+      height: 111px;
+      display: flex;
+      align-items: center;
+
+      img {
+        height: 47px;
+        width: 25px;
+        margin-left: 16px;
+      }
+
+      span {
+        font-size: 42px;
+        font-family: Microsoft YaHei Regular;
+        color: #ffffff;
+        letter-spacing: 3px;
+        margin-left: 268px;
+      }
+    }
+
+    .connector_info {
+      margin-top: 91px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      .connector_first_name {
+        width: 223px;
+        height: 223px;
+        background: #f4f4f4;
+        border: 5px solid #1f7ee5;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        span {
+          font-size: 73px;
+          font-family: Microsoft YaHei Regular;
+          color: #181717;
+          line-height: 11px;
+          letter-spacing: 5px;
+        }
+      }
+
+      .connector_name {
+        margin-top: 27px;
+
+        span {
+          font-size: 45px;
+          font-family: Microsoft YaHei Regular;
+          color: #ffffff;
+          letter-spacing: 3px;
+        }
+      }
+
+      .connector_info_details {
+        margin-top: 60px;
+        display: flex;
+
+        .phone {
+          width: 160px;
+          height: 48px;
+          font-size: 20px;
+          font-family: Microsoft YaHei Regular;
+          font-weight: 400;
+          text-align: left;
+          color: #ffffff;
+          letter-spacing: 2px;
+        }
+
+        .separator {
+          width: 3px;
+          height: 51px;
+          background: #f4f4f4;
+          margin-left: 27px;
+        }
+
+        .section {
+          width: 160px;
+          height: 48px;
+          font-size: 20px;
+          font-family: Microsoft YaHei Regular;
+          font-weight: 400;
+          text-align: left;
+          color: #ffffff;
+          letter-spacing: 2px;
+          margin-left: 52px;
+        }
+      }
+
+    }
+  }
+  .call_btn{
+    width: 534px;
+    height: 112px;
+    background: url(../../assets/call_btn@2x.png) no-repeat center center;
+    background-size: 100% 100%;
+    margin-top: 411px;
+    margin-left: 108px;
+  }
 </style>

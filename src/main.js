@@ -8,9 +8,16 @@ import App from './App'
 import router from './router'
 import 'lib-flexible'
 import { Lazyload } from 'vant';
+import Mui from 'vue-awesome-mui';
+/* import VConsole from 'vconsole/dist/vconsole.min.js' //import vconsole
+var vConsole = new VConsole() // 初始化 */
+Vue.config.productionTip = false
+Vue.use(Mui);
 Vue.use(Lazyload);
 Vue.config.productionTip = false
 Vue.use(Vant)
+import plusExtends from './utils/plusextends.js'
+Vue.prototype.$plusExtends = plusExtends
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

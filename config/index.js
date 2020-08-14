@@ -10,17 +10,27 @@ module.exports = {
     // Paths
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
-    proxyTable: {},
+    proxyTable: {
+      '/api': {
+        //target: 'https://business-h5-test.motree.cn',//motree测试环境
+        // target: 'http://h5-test.test.lemobar.cn',//内网测试
+        target: 'http://testsgcc.xinhuaapp.com:19002', //本地测试环境
+        pathRewrite: {},
+        changeOrigin: true,
+        cookieDomainRewrite: ''
+      }
+    },
 
     // Various Dev Server settings
-    host: 'localhost', // can be overwritten by process.env.HOST
+    host: '192.168.1.170', // can be overwritten by process.env.HOST
     port: 8080, // can be overwritten by process.env.PORT, if port is in use, a free one will be determined
+
     autoOpenBrowser: false,
     errorOverlay: true,
     notifyOnErrors: true,
     poll: false, // https://webpack.js.org/configuration/dev-server/#devserver-watchoptions-
 
-    
+
     /**
      * Source Maps
      */

@@ -2,7 +2,6 @@
 	<div>
     <!-- 'title','hasRight','back','parting','search','upload' -->
     <my-header title="关于" back="true"></my-header>
-    关于
   </div>
 
 </template>

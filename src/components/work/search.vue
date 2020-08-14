@@ -59,17 +59,20 @@
 	.van-cell {
 		padding-left: 10px !important;
 	}
-	
+
 	.search {
+    display: flex;
+    justify-content: center;
 		.search_no_data {
 			width: 513px;
 			height: 392px;
 			position: absolute;
-			top: 507px;
-			margin: 0 auto;
+			top: 469px;
 			background-image: url(../../assets/search_no_data@2x.png);
 			background-repeat: no-repeat;
 			background-size: 100% auto;
+      display: flex;
+      justify-content: center;
 			.no_data_text {
 				font-size: 44px;
 				font-family: Microsoft YaHei Regular;
