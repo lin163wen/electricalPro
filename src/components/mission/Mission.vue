@@ -69,12 +69,15 @@
 						console.log(_this.missionListNum);
 					}else{
 						Toast(response.message);
+            if(response.code==401){
+              _this.$router.push('/Login')
+            }
 					}
 				}).catch((response) => {
 					console.log(4444);
 					console.log(response);
 				})
-				
+
 			}
 		}
 	}
@@ -85,7 +88,7 @@
 		height: 111px;
 		background: linear-gradient(#7c5dfb 0%, #41abff 100%);
 	}
-	
+
 	.mission_num {
 		font-size: 31px;
 		font-family: Microsoft YaHei Regular, Microsoft YaHei Regular-Regular;
@@ -107,7 +110,7 @@
 		background-repeat: no-repeat;
 		background-size: 100% auto;
 	}
-	
+
 	.mission_list {
 		background-color: #f4f4f4;
 		display: flex;
@@ -119,6 +122,7 @@
 			display: flex;
 			flex-direction: column;
 			margin-bottom: 13px;
+      min-height: 280px;
 			.content {
 				display: flex;
 				flex-wrap: nowrap;

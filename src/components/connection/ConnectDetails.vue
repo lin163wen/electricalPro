@@ -8,23 +8,23 @@
       </div>
       <div class="connector_info">
         <div class="connector_first_name">
-          <span>熊</span>
+          <span>{{firstName}}</span>
         </div>
         <div class="connector_name">
-          <span>熊大</span>
+          <span>{{userInfo.name}}</span>
         </div>
         <div class="connector_info_details">
           <div class="phone">
             <span>电话</span>
             <br />
-            <span>15869754821</span>
+            <span>{{userInfo.phone}}</span>
           </div>
           <div class="separator">
           </div>
           <div class="section">
             <span>部门</span>
             <br />
-            <span>科技财务中心部</span>
+            <span>{{userInfo.orgName}}</span>
           </div>
         </div>
       </div>
@@ -41,6 +41,26 @@
     name: 'ConnectDetails',
     components: {
       MyHeader
+    },
+    data(){
+      return{
+        userInfo:null,
+      }
+    },
+    created() {
+      console.log(this.$route.params.user)
+      this.userInfo = this.$route.params.user;
+    },
+    computed:{
+      firstName:function(){
+        var userName = this.userInfo.name;
+        return userName.substr(0,1);
+      }
+    },
+    methods:{
+      goBack(){
+        this.$router.back();
+      }
     }
   }
 </script>

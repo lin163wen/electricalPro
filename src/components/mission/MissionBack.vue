@@ -20,6 +20,14 @@
 			<textarea id='reason' class="mission_back_textarea"></textarea>
 			<span class="text_length">{{textLength}}<span>/200</span></span>
 		</div>
+    <div class="btn_div">
+      <div class="cancel_btn" @click="cancel()">
+        <span>取消</span>
+      </div>
+      <div class="reject_btn" @click="reject()">
+        <span>退回</span>
+      </div>
+    </div>
 	</div>
 
 </template>
@@ -30,6 +38,12 @@
 		DropdownItem
 	} from 'vant';
 	import MyHeader from '../views/header.vue'
+  import {
+    MissionReject
+  } from '../../utils/request.js'
+  import {
+    Toast
+  } from 'vant';
 	export default {
 		name: 'MissionDetail',
 		components: {
@@ -55,6 +69,8 @@
 				showOptions: false,
 				selectedText: '',
 				selectedValue: '',
+        storyId: this.$route.params.storyId,
+        auditId: this.$route.params.auditId,
 			}
 		},
 		mounted() {
@@ -77,6 +93,35 @@
 		},
 		created() {},
 		methods: {
+      cancel(){
+        this.$router.push({
+          name:'MissionDetail',
+          params:{
+          	storyId:this.storyId,
+          	auditId:this.auditId
+          }
+        })
+      },
+      reject(){
+        var _this = this;
+        MissionReject({
+          storyId:this.storyId,
+          auditId:this.auditId,
+          seqNum:this.selectedValue
+        }).then(resposne => {
+          if(resposne.code==0){
+            Toast('回退成功');
+            _this.$router.push('/Mission');
+          }else{
+						Toast(response.message);
+            if(response.code==401){
+              _this.$router.push('/Login')
+            }
+					}
+        }).catch(err => {
+          console.log(err);
+        })
+      },
 			choose(item) {
 				this.showOptions = false
 				if(item.value !== this.selected) {
@@ -94,7 +139,7 @@
 	li {
 		list-style: none;
 	}
-	
+
 	.mission_back {
 		display: flex;
 		flex-direction: column;
@@ -197,5 +242,47 @@
 			right: 83px;
 			top: 930px;
 		}
-	}
+  }
+  .btn_div{
+    height: 112px;
+    width: 100%;
+    background: #e5e5e5;
+    display: flex;
+    position: absolute;
+    bottom: 0;
+    .cancel_btn{
+      margin-left: 39px;
+      margin-top: 12px;
+      background-image: url(../../assets/cancel_btn@2x.png);
+      background-size: 100% auto;
+      width: 326px;
+      height: 99px;
+      text-align: center;
+      span {
+        font-size: 33px;
+        font-family: Microsoft YaHei Regular;
+        color: #ffffff;
+        letter-spacing: 1px;
+        line-height: 85px;
+        height: 85px;
+      }
+    }
+    .reject_btn{
+      margin-left: 30px;
+      margin-top: 22px;
+      background-image: url(../../assets/reject_btn@2x.png);
+      background-size: 100% auto;
+      width: 308px;
+      height: 81px;
+      text-align: center;
+      span {
+        font-size: 33px;
+        font-family: Microsoft YaHei Regular;
+        color: #ffffff;
+        letter-spacing: 1px;
+        line-height: 70px;
+        height: 70px;
+      }
+    }
+  }
 </style>

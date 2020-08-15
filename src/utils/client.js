@@ -1,9 +1,9 @@
 import axios from 'axios';
 import QS from 'qs';
 
-//const domain = 'http://testsgcc.xinhuaapp.com:19002/api';
+//const domain = 'http://testsgcc.xinhuaapp.com:19002';
 axios.interceptors.request.use(function (config) {
-  //config.url = domain+config.url;
+  config.url = domain+config.url;
   //console.log(config.url);
   config.headers['Access-Control-Allow-Origin']='*';
   if(config.url.indexOf('login')<0){

@@ -7,7 +7,7 @@
         <img class="all_connections" src="../../assets/all_connections@2x.png" />
       </template>
     </van-cell> -->
-    <div class="all_connections">
+    <div class="all_connections" @click="AllContector()">
       <span>查看全部联系人</span>
       <img src="../../assets/all_connections@2x.png" />
     </div>
@@ -15,16 +15,13 @@
       <span>最近联系人</span>
     </div>
     <div class="connections">
-      <div class="connection">
-        <img class="user_head" src="../../assets/head@2x.png" />
-        <span class="user_name">我是谁</span>
-        <img class="call" src="../../assets/call@2x.png" />
-      </div>
-      <div class="connection">
-        <img class="user_head" src="../../assets/head@2x.png" />
-        <span class="user_name">我是谁</span>
-        <img class="call" src="../../assets/call@2x.png" />
-      </div>
+      <template v-for="(item,index) in lastestConnector">
+        <div class="connection" :ke="index">
+          <img class="user_head" src="../../assets/head@2x.png" />
+          <span class="user_name">{{item}}</span>
+          <img class="call" src="../../assets/call@2x.png" />
+        </div>
+      </template>
     </div>
 
     <navigate-bar></navigate-bar>
@@ -40,6 +37,16 @@
     components: {
       NavigateBar,
       MyHeader
+    },
+    data(){
+      return{
+        lastestConnector:localStorage.getItem('lastestConnector')
+      }
+    },
+    methods:{
+      AllContector(){
+        this.$router.push('/ConnectAll')
+      }
     }
   }
 </script>

@@ -54,18 +54,12 @@
       return {}
     },
     created() {
-      this.$plusExtends(() => {
-        plus.gallery.pick(function(e) {
-          for (var i in e.files) {
-            console.log(e.files[i]);
-          }
-        }, function(e) {
-          console.log("取消选择图片");
-        }, {
-          filter: "image",
-          multiple: true
-        });
-      })
+      if(window.plus){
+        this.plusReady()
+      }else{
+        document.addEventListener('plusready', this.plusReady, false)
+      }
+      this.galleryImgs('',10)
 
     },
     methods: {
@@ -129,6 +123,10 @@
           // 返回以upload对象
           let task = plus.uploader.createUpload(url, {
               method: 'POST',
+              header:{
+                "Content-Type":"application/x-www-form-urlencoded",
+                "token":localStorage.getItem('token')
+              },
               // 上传任务每次上传的文件块大小（仅在支持断点续传的服务有效）
               // 数值类型，单位为Byte（字节），默认值为102400，若设置值小于等于0则表示不分块上传
               blocksize: 10000000000000000000000000,
@@ -164,6 +162,9 @@
           if (imgType !== undefined) {
             task.addData('IMG_TYPE', imgType)
           }
+          //需要提交的参数多次添加
+          task.addData("fileFrom", "信息发布");
+          task.addData("attachType", "1");
           task.start()
 
         }, function(e) {

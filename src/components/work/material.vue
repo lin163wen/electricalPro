@@ -6,7 +6,7 @@
 			<van-tabs v-model="active" color="#ffaf6f">
 				<van-tab title="图片">
 					<div class="picture">
-						<van-uploader v-model="imagesList" :after-read="afterRead" />
+						<van-uploader v-model="imagesList" />
 					</div>
 				</van-tab>
 				<van-tab title="视频">
@@ -24,6 +24,7 @@
 				<span>上传素材</span>
 			</div>
 		</div>
+    <div :class="cagetoryClass" @click="changeCagetory()"></div>
 	</div>
 
 </template>
@@ -39,6 +40,7 @@
 			return {
 				active: 0,
 				headerTitle: '',
+        curCagetory:0,
 				imagesList: [{
 						url: 'https://img.yzcdn.cn/vant/leaf.jpg',
 						status: 'uploading',
@@ -52,6 +54,17 @@
 				]
 			}
 		},
+    /* watch:{
+      curCagetory:function(val,oldVal){
+        if(val==0){
+          this.cagetoryClass = 'cagetory official';
+        }else if(val==1){
+          this.cagetoryClass = 'cagetory public';
+        }else if(val==2){
+          this.cagetoryClass = 'cagetory private';
+        }
+      }
+    }, */
 		created() {
 			var titlePre = this.$route.query.headerTitle;
 			if(titlePre) {
@@ -61,7 +74,21 @@
 			}
 
 		},
+    computed:{
+      cagetoryClass:function(){
+        if(this.curCagetory==0){
+          return 'cagetory official';
+        }else if(this.curCagetory==1){
+          return 'cagetory public';
+        }else if(this.curCagetory==2){
+          return 'cagetory private';
+        }
+      }
+    },
 		methods: {
+      changeCagetory(){
+        this.curCagetory = (this.curCagetory+1)%3
+      },
 			materialDetail() {
 				console.log(11111);
 				this.$router.push('/MaterialDetail');
@@ -69,6 +96,7 @@
 			upload() {
 				this.$router.push('/Upload')
 			}
+
 		}
 	}
 </script>
@@ -79,7 +107,7 @@
 		margin-left: 16px;
 		min-height: 1003px;
 	}
-	
+
 	.upload_div {
 		width: 100%;
 		height: 112px;
@@ -103,4 +131,24 @@
 			}
 		}
 	}
+  .cagetory{
+    width: 108px;
+    height: 108px;
+    
+    position: fixed;
+    bottom: 105px;
+    right: 13px;
+  }
+  .official{
+    background: url(../../assets/official@2x.png) no-repeat;
+    background-size: 100% 100%;
+  }
+  .public{
+    background: url(../../assets/public@2x.png) no-repeat;
+    background-size: 100% 100%;
+  }
+  .private{
+    background: url(../../assets/private@2x.png) no-repeat;
+    background-size: 100% 100%;
+  }
 </style>
