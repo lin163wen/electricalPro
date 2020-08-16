@@ -18,7 +18,7 @@
 <script>
 	export default {
 		name: 'MyHeader',
-		props: ['title', 'hasRight', 'back', 'parting', 'search', 'upload', 'backUrl'],
+		props: ['title', 'hasRight', 'back', 'parting', 'search', 'upload', 'backUrl','backParams'],
 		data() {
 			return {
 				msg: 'Welcome to Your Vue.js App'

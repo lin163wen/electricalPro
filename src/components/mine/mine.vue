@@ -9,13 +9,13 @@
         </div>
         <div class="mine_info">
           <div class="first_name">
-            <span>熊</span>
+            <span>{{userInfo.name.substr(0,1)}}</span>
           </div>
           <div class="name">
-            <span>熊大</span>
+            <span>{{userInfo.name}}</span>
           </div>
           <div class="section">
-            <span>科技财务中心部</span>
+            <span>{{userInfo.orgName}}</span>
           </div>
         </div>
       </div>
@@ -40,11 +40,41 @@
 <script>
   import NavigateBar from '../views/navigateBar.vue'
   import MyHeader from '../views/header.vue'
+  import {
+		getUserInfo
+	} from '../../utils/request.js'
+	import {
+		Toast
+	} from 'vant';
   export default {
     name: 'Mine',
     components: {
       NavigateBar,
       MyHeader
+    },
+    data(){
+    		return{
+    			userInfo:null
+    		}
+    },
+    created(){
+    		this.queryUserInfo()
+    },
+    methods:{
+    		queryUserInfo(){
+    			var _this = this;
+    			getUserInfo()
+    			.then(response =>{
+    				if(response.code==0){
+    					_this.userInfo = response.data;
+    				}else{
+    					Toast(response.message);
+    				}
+    			})
+    			.catch(err =>{
+    				console.log(err);
+    			});
+    		}
     }
   }
 </script>

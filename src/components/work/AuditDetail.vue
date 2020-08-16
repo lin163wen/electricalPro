@@ -1,7 +1,7 @@
 <template>
 	<div style="height: 100%;">
 		<!-- 'title','hasRight','back','parting','search','upload' -->
-		<my-header title="稿件详情" back="true" ref="header" backUrl='/Mission'></my-header>
+		<my-header title="稿件详情" back="true" ref="header" backUrl='/Audit'></my-header>
 		<van-tabs v-model="active" color="#ffaf6f">
 			<van-tab title="正文内容">
 				<div class="content_div">
@@ -130,7 +130,7 @@
 		Toast
 	} from 'vant';
 	export default {
-		name: 'MissionDetail',
+		name: 'AuditDetail',
 		components: {
 			MyHeader
 		},
@@ -175,7 +175,7 @@
 				}).then(response => {
 					if(response.code == 0) {
 						Toast('发布成功');
-						_this.$router.push('/Mission');
+						_this.$router.push('/Audit');
 					} else {
 						Toast(response.message);
 						if(response.code == 401) {
@@ -194,7 +194,7 @@
 				}).then(response => {
 					if(response.code == 0) {
 						Toast('通过成功');
-						_this.$router.push('/Mission');
+						_this.$router.push('/Audit');
 					} else {
 						Toast(response.message);
 						if(response.code == 401) {
@@ -228,7 +228,7 @@
 			},
 			back(auditSeqNum) {
 				this.$router.push({
-					name: 'MissionBack',
+					name: 'AuditBack',
 					params: {
 						storyId: this.storyId,
 						auditId: this.auditId,

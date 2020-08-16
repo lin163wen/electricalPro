@@ -1,7 +1,7 @@
 <template>
 	<div style="height: 100%;">
 		<!-- 'title','hasRight','back','parting','search','upload' -->
-		<my-header title="退回" back="true" ref="header" backUrl='MissionDetail'></my-header>
+		<my-header title="退回" back="true" ref="header" backUrl='AuditDetail'></my-header>
 		<div class="mission_back">
 			<div class="mission_back_text"><span style="color: #ff4545;">*</span>退回节点</div>
 			<div class="select">
@@ -45,7 +45,7 @@
 		Toast
 	} from 'vant';
 	export default {
-		name: 'MissionBack',
+		name: 'AuditBack',
 		components: {
 			MyHeader
 		},
@@ -113,7 +113,7 @@
 			},
 			cancel() {
 				this.$router.push({
-					name: 'MissionDetail',
+					name: 'AuditDetail',
 					params: {
 						storyId: this.storyId,
 						auditId: this.auditId
@@ -134,7 +134,7 @@
 				}).then(response => {
 					if(response.code == 0) {
 						Toast('回退成功');
-						_this.$router.push('/Mission');
+						_this.$router.push('/Audit');
 					} else {
 						Toast(response.message);
 						if(response.code == 401) {

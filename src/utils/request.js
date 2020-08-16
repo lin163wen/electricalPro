@@ -5,6 +5,9 @@ export const Prelogin = params =>   { return axios.post('/api/rmt/pre-login',par
 export const Trylogin = params =>   { return axios.post('/api/rmt/try-login',params, {showLoading: true}) }
 export const Comfirmlogin = params =>   { return axios.post('/api/rmt/confirm-login',params, {showLoading: true}) }
 
+//mine
+export const getUserInfo = params =>   { return axios.post('/api/m/member/info',params, {showLoading: true}) }
+
 //任务
 export const Missions = params =>   { return axios.post('/api/cms/task/list',params, {showLoading: true}) }
 export const MissionDetail = params =>   { return axios.post('/api/cms/story/audit/detail',params, {showLoading: true}) }
@@ -17,4 +20,24 @@ export const Organizations = params => { return axios.post('/api/m/organization/
 export const OrganizationMember = params => { return axios.post('/api/m/organization/member',params,{showLoading: true})}
 
 //素材
-export const OfficialImages = params => { return axios.post('/api/m/organization/tree',params,{showLoading: true})}
+//image
+export const OfficialImages = params => { return axios.post('/api/asset/official/image/page',params,{showLoading: true})}
+export const PrivateImages = params => { return axios.post('/api/asset/private/image/page',params,{showLoading: true})}
+export const PublicImages = params => { return axios.post('/api/asset/public/image/page',params,{showLoading: true})}
+export const ImageDetail = params => { return axios.post('/api/asset/image',params,{showLoading: true})}
+//vide
+export const OfficialVideos = params => { return axios.post('/api/asset/official/video/page',params,{showLoading: true})}
+export const PrivateVideos = params => { return axios.post('/api/asset/private/video/page',params,{showLoading: true})}
+export const PublicVideos = params => { return axios.post('/api/asset/public/video/page',params,{showLoading: true})}
+export const VideoDetail = params => { return axios.post('/api/asset/video',params,{showLoading: true})}
+
+//audio
+export const OfficialAudios = params => { return axios.post('/api/asset/official/audio/page',params,{showLoading: true})}
+export const PrivateAudios = params => { return axios.post('/api/asset/private/audio/page',params,{showLoading: true})}
+export const PublicAudios = params => { return axios.post('/api/asset/public/audio/page',params,{showLoading: true})}
+export const AudiosDetail = params => { return axios.post('/api/asset/audio',params,{showLoading: true})}
+//审稿
+export const AuditList = params => { return axios.post('/api/cms/story/auditing/page',params,{showLoading: true})}
+
+//分类，搜索
+export const getParting = params => { return axios.post('/api/asset/category/dict',params,{showLoading: true})}

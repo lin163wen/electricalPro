@@ -48,7 +48,8 @@
 		},
 		methods: {
 			missionDetail(item) {
-				console.log(item);
+				localStorage.setItem('storyId',item.storyId);
+				localStorage.setItem('auditId',item.auditId);
 				this.$router.push({
 					name:'MissionDetail',
 					params:{

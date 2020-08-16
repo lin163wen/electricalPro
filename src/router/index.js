@@ -9,6 +9,8 @@ import MissionBack from '../components/mission/MissionBack.vue'
 import Work from '../components/work/work.vue'
 import Material from '../components/work/material.vue'
 import Audit from '../components/work/audit.vue'
+import AuditDetail from '../components/work/AuditDetail.vue'
+import AuditBack from '../components/work/AuditBack.vue'
 import Parting from '../components/work/parting.vue'
 import MaterialDetail from '../components/work/materialDetail.vue'
 import Search from '../components/work/search.vue'
@@ -61,6 +63,14 @@ export default new Router({
       path: '/Audit',
       name: 'Audit',
       component: Audit
+    },{
+      path: '/AuditDetail',
+      name: 'AuditDetail',
+      component: AuditDetail
+    },{
+      path: '/AuditBack',
+      name: 'AuditBack',
+      component: AuditBack
     },{
       path: '/MaterialDetail',
       name: 'MaterialDetail',

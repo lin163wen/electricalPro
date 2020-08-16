@@ -3,10 +3,7 @@
 		<!-- 'title','hasRight','back','parting','search','upload' -->
 		<my-header title="分类" back="true" backUrl="/Material"></my-header>
 		<div class="material_content">
-			<van-cell title="单元格" is-link />
-			<van-cell title="单元格" is-link />
-			<van-cell title="单元格" is-link />
-			<van-cell title="单元格" is-link />
+			<van-cell :title="item.value" :code="item.code" v-for="(item,index) in partings" :key="index" @click="goPartingMaterial(item)" />
 		</div>
 	</div>
 
@@ -15,17 +12,39 @@
 <script>
 	import NavigateBar from '../views/navigateBar.vue'
 	import MyHeader from '../views/header.vue'
+	import {getParting} from '../../utils/request.js'
+	import { Toast } from 'vant';
 	export default {
 		name: 'Parting',
 		components: {
 			MyHeader
 		},
 		data() {
-			return {}
+			return {
+				partings:[]
+			}
+		},
+		created(){
+			this.parting();
 		},
 		methods: {
 			parting() {
-				this.$router.push('/Material?headerTitle=分类1')
+				var _this = this;
+				getParting({materialType:this.common.materialType})
+				.then(response =>{
+					if(response.code==0){
+						_this.partings = response.list
+					}else{
+						Toast(response.message);
+					}
+				}).catch(err =>{
+					console.log(err);
+				});
+				//this.$router.push('/Material?headerTitle=分类1')
+			},
+			goPartingMaterial(item){
+				this.common.setParting(item.value,item.code);
+				this.$router.push('Material')
 			}
 		}
 	}
