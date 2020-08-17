@@ -21,5 +21,9 @@ export default {
 		this.parting.value=value;
 		this.parting.code=code;
 	},
+  curCagetory:2,//0成品，1公共，2个人
+  setCagetory(cagetory){
+    this.curCagetory = cagetory
+  },
 	about:require('@/assets/about@2x.png')
 }

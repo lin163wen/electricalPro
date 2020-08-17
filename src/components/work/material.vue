@@ -312,18 +312,9 @@
       },
       changeCagetory() {
         this.curCagetory = (this.curCagetory + 1) % 3;
+        this.common.setCagetory(this.curCagetory);
         this.initQueryParams();
-      },
-      materialDetail() {
-        this.$router.push({
-
-        });
-      },
-      upload() {
-        this.galleryImgs('http://testsgcc.xinhuaapp.com:19002/api/asset/common/oss/push-url', 1, 'image')
-        //this.$router.push('/Upload')
       }
-
     }
   }
 </script>
