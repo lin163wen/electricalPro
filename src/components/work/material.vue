@@ -9,7 +9,8 @@
             <van-list class="list" style="display: flex;flex-direction: row;flex-wrap: wrap;" v-model="loading"
               :finished="finished" finished-text="没有更多了" @load="queryImages()">
               <div class="list_item" v-for="(item,index) in list" @click="goDetail(item)">
-                <em class="item_mask"><span>{{item.status}}</span></em>
+                <!--<em class="item_mask"><span>{{item.status==0?"未标引":(item.status==1?"审核中":"已标引")}}</span></em>-->
+                <em class="item_mask"><span>{{item.accessUrl?"上传成功":"上传失败"}}</span></em>
                 <img :src="item.accessUrl" />
               </div>
             </van-list>
@@ -20,7 +21,8 @@
             <van-list class="list" style="display: flex;flex-direction: row;flex-wrap: wrap;" v-model="loading"
               :finished="finished" finished-text="没有更多了" @load="queryVideos()">
               <div class="list_item" v-for="(item,index) in list" @click="goDetail(item)">
-                <em class="item_mask"><span>{{item.status}}</span></em>
+                <!--<em class="item_mask"><span>{{item.status==0?"未标引":(item.status==1?"审核中":"已标引")}}</span></em>-->
+                <em class="item_mask"><span>{{item.accessUrl?"上传成功":"上传失败"}}</span></em>
                 <img :src="item.accessUrl" />
               </div>
             </van-list>
@@ -29,9 +31,10 @@
         <van-tab title="音频">
           <div class="content">
             <van-list class="list" style="display: flex;flex-direction: row;flex-wrap: wrap;" v-model="loading"
-              :finished="finished" finished-text="没有更多了" @load="queryAudio()">
+              :finished="finished" finished-text="没有更多了" @load="queryAudios()">
               <div class="list_item" v-for="(item,index) in list" @click="goDetail(item)">
-                <em class="item_mask"><span>{{item.status}}</span></em>
+                <!--<em class="item_mask"><span>{{item.status==0?"未标引":(item.status==1?"审核中":"已标引")}}</span></em>-->
+                <em class="item_mask"><span>{{item.accessUrl?"上传成功":"上传失败"}}</span></em>
                 <img :src="item.accessUrl" />
               </div>
             </van-list>
@@ -40,7 +43,17 @@
       </van-tabs>
     </div>
     <div class="upload_div" v-if="curCagetory==2">
-      <van-uploader :before-read="getFileInfo" :after-read="uploadComplete">
+    	<van-uploader :before-read="getFileInfo" :after-read="uploadComplete" accept="image/*" v-if="active==0">
+        <div class="upload_btn">
+          <span>上传素材</span>
+        </div>
+      </van-uploader>
+      <van-uploader :before-read="getFileInfo" :after-read="uploadComplete" accept="video/*" v-if="active==1">
+        <div class="upload_btn">
+          <span>上传素材</span>
+        </div>
+      </van-uploader>
+      <van-uploader :before-read="getFileInfo" :after-read="uploadComplete" accept="audio/*" v-if="active==2">
         <div class="upload_btn">
           <span>上传素材</span>
         </div>
@@ -82,8 +95,8 @@
     },
     data() {
       return {
-        active: 0,
-        pageSize: 20,
+        active: this.common.materialType==3?0:(this.common.materialType==2?1:2),
+        pageSize: 40,
         partingTitle: this.common.parting.value ? this.common.parting.value : '素材',
         partingCode: this.common.parting.code ? this.common.parting.code : '',
         curCagetory: 2,
@@ -100,20 +113,34 @@
         this.common.setParting('', ''); //清空分类
         this.partingTitle = '素材'
         this.partingCode = '';
+        this.finished=false;
+        this.loading=true;
+        this.list=[];
+        this.pageNum=1;
+        
         if (val == 0) { //image
           this.common.setMaterialType(3);
-          this.queryImages();
+          if(this.loading){
+          	this.queryImages();
+          }
+          //this.queryImages();
         } else if (val == 1) { //video
           this.common.setMaterialType(2);
-          this.queryVideos();
+          if(this.loading){
+          	this.queryVideos();
+          }
+          //this.queryVideos();
         } else if (val == 2) { //audio
           this.common.setMaterialType(1);
-          this.queryAudio();
+          if(this.loading){
+          	this.queryAudios();
+          }
+          //this.queryAudios();
         }
       }
     },
     created() {
-      this.queryImages();
+      //this.setActived();
     },
     computed: {
       cagetoryClass: function() {
@@ -127,6 +154,16 @@
       }
     },
     methods: {
+//  	  setActived(){
+//  	  	console.log('setActived',this.common.materialType);
+//  	  	if(this.common.materialType==3){
+//  	  		this.active=0
+//  	  	}else if(this.common.materialType==2){
+//  	  		this.active=1
+//  	  	}else if(this.common.materialType==1){
+//  	  		this.active=2
+//  	  	}
+//  	  },
       getFileInfo(file, detail) {
         //TODO
         return true;
@@ -145,7 +182,6 @@
         }; //添加请求头
         this.$http.post('/api/asset/common/oss/push-url', data, config)
           .then(response => {
-            console.log(response.data);
             if(response.data.code==0){
                 _this.initQueryParams()
                 var params = this.getParamsFromOssPush(response.data.data,size);
@@ -167,7 +203,7 @@
                   .then(response =>{
                     if(response.code==0){
                       Toast('上传成功');
-                      _this.queryImages();
+                      _this.queryVideos();
                     }else{
                       Toast(response.message);
                     }
@@ -180,7 +216,7 @@
                   .then(response =>{
                     if(response.code==0){
                       Toast('上传成功');
-                      _this.queryImages();
+                      _this.queryAudios();
                     }else{
                       Toast(response.message);
                     }
@@ -218,7 +254,6 @@
         this.list = [];
       },
       queryImages() {
-        console.log(this.curCagetory);
         if (this.curCagetory == 0) {
           this.queryMaterial(OfficialImages({
             pageNum: this.pageNum,
@@ -240,7 +275,6 @@
         }
       },
       queryVideos() {
-        console.log(this.curCagetory);
         if (this.curCagetory == 0) {
           this.queryMaterial(OfficialVideos({
             pageNum: this.pageNum,
@@ -261,8 +295,7 @@
           }));
         }
       },
-      queryAudio() {
-        console.log(this.curCagetory);
+      queryAudios() {
         if (this.curCagetory == 0) {
           this.queryMaterial(OfficialAudios({
             pageNum: this.pageNum,
@@ -340,7 +373,7 @@
           .item_mask {
             width: 163px;
             height: 193px;
-            background: rgba(149, 143, 143, 0.6);
+            background: rgba(0, 0, 0, 0.6);
             position: absolute;
 
             span {

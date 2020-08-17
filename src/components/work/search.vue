@@ -4,18 +4,17 @@
 		<my-header title="搜索" back="true"></my-header>
 		<div class="search">
 			<div class="search_btn">
-				<van-search v-model="keyWord" shape="round" background="#f4f4f4" placeholder="请输入搜索关键词" @search="searchMaterial"/>
+				<van-search v-model="keyWord" shape="round" background="#f4f4f4" placeholder="请输入搜索关键词" @search="searchMaterial" />
 				<div class="search_cancel" @click="cancel()">取消</div>
 			</div>
 			<div class="search_result" v-if="list.length>0">
 				<div class="content">
-				  <van-list class="list" style="display: flex;flex-direction: row;flex-wrap: wrap;" v-model="loading"
-				    :finished="finished" finished-text="没有更多了" @load="queryImages">
-				    <div class="list_item" v-for="(item,index) in list" @click="goDetail(item)">
-				      <em class="item_mask"><span>{{item.status}}</span></em>
-				      <img :src="item.accessUrl" />
-				    </div>
-				  </van-list>
+					<van-list class="list" style="display: flex;flex-direction: row;flex-wrap: wrap;" v-model="loading" :finished="finished" finished-text="没有更多了" @load="queryImages">
+						<div class="list_item" v-for="(item,index) in list" @click="goDetail(item)">
+							<em class="item_mask"><span>{{item.status==0?"未标引":(item.status==1?"审核中":"已标引")}}</span></em>
+							<img :src="item.accessUrl" />
+						</div>
+					</van-list>
 				</div>
 			</div>
 			<div class="search_no_data" v-if="list.length<=0">
@@ -28,17 +27,17 @@
 
 <script>
 	import MyHeader from '../views/header.vue'
-  import {
-    OfficialImages,
-    PrivateImages,
-    PublicImages,
-    OfficialVideos,
-    PrivateVideos,
-    PublicVideos,
-    OfficialAudios,
-    PrivateAudios,
-    PublicAudios
-  } from '../../utils/request.js'
+	import {
+		OfficialImages,
+		PrivateImages,
+		PublicImages,
+		OfficialVideos,
+		PrivateVideos,
+		PublicVideos,
+		OfficialAudios,
+		PrivateAudios,
+		PublicAudios
+	} from '../../utils/request.js'
 	export default {
 		name: 'Search',
 		components: {
@@ -47,76 +46,84 @@
 		data() {
 			return {
 				searchResultNum: 0,
-        keyWord:'',
-        loading:false,
-        finished:false,
-        list:[],
-        pageNum:1,
-        pageSize:100
+				keyWord: '',
+				loading: false,
+				finished: false,
+				list: [],
+				pageNum: 1,
+				pageSize: 100
 			}
 		},
 		methods: {
-      searchMaterial(val){
-        this.queryImages();
-      },
+			goDetail(item) {
+				this.$router.push({
+					name: 'MaterialDetail',
+					params: {
+						id: item.id
+					}
+				})
+			},
+			searchMaterial(val) {
+				this.queryImages();
+			},
 			queryImages() {
-        var params = {
-              pageNum: this.pageNum,
-              pageSize: this.pageSize,
-              categoryId: '',
-              keyWord: this.keyWord,
-              list:[]
-            }
-        //0成品，1公共，2个人
-        if(this.common.materialType==3){//image
-          if(this.common.curCagetory==0){
-            this.queryMaterial(OfficialImages(params))
-          }else if(this.common.curCagetory==1){
-            this.queryMaterial(PublicImages(params))
-          }else if(this.common.curCagetory==2){
-            this.queryMaterial(PrivateImages(params))
-          }
-        }else if(this.common.materialType==2){//2video
-          if(this.common.curCagetory==0){
-            this.queryMaterial(OfficialVideos(params))
-          }else if(this.common.curCagetory==1){
-            this.queryMaterial(PublicVideos(params))
-          }else if(this.common.curCagetory==2){
-            this.queryMaterial(PrivateVideos(params))
-          }
-        }else if(this.common.materialType==1){//1audio
-          if(this.common.curCagetory==0){
-            this.queryMaterial(OfficialAudios(params))
-          }else if(this.common.curCagetory==1){
-            this.queryMaterial(PublicAudios(params))
-          }else if(this.common.curCagetory==2){
-            this.queryMaterial(PrivateAudios(params))
-          }
-        }
+				var params = {
+					pageNum: this.pageNum,
+					pageSize: this.pageSize,
+					categoryId: '',
+					keyword: this.keyWord,
+					list: []
+				}
+				//0成品，1公共，2个人
+				if(this.common.materialType == 3) { //image
+					if(this.common.curCagetory == 0) {
+						this.queryMaterial(OfficialImages(params))
+					} else if(this.common.curCagetory == 1) {
+						this.queryMaterial(PublicImages(params))
+					} else if(this.common.curCagetory == 2) {
+						this.queryMaterial(PrivateImages(params))
+					}
+				} else if(this.common.materialType == 2) { //2video
+					if(this.common.curCagetory == 0) {
+						this.queryMaterial(OfficialVideos(params))
+					} else if(this.common.curCagetory == 1) {
+						this.queryMaterial(PublicVideos(params))
+					} else if(this.common.curCagetory == 2) {
+						this.queryMaterial(PrivateVideos(params))
+					}
+				} else if(this.common.materialType == 1) { //1audio
+					if(this.common.curCagetory == 0) {
+						this.queryMaterial(OfficialAudios(params))
+					} else if(this.common.curCagetory == 1) {
+						this.queryMaterial(PublicAudios(params))
+					} else if(this.common.curCagetory == 2) {
+						this.queryMaterial(PrivateAudios(params))
+					}
+				}
 				//this.$router.push('/Material?headerTitle=分类1')
 			},
-      queryMaterial(queryFuc) {
-        var _this = this;
-        queryFuc.then(response => {
-            if (response.code == 0) {
-              _this.list = _this.list.concat(response.list);
-              if (_this.list.length == response.total) {
-                _this.finished = true;
-              } else {
-                _this.pageNum++;
-              }
-              _this.loading = false
-            } else {
-              Toast(response.message);
-            }
-          })
-          .catch(err => {
-            console.log(err);
-          })
-      },
-      cancel(){
-        this.keyWord='';
-      }
+			queryMaterial(queryFuc) {
+				var _this = this;
+				queryFuc.then(response => {
+						if(response.code == 0) {
+							_this.list = _this.list.concat(response.list);
+							if(_this.list.length == response.total) {
+								_this.finished = true;
+							} else {
+								_this.pageNum++;
+							}
+							_this.loading = false
+						} else {
+							Toast(response.message);
+						}
+					})
+					.catch(err => {
+						console.log(err);
+					})
+			},
+			cancel() {
+				this.keyWord = '';
+			}
 		}
 	}
 </script>
@@ -125,9 +132,11 @@
 	.van-cell {
 		padding-left: 10px !important;
 	}
+	
 	.search {
-    display: flex;
-    justify-content: center;
+		display: flex;
+		justify-content: center;
+		flex-direction: column;
 		.search_no_data {
 			width: 513px;
 			height: 392px;
@@ -136,8 +145,11 @@
 			background-image: url(../../assets/search_no_data@2x.png);
 			background-repeat: no-repeat;
 			background-size: 100% auto;
-      display: flex;
-      justify-content: center;
+			display: flex;
+			justify-content: center;
+			position: fixed;
+			left: 50%;	
+			transform: translateX(-50%);
 			.no_data_text {
 				font-size: 44px;
 				font-family: Microsoft YaHei Regular;
@@ -163,42 +175,38 @@
 		}
 		.search_result {
 			.content {
-			  margin-top: 17px;
-			  min-height: 1003px;
-			  max-width: 100%;
-
-			  .list {
-			    .list_item {
-			      width: 163px;
-			      height: 193px;
-			      margin-left: 18px;
-			      margin-top: 18px;
-
-			      .item_mask {
-			        width: 163px;
-			        height: 193px;
-			        background: rgba(149, 143, 143, 0.6);
-			        position: absolute;
-
-			        span {
-			          font-size: 24px;
-			          font-family: Microsoft YaHei Regular;
-			          color: #ffffff;
-			          letter-spacing: 0px;
-			          text-align: center;
-			          display: block;
-			          position: relative;
-			          top: 50%;
-			          transform: translateY(-50%);
-			        }
-			      }
-
-			      img {
-			        width: 163px;
-			        height: 193px;
-			      }
-			    }
-			  }
+				margin-top: 17px;
+				min-height: 1003px;
+				max-width: 100%;
+				.list {
+					.list_item {
+						width: 163px;
+						height: 193px;
+						margin-left: 18px;
+						margin-top: 18px;
+						.item_mask {
+							width: 163px;
+							height: 193px;
+							background: rgba(149, 143, 143, 0.6);
+							position: absolute;
+							span {
+								font-size: 24px;
+								font-family: Microsoft YaHei Regular;
+								color: #ffffff;
+								letter-spacing: 0px;
+								text-align: center;
+								display: block;
+								position: relative;
+								top: 50%;
+								transform: translateY(-50%);
+							}
+						}
+						img {
+							width: 163px;
+							height: 193px;
+						}
+					}
+				}
 			}
 		}
 	}
