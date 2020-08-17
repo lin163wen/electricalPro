@@ -9,7 +9,7 @@ export default {
 	setMissionNum(num){
 		this.missionNum = num;
 	},
-	materialType:3,//3Image,2video,3audio
+	materialType:3,//3Image,2video,1audio
 	setMaterialType(type){
 		this.materialType = type;
 	},

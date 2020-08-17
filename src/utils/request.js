@@ -1,5 +1,6 @@
 import * as axios from './client'
 
+const domain = 'http://testsgcc.xinhuaapp.com:19002'
 //登陆
 export const Prelogin = params =>   { return axios.post('/api/rmt/pre-login',params, {showLoading: true}) }
 export const Trylogin = params =>   { return axios.post('/api/rmt/try-login',params, {showLoading: true}) }
@@ -25,17 +26,22 @@ export const OfficialImages = params => { return axios.post('/api/asset/official
 export const PrivateImages = params => { return axios.post('/api/asset/private/image/page',params,{showLoading: true})}
 export const PublicImages = params => { return axios.post('/api/asset/public/image/page',params,{showLoading: true})}
 export const ImageDetail = params => { return axios.post('/api/asset/image',params,{showLoading: true})}
-//vide
+export const ImageUpload = params => { return axios.post('/api/asset/private/image',params,{showLoading: true})}
+
+//video
 export const OfficialVideos = params => { return axios.post('/api/asset/official/video/page',params,{showLoading: true})}
 export const PrivateVideos = params => { return axios.post('/api/asset/private/video/page',params,{showLoading: true})}
 export const PublicVideos = params => { return axios.post('/api/asset/public/video/page',params,{showLoading: true})}
 export const VideoDetail = params => { return axios.post('/api/asset/video',params,{showLoading: true})}
+export const VideoUpload = params => { return axios.post('/api/asset/private/video',params,{showLoading: true})}
 
 //audio
 export const OfficialAudios = params => { return axios.post('/api/asset/official/audio/page',params,{showLoading: true})}
 export const PrivateAudios = params => { return axios.post('/api/asset/private/audio/page',params,{showLoading: true})}
 export const PublicAudios = params => { return axios.post('/api/asset/public/audio/page',params,{showLoading: true})}
 export const AudiosDetail = params => { return axios.post('/api/asset/audio',params,{showLoading: true})}
+export const AudioUpload = params => { return axios.post('/api/asset/private/audio',params,{showLoading: true})}
+
 //审稿
 export const AuditList = params => { return axios.post('/api/cms/story/auditing/page',params,{showLoading: true})}
 

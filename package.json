@@ -17,6 +17,7 @@
     "vue": "^2.5.2",
     "vue-awesome-mui": "^1.7.3",
     "vue-gallery": "^2.0.1",
+    "vue-resource": "^1.5.1",
     "vue-router": "^3.0.1"
   },
   "devDependencies": {

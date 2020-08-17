@@ -4,7 +4,8 @@
 		<my-header title="素材" back="true" backUrl=""></my-header>
 		<div class="material">
 			<div class="material_content">
-				<video></video>
+        <img :src="materialDetail.accessUrl" style="width: 100%;height: 100%;" v-if="common.materialType==3"/>
+				<video :src="materialDetail.accessUrl" style="width: 100%;height: 100%;" v-if="common.materialType==1 || common.materialType==2"></video>
 			</div>
 			<div class="material_info">
 				<ul class="basic_name">
@@ -18,14 +19,14 @@
 					<li>描述</li>
 				</ul>
 				<ul class="basic_value">
-					<li>稿件标题稿件标题稿件标题稿件标题稿件标题稿件标题</li>
-					<li>名称</li>
-					<li>xxxx</li>
-					<li>xxxxx</li>
-					<li>xxxxx</li>
-					<li></li>
-					<li></li>
-					<li></li>
+					<li>{{materialDetail.objKey}}</li>
+					<li>{{materialDetail.id}}</li>
+					<li>{{materialDetail.size}}</li>
+					<li>{{materialDetail.dpi}}</li>
+					<li>{{materialDetail.userName}}</li>
+					<li>{{materialDetail.updateTime}}</li>
+					<li>{{materialDetail.source}}</li>
+					<li>{{materialDetail.remark}}</li>
 				</ul>
 			</div>
 		</div>
@@ -34,15 +35,52 @@
 
 <script>
 	import MyHeader from '../views/header.vue'
+  import { ImageDetail,VideoDetail,AudiosDetail } from '../../utils/request.js'
+  import { Toast } from 'vant';
 	export default {
 		name: 'MaterialDetail',
 		components: {
 			MyHeader
 		},
 		data() {
-			return {}
+			return {
+        materialDetail:{},
+      }
 		},
-		methods: {}
+    created() {
+      this.queryDetail();
+    },
+		methods: {
+      queryDetail(){
+        if(!this.$route.params.id){
+          Toast('参数id非法');
+          return;
+        }
+        var id = this.$route.params.id;
+        console.log(id,this.common.materialType);
+        if(this.common.materialType==1){//audio
+          this.detail(AudiosDetail({id:id}))
+        }else if(this.common.materialType==2){//video
+          this.detail(VideoDetail({id:id}))
+        }else if(this.common.materialType==3){//image
+          this.detail(ImageDetail({id:id}))
+        }
+      },
+      detail(queryFuc) {
+      	var _this = this;
+      	queryFuc.then(response => {
+            console.log(response)
+      			if(response.code == 0) {
+      				_this.materialDetail = response.data;
+      			} else {
+      				Toast(response.message);
+      			}
+      		})
+      		.catch(err => {
+      			console.log(err);
+      		})
+      }
+    }
 	}
 </script>
 
@@ -75,6 +113,7 @@
 				li {
 					margin-bottom: 35px;
 					text-align: right;
+          min-width: 110px;
 					img {
 						width: 36px;
 						height: 36px;
@@ -89,8 +128,12 @@
 				font-weight: 400;
 				color: #333333;
 				letter-spacing: 1px;
+        max-width: 480px;
 				li {
-					margin-bottom: 35px;
+					//margin-bottom: 35px;
+          height: 70px;
+          word-wrap: break-word;
+          word-break: normal;
 					img {
 						width: 28px;
 						height: 28px;

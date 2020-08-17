@@ -100,7 +100,7 @@
           console.log(err);
           _this.loginToast.clear()
         })
-        //this.$router.push('/Mission')
+        //this.$router.push('/Work')
       },
       showPwd() {
         this.showPwdInput = true;

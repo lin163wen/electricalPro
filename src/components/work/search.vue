@@ -8,23 +8,14 @@
 				<div class="search_cancel">取消</div>
 			</div>
 			<div class="search_result" v-if="searchResultNum>0">
-				<div class="result">
-					<div class="content" @click="missionDetail()">
-						<img class="icon" src="../../assets/search_result@2x.png" />
-						<div class="text">
-							<div class="text_title">稿件标题稿件标题稿件标题稿件标题</div>
-							<div class="text_time">2020-02-02 22:22</div>
-						</div>
-					</div>
-				</div>
-				<div class="result">
-					<div class="content" @click="missionDetail()">
-						<img class="icon" src="../../assets/search_result@2x.png" />
-						<div class="text">
-							<div class="text_title">稿件标题稿件标题稿件标题稿件标题稿件标题稿件标题稿件标题稿件标题稿件标题稿件标题稿件标题稿件标题稿件标题稿件标题稿件标题稿件标题稿件标题稿件标题稿件标题稿件标题稿件标题稿件标题稿件标题稿件标题稿件标题稿件标题稿件标题稿件标题稿件标题稿件标题稿件标题稿件标题稿件标题稿件标题稿件标题稿件标题</div>
-							<div class="text_time">2020-02-02 22:22</div>
-						</div>
-					</div>
+				<div class="content">
+				  <van-list class="list" style="display: flex;flex-direction: row;flex-wrap: wrap;" v-model="loading"
+				    :finished="finished" finished-text="没有更多了" @load="queryImages()">
+				    <div class="list_item" v-for="(item,index) in list" @click="goDetail(item)">
+				      <em class="item_mask"><span>{{item.status}}</span></em>
+				      <img :src="item.accessUrl" />
+				    </div>
+				  </van-list>
 				</div>
 			</div>
 			<div class="search_no_data" v-if="searchResultNum<=0">
@@ -97,44 +88,43 @@
 			}
 		}
 		.search_result {
-			background-color: #f4f4f4;
-			.result {
-				background-color: #ffffff;
-				display: flex;
-				flex-direction: column;
-				margin-bottom: 13px;
-				min-height: 240px;
-				.content {
-					display: flex;
-					flex-wrap: nowrap;
-					padding-bottom: 30px;
-					padding-top: 23px;
-					margin-left: 23px;
-					border-bottom: solid #ededed 1px;
-					.icon {
-						height: 200px;
-						width: 171px;
-					}
-					.text {
-						margin: 5px 0px 0px 22px;
-						text-align: left;
-						font-family: Microsoft YaHei Regular, Microsoft YaHei Regular-Regular;
-						font-weight: 400;
-						.text_title {
-							width: 520px;
-							font-size: 26px;
-							color: #333333;
-							min-height: 140px;
-							max-width: 506px;
-						}
-						.text_time {
-							margin-top: 19px;
-							font-size: 24px;
-							color: #999999;
-							letter-spacing: 0px;
-						}
-					}
-				}
+			.content {
+			  margin-top: 17px;
+			  min-height: 1003px;
+			  max-width: 100%;
+			
+			  .list {
+			    .list_item {
+			      width: 163px;
+			      height: 193px;
+			      margin-left: 18px;
+			      margin-top: 18px;
+			
+			      .item_mask {
+			        width: 163px;
+			        height: 193px;
+			        background: rgba(149, 143, 143, 0.6);
+			        position: absolute;
+			
+			        span {
+			          font-size: 24px;
+			          font-family: Microsoft YaHei Regular;
+			          color: #ffffff;
+			          letter-spacing: 0px;
+			          text-align: center;
+			          display: block;
+			          position: relative;
+			          top: 50%;
+			          transform: translateY(-50%);
+			        }
+			      }
+			
+			      img {
+			        width: 163px;
+			        height: 193px;
+			      }
+			    }
+			  }
 			}
 		}
 	}

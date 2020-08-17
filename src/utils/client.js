@@ -4,7 +4,7 @@ import QS from 'qs';
 //const domain = 'http://testsgcc.xinhuaapp.com:19002';
 axios.interceptors.request.use(function (config) {
   //config.url = domain+config.url;
-  //console.log(config.url);
+  console.log(config.url);
   config.headers['Access-Control-Allow-Origin']='*';
   if(config.url.indexOf('login')<0){
   	config.headers['token'] = localStorage.getItem('token');
