@@ -20,13 +20,13 @@
       <div class="login_tip">{{message}}</div>
       <div class="login_btn" @click="goto()"></div>
     </div>
-    <div class="no_login">登陆成功后7天内免登陆</div>
+    <div class="no_login" @click="test()">登陆成功后7天内免登陆</div>
   </div>
 </template>
 
 <script>
   import {
-    Prelogin,Trylogin,Comfirmlogin
+    Prelogin,Trylogin,Comfirmlogin,Test
   } from '../utils/request.js'
   import { Toast } from 'vant';
   import {encryptByDES} from '../utils/util.js'
@@ -109,6 +109,28 @@
       hidenPwd() {
         this.showPwdInput = false;
         this.passwordCoven = this.password;
+      },
+      ajaxGet(url, callback) {
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', url, true);
+        xhr.send();
+
+        xhr.onreadystatechange = function () {
+          if (xhr.readyState == 4 && xhr.status == 200) {
+            callback(xhr.responseText);
+          }
+        }
+      },
+      test(){
+        console.log('start');
+        Test({}).then(response => {
+          console.log(response);
+        }).catch(err => {
+          console.log(err);
+        })
+        /* this.ajaxGet('https://health.motree.cn/api/user/servertime',data =>{
+          console.log(data);
+        }) */
       }
     }
   }

@@ -23,7 +23,7 @@
               <div class="list_item" v-for="(item,index) in list" @click="goDetail(item)">
                 <!--<em class="item_mask"><span>{{item.status==0?"未标引":(item.status==1?"审核中":"已标引")}}</span></em>-->
                 <em class="item_mask"><span>{{item.accessUrl?"上传成功":"上传失败"}}</span></em>
-                <img :src="item.accessUrl" />
+                <video :src="item.accessUrl" />
               </div>
             </van-list>
           </div>
@@ -32,10 +32,12 @@
           <div class="content">
             <van-list class="list" style="display: flex;flex-direction: row;flex-wrap: wrap;" v-model="loading"
               :finished="finished" finished-text="没有更多了" @load="queryAudios()">
-              <div class="list_item" v-for="(item,index) in list" @click="goDetail(item)">
+              <div class="list_item audio_img" v-for="(item,index) in list" @click="goDetail(item)">
                 <!--<em class="item_mask"><span>{{item.status==0?"未标引":(item.status==1?"审核中":"已标引")}}</span></em>-->
                 <em class="item_mask"><span>{{item.accessUrl?"上传成功":"上传失败"}}</span></em>
-                <img :src="item.accessUrl" />
+                <audio>
+                  <source :src="item.accessUrl"></source>
+                </audio>
               </div>
             </van-list>
           </div>
@@ -117,25 +119,22 @@
         this.loading=true;
         this.list=[];
         this.pageNum=1;
-        
+
         if (val == 0) { //image
           this.common.setMaterialType(3);
           if(this.loading){
           	this.queryImages();
           }
-          //this.queryImages();
         } else if (val == 1) { //video
           this.common.setMaterialType(2);
           if(this.loading){
           	this.queryVideos();
           }
-          //this.queryVideos();
         } else if (val == 2) { //audio
           this.common.setMaterialType(1);
           if(this.loading){
           	this.queryAudios();
           }
-          //this.queryAudios();
         }
       }
     },
@@ -171,7 +170,9 @@
       uploadComplete(file) {
         var _this = this;
         var size = file.file.size;
-
+        file.file.duration
+        console.log('uploadComplete',file);
+        console.log('uploadComplete',file.file.duration);
         const data = new FormData();
         data.append("file", file.file);
         let config = {
@@ -184,8 +185,8 @@
           .then(response => {
             if(response.data.code==0){
                 _this.initQueryParams()
-                var params = this.getParamsFromOssPush(response.data.data,size);
                 if(_this.active==0){
+                  var params = this.getImgParamsFromOssPush(response.data.data,size);
                   ImageUpload(params)
                   .then(response =>{
                     if(response.code==0){
@@ -199,6 +200,7 @@
                     console.log(err);
                   })
                 }else if(_this.active==1){
+                  var params = this.getAudioParamsFromOssPush(response.data.data,size);
                   VideoUpload(params)
                   .then(response =>{
                     if(response.code==0){
@@ -212,6 +214,7 @@
                     console.log(err);
                   })
                 }else if(this.active==2){
+                  var params = this.getAudioParamsFromOssPush(response.data.data,size);
                   AudioUpload(params)
                   .then(response =>{
                     if(response.code==0){
@@ -233,7 +236,7 @@
             console.log(err);
           });
       },
-      getParamsFromOssPush(data,size){
+      getImgParamsFromOssPush(data,size){
         console.log(data);
         var dataArr =data.split("/");
         var image = dataArr[dataArr.length-1]
@@ -241,6 +244,20 @@
           objKey:image,
           name:image,
           dpi:'',
+          size:size,
+          extension:image.split(".")[1],
+          source:0,
+          medialYear:new Date().getFullYear()
+        }
+      },
+      getAudioParamsFromOssPush(data,size){
+        console.log(data);
+        var dataArr =data.split("/");
+        var image = dataArr[dataArr.length-1]
+        return {
+          objKey:image,
+          name:image,
+          length:'30',
           size:size,
           extension:image.split(".")[1],
           source:0,
@@ -364,12 +381,15 @@
       max-width: 100%;
 
       .list {
+        .audio_img{
+          background: url(../../assets/audio@2x.png) no-repeat center center;
+          background-size: 100% 100%;
+        }
         .list_item {
           width: 163px;
           height: 193px;
           margin-left: 18px;
           margin-top: 18px;
-
           .item_mask {
             width: 163px;
             height: 193px;
@@ -388,7 +408,14 @@
               transform: translateY(-50%);
             }
           }
-
+          video{
+            width: 163px;
+            height: 193px;
+          }
+          audio{
+            width: 163px;
+            height: 193px;
+          }
           img {
             width: 163px;
             height: 193px;

@@ -47,3 +47,6 @@ export const AuditList = params => { return axios.post('/api/cms/story/auditing/
 
 //分类，搜索
 export const getParting = params => { return axios.post('/api/asset/category/dict',params,{showLoading: true})}
+
+//test
+export const Test = params => { return axios.ajaxPostGet('https://health.motree.cn/api/user/servertime',params,'GET')}

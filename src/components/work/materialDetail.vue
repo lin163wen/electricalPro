@@ -3,9 +3,9 @@
 	<div>
 		<my-header title="素材" back="true" backUrl=""></my-header>
 		<div class="material">
-			<div class="material_content" @click="showPreview=!showPreview">
-				<img :src="materialDetail.accessUrl" style="width: 100%;height: 100%;" v-if="common.materialType==3" />
-				<video :src="materialDetail.accessUrl" style="width: 100%;height: 100%;" v-if="common.materialType==1 || common.materialType==2"></video>
+			<div class="material_content">
+				<img :src="materialDetail.accessUrl" style="width: 100%;height: 100%;" v-if="common.materialType==3"  @click="showPreview=!showPreview"/>
+				<video :src="materialDetail.accessUrl" controls="controls" style="width: 100%;height: 100%;" v-if="common.materialType==1 || common.materialType==2"></video>
 			</div>
 			<div class="material_info">
 				<ul class="basic_name">
@@ -157,7 +157,7 @@
 			}
 		}
 	}
-	
+
 	.preview {
 		height: 100%;
 		width: 100%;

@@ -21,7 +21,9 @@ import Preview from '../components/work/preview.vue'
 import Connection from '../components/connection/connection.vue'
 import ConnectAll from '../components/connection/ConnectAll.vue'
 import ConnectDetails from '../components/connection/ConnectDetails.vue'
-import Call from '../components/connection/Call.vue'
+import Calling from '../components/connection/Calling.vue'
+import Called from '../components/connection/Called.vue'
+import VideoCall from '../components/connection/VideoCall.vue'
 
 import Mine from '../components/mine/mine.vue'
 import Setting from '../components/mine/setting.vue'
@@ -108,9 +110,17 @@ export default new Router({
       name: 'ConnectDetails',
       component: ConnectDetails
     },{
-      path: '/Call',
-      name: 'Call',
-      component: Call
+      path: '/Calling',
+      name: 'Calling',
+      component: Calling
+    },{
+      path: '/Called',
+      name: 'Called',
+      component: Called
+    },{
+      path: '/VideoCall',
+      name: 'VideoCall',
+      component: VideoCall
     },{
       path: '/Mine',
       name: 'Mine',

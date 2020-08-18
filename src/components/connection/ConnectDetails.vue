@@ -29,7 +29,7 @@
         </div>
       </div>
     </div>
-    <div class="call_btn"></div>
+    <div class="call_btn" @click="call()"></div>
   </div>
 
 </template>
@@ -60,6 +60,14 @@
     methods:{
       goBack(){
         this.$router.back();
+      },
+      call(){
+        this.$router.push({
+          name:'Calling',
+          params:{
+            userInfo:this.userInfo
+          }
+        })
       }
     }
   }
