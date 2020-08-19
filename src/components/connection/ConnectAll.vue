@@ -1,7 +1,7 @@
 <template>
   <div>
     <!-- 'title','hasRight','back','parting','search','upload' -->
-    <my-header title="全部联系人" back="true"></my-header>
+    <my-header title="全部联系人" back="true" backUrl='Connection'></my-header>
     <div class="all_connections">
       <template v-for="(item,index) in curOriganizationDeep">
         <span v-if="index!=0">></span>

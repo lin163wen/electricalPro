@@ -59,9 +59,23 @@
     },
     methods:{
       goBack(){
-        this.$router.back();
+        this.$router.push('ConnectAll');
       },
       call(){
+        //localStorage.setItem('lastestConnector','')
+        //设置最近联系人
+        var lastestConnector = localStorage.getItem('lastestConnector');
+
+        if(!lastestConnector){
+          console.log(11111);
+          lastestConnector = new Array();
+        }else{
+          lastestConnector = JSON.parse(lastestConnector)
+        }
+        console.log(lastestConnector)
+        console.log(typeof lastestConnector)
+        lastestConnector.push(this.userInfo);
+        localStorage.setItem('lastestConnector',JSON.stringify(lastestConnector))
         this.$router.push({
           name:'Calling',
           params:{

@@ -18,8 +18,8 @@
       <template v-for="(item,index) in lastestConnector">
         <div class="connection" :ke="index">
           <img class="user_head" src="../../assets/head@2x.png" />
-          <span class="user_name">{{item}}</span>
-          <img class="call" src="../../assets/call@2x.png" />
+          <span class="user_name">{{item.name}}</span>
+          <img class="call" src="../../assets/call@2x.png" @click="goConnectDetail(item)"/>
         </div>
       </template>
     </div>
@@ -40,10 +40,36 @@
     },
     data(){
       return{
-        lastestConnector:localStorage.getItem('lastestConnector')
+        lastestConnector:[]
+      }
+    },
+    created() {
+      if(localStorage.getItem('lastestConnector')){
+        this.lastestConnector = JSON.parse(localStorage.getItem('lastestConnector'));
+        this.lastestConnector = this.lastestConnectorUnique(this.lastestConnector);
       }
     },
     methods:{
+      goConnectDetail(item){
+        console.log(item);
+        this.$router.push({
+          name:'ConnectDetails',
+          params:{
+            user:item
+          }
+        })
+      },
+      lastestConnectorUnique(arr){
+        for(var i=0;i<arr.length;i++){
+          for(var j=i+1;j<arr.length;j++){
+            if(arr[i].id ==arr[j].id){
+              arr.splice(j,1);
+              j--;
+            }
+          }
+        }
+        return arr;
+      },
       AllContector(){
         this.$router.push('/ConnectAll')
       }

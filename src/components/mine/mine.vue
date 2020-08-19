@@ -9,7 +9,7 @@
         </div>
         <div class="mine_info">
           <div class="first_name">
-            <span>{{userInfo.name.substr(0,1)}}</span>
+            <span>{{userInfo.name?userInfo.name.substr(0,1):''}}</span>
           </div>
           <div class="name">
             <span>{{userInfo.name}}</span>
@@ -20,12 +20,12 @@
         </div>
       </div>
       <div class="others">
-        <div class="setting">
+        <div class="setting" @click="goSetting()">
           <img class="setting_icon" src="../../assets/setting@2x.png" />
           <span>设置</span>
           <img class="setting_go" src="../../assets/go@2x.png" />
         </div>
-        <div class="about">
+        <div class="about" @click="goAbout()">
           <img class="about_icon" src="../../assets/about@2x.png" />
           <span>关于</span>
           <img class="about_go" src="../../assets/go@2x.png" />
@@ -54,13 +54,19 @@
     },
     data(){
     		return{
-    			userInfo:null
+    			userInfo:{}
     		}
     },
     created(){
     		this.queryUserInfo()
     },
     methods:{
+        goSetting(){
+          this.$router.push('Setting');
+        },
+        goAbout(){
+          this.$router.push('About');
+        },
     		queryUserInfo(){
     			var _this = this;
     			getUserInfo()
@@ -69,6 +75,9 @@
     					_this.userInfo = response.data;
     				}else{
     					Toast(response.message);
+              if(response.code=401){
+                _this.$router.push('Login')
+              }
     				}
     			})
     			.catch(err =>{

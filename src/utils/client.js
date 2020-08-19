@@ -1,11 +1,9 @@
 import axios from 'axios';
 import QS from 'qs';
 
-//const domain = 'http://testsgcc.xinhuaapp.com:19002';
 axios.interceptors.request.use(function(config) {
-  //config.url = domain+config.url;
-  console.log(config.url);
   config.headers['Access-Control-Allow-Origin'] = '*';
+  config.headers['Content-Type'] = 'application/x-www-form-urlencoded'
   if (config.url.indexOf('login') < 0) {
     config.headers['token'] = localStorage.getItem('token');
   }
@@ -47,7 +45,7 @@ export const deletes = (url, params, config) => {
   })
 }
 
-export const ajaxPostGet = (url, data, method) => {
+export const ajaxGet = (url, data) => {
   var request;
   if (window.XMLHttpRequest) {
     request = new XMLHttpRequest();
@@ -57,8 +55,6 @@ export const ajaxPostGet = (url, data, method) => {
   return new Promise(function(resolve, reject) {
     request.onreadystatechange = function() {
       if (request.readyState === 4) {
-        console.log(request);
-        console.log(request.status);
         if (request.status === 200) {
           resolve(JSON.parse(request.response));
         } else {
@@ -66,9 +62,6 @@ export const ajaxPostGet = (url, data, method) => {
         }
       }
     };
-    request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-    request.setRequestHeader('Access-Control-Allow-Origin','*');
-    if (method.toUpperCase() === "GET") {
       var arr = [];
       for (var key in data) {
         arr.push(key + '=' + data[key]);
@@ -77,14 +70,33 @@ export const ajaxPostGet = (url, data, method) => {
 
       request.open("GET", url + "?" + getData, true);
       request.send(null);
-    } else if (method.toUpperCase() === "POST") {
-      request.open("POST", url, true);
-      request.responseType = "json";
+  })
+}
 
-      if (url.indexOf('login') < 0) {
-        request.setRequestHeader('token',localStorage.getItem('token'));
+export const ajaxPost = (url, data) => {
+  var request;
+  if (window.XMLHttpRequest) {
+    request = new XMLHttpRequest();
+  } else {
+    request = new ActiveXObject("Microsoft.XMLHTTP")
+  }
+  return new Promise(function(resolve, reject) {
+    request.onreadystatechange = function() {
+      if (request.readyState === 4) {
+        if (request.status === 200) {
+          resolve(JSON.parse(request.response));
+        } else {
+          reject(request.status);
+        }
       }
-      request.send(data);
-    }
+    };
+    request.open("POST", url, true);
+          //request.responseType = "json";
+          request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+          request.setRequestHeader('Access-Control-Allow-Origin','*');
+          if (url.indexOf('login') < 0) {
+            request.setRequestHeader('token',localStorage.getItem('token'));
+          }
+          request.send(data);
   })
 }

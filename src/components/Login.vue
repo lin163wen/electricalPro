@@ -20,13 +20,13 @@
       <div class="login_tip">{{message}}</div>
       <div class="login_btn" @click="goto()"></div>
     </div>
-    <div class="no_login" @click="test()">登陆成功后7天内免登陆</div>
+    <div class="no_login">登陆成功后7天内免登陆</div>
   </div>
 </template>
 
 <script>
   import {
-    Prelogin,Trylogin,Comfirmlogin,Test
+    Prelogin,Trylogin,Comfirmlogin,Test,Test2
   } from '../utils/request.js'
   import { Toast } from 'vant';
   import {encryptByDES} from '../utils/util.js'
@@ -100,7 +100,7 @@
           console.log(err);
           _this.loginToast.clear()
         })
-        //this.$router.push('/Work')
+        //this.$router.push('/Setting')
       },
       showPwd() {
         this.showPwdInput = true;
@@ -110,16 +110,16 @@
         this.showPwdInput = false;
         this.passwordCoven = this.password;
       },
-      ajaxGet(url, callback) {
-        var xhr = new XMLHttpRequest();
-        xhr.open('GET', url, true);
-        xhr.send();
-
-        xhr.onreadystatechange = function () {
-          if (xhr.readyState == 4 && xhr.status == 200) {
-            callback(xhr.responseText);
-          }
-        }
+      test2(){
+        Test2({
+          phone:'18859147151',
+          verifycode:'0000',
+          new_password:'123456'
+        }).then(response => {
+          console.log(response);
+        }).catch(err => {
+          console.log(err);
+        })
       },
       test(){
         console.log('start');

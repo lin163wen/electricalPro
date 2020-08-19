@@ -1,5 +1,5 @@
 <template>
-	<div class="call">
+  <div class="call">
     <div class="call_member">
       <div class="first_name">
         <span>{{firstName}}</span>
@@ -24,7 +24,7 @@
       <div class="video">
         <span>摄像头</span>
       </div> -->
-      <div class="operation hang_up">
+      <div class="operation hang_up" @click="hangUp()">
         <img src="../../assets/hang_up@2x.png" />
         <span>挂断</span>
       </div>
@@ -34,46 +34,58 @@
 </template>
 
 <script>
-import MyHeader from '../views/header.vue'
-export default{
-  name:'Calling',
-  components:{MyHeader},
-  data(){
-    return{
-      userInfo:{}
-    }
-  },
-  computed:{
-    firstName:function(){
-      var userName = this.userInfo.name;
-      return userName.substr(0,1);
-    }
-  },
-  created() {
-    console.log(this.$route.params.userInfo)
-    this.userInfo = this.$route.params.userInfo;
-  },
-  methods:{
+  import MyHeader from '../views/header.vue'
+  export default {
+    name: 'Calling',
+    components: {
+      MyHeader
+    },
+    data() {
+      return {
+        userInfo: {}
+      }
+    },
+    computed: {
+      firstName: function() {
+        var userName = this.userInfo.name;
+        return userName.substr(0, 1);
+      }
+    },
+    created() {
+      console.log(this.$route.params.userInfo)
+      this.userInfo = this.$route.params.userInfo;
+    },
+    methods: {
+      hangUp() {
+        this.$router.push({
+          name: 'ConnectDetails',
+          params: {
+            user: this.userInfo
+          }
 
+        })
+      }
+    }
   }
-}
 </script>
 
 <style scoped lang="less">
-  .call{
+  .call {
     height: 100%;
     width: 100%;
     background: url(../../assets/start@2x.png) no-repeat center;
     background-size: 100% 100%;
     display: flex;
     justify-content: center;
-    .call_member{
-      top:117px;
+
+    .call_member {
+      top: 117px;
       display: flex;
       position: absolute;
       align-items: center;
       flex-direction: column;
-      .first_name{
+
+      .first_name {
         width: 223px;
         height: 223px;
         background: #f4f4f4;
@@ -82,6 +94,7 @@ export default{
         display: flex;
         align-items: center;
         justify-content: center;
+
         span {
           font-size: 73px;
           font-family: Microsoft YaHei Regular;
@@ -90,6 +103,7 @@ export default{
           letter-spacing: 5px;
         }
       }
+
       .name {
         margin-top: 27px;
 
@@ -114,13 +128,14 @@ export default{
       }
     }
 
-    .call_status{
+    .call_status {
       position: absolute;
-      top:683px;
+      top: 683px;
       width: 457px;
       height: 94px;
       text-align: center;
-      span{
+
+      span {
         font-size: 40px;
         font-family: Microsoft YaHei Regular;
         font-weight: 400;
@@ -129,22 +144,25 @@ export default{
       }
     }
 
-    .operations{
+    .operations {
       position: absolute;
-      bottom:214px;
-      width:487px;
+      bottom: 214px;
+      width: 487px;
       display: flex;
       justify-content: center;
-      .operation{
+
+      .operation {
         width: 126px;
         height: 180px;
         text-align: center;
-        img{
+
+        img {
           width: 126px;
           height: 126px;
           margin-bottom: 19px;
         }
-        span{
+
+        span {
           font-size: 36px;
           font-family: Microsoft YaHei Regular;
           font-weight: 400;

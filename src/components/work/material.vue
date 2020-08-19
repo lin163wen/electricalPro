@@ -181,7 +181,7 @@
             'token':localStorage.getItem('token')
           }
         }; //添加请求头
-        this.$http.post('/api/asset/common/oss/push-url', data, config)
+        this.$http.post('http://testsgcc.xinhuaapp.com:19002/api/asset/common/oss/push-url', data, config)
           .then(response => {
             if(response.data.code==0){
                 _this.initQueryParams()
@@ -194,6 +194,9 @@
                       _this.queryImages();
                     }else{
                       Toast(response.message);
+                      if(response.code=401){
+                        _this.$router.push('Login')
+                      }
                     }
                   })
                   .catch(err =>{
@@ -208,6 +211,9 @@
                       _this.queryVideos();
                     }else{
                       Toast(response.message);
+                      if(response.code=401){
+                        _this.$router.push('Login')
+                      }
                     }
                   })
                   .catch(err =>{
@@ -222,6 +228,9 @@
                       _this.queryAudios();
                     }else{
                       Toast(response.message);
+                      if(response.code=401){
+                        _this.$router.push('Login')
+                      }
                     }
                   })
                   .catch(err =>{
@@ -230,6 +239,9 @@
                 }
             }else{
               Toast(response.data.message);
+              if(response.data.code=401){
+                _this.$router.push('Login')
+              }
             }
             console.log(response);
           }).catch(err => {
