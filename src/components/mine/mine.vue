@@ -75,8 +75,8 @@
     					_this.userInfo = response.data;
     				}else{
     					Toast(response.message);
-              if(response.code=401){
-                _this.$router.push('Login')
+              if(response.code==401){
+                _this.$router.push('/')
               }
     				}
     			})

@@ -38,7 +38,7 @@ export default{
   methods:{
     logout(){
       localStorage.setItem('token','');
-      this.$router.push('Login');
+      this.$router.push('/');
     },
     caching(callback){
     	if (window.plus) {
@@ -85,11 +85,12 @@ export default{
     	});
     },
     remove(){
-      var _this = this;
+      localStorage.setItem('token','')
+      /* var _this = this;
     	this.clearCaching(function(){
     		Toast("缓存清除成功！");
         _this.getCache();
-    	});
+    	}); */
     }
 
   }

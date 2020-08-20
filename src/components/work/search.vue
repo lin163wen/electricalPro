@@ -115,8 +115,8 @@
 							_this.loading = false
 						} else {
 							Toast(response.message);
-              if(response.code=401){
-                _this.$router.push('Login')
+              if(response.code==401){
+                _this.$router.push('/')
               }
 						}
 					})
