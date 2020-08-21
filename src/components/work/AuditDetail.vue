@@ -1,5 +1,5 @@
 <template>
-	<div style="height: 100%;">
+	<div class="detail_div">
 		<!-- 'title','hasRight','back','parting','search','upload' -->
 		<my-header title="稿件详情" back="true" ref="header" backUrl='/Audit'></my-header>
 		<van-tabs v-model="active" color="#ffaf6f">
@@ -243,7 +243,11 @@
 
 <style scoped lang="less">
 	@deep: ~'>>>';
-	.content_div {
+	.detail_div{
+		height: 100%;
+		padding: 111px 0 0;
+		box-sizing: border-box;
+		.content_div {
 		.content {
 			display: flex;
 			flex-direction: column;
@@ -277,8 +281,16 @@
 				color: #666666;
 				letter-spacing: 0px;
 				@{deep} img {
-					max-width: 100%;
-					width: 100%
+					max-width: 100% !important;
+					width: 100% !important;
+				}
+				@{deep} video {
+					max-width: 100% !important;
+					width: 100% !important;
+				}
+				@{deep} audio {
+					max-width: 100% !important;
+					width: 100% !important;
 				}
 			}
 			/* .btn_div{
@@ -304,8 +316,11 @@
 			}
 		}
 		.btn_div {
+			position: fixed;
+			bottom: 0px;
 			background-color: #e5e5e5;
 			padding-top: 12px;
+			width: 100%;
 			.next_btn {
 				margin-left: 106px;
 				width: 539px;
@@ -445,6 +460,8 @@
 			}
 		}
 		.btn_div {
+			position: fixed;
+			bottom: 0px;
 			background-color: #e5e5e5;
 			padding-top: 12px;
 			font-size: 33px;
@@ -489,6 +506,8 @@
 			}
 		}
 		.btn_div2 {
+			position: fixed;
+			bottom: 0px;
 			background-color: #e5e5e5;
 			padding-top: 12px;
 			font-size: 33px;
@@ -520,5 +539,6 @@
 				}
 			}
 		}
+	}
 	}
 </style>

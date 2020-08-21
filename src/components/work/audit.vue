@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<div class="list_div">
 		<!-- 'title','hasRight','back','parting','search','upload' -->
 		<my-header title="审稿" back="true" backUrl="Work"></my-header>
 		<van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="queryAudits">
@@ -76,7 +76,11 @@
 </script>
 
 <style scoped lang="less">
-	.content {
+	.list_div{
+		height: 100%;
+		padding: 111px 0 0;
+		box-sizing: border-box;
+		.content {
 		display: flex;
 		flex-wrap: nowrap;
 		padding-bottom: 30px;
@@ -111,5 +115,6 @@
 				letter-spacing: 0px;
 			}
 		}
+	}
 	}
 </style>

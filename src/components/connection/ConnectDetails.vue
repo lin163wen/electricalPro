@@ -29,7 +29,9 @@
         </div>
       </div>
     </div>
-    <div class="call_btn" @click="call()"></div>
+    <div class="call_div">
+    		<div class="call_btn" @click="call()"></div>
+    </div>
   </div>
 
 </template>
@@ -186,7 +188,11 @@
 
     }
   }
-  .call_btn{
+  .call_div{
+  	width: 100%;
+  	position: fixed;
+  	bottom: 0px;
+  	.call_btn{
     width: 534px;
     height: 112px;
     background: url(../../assets/call_btn@2x.png) no-repeat center center;
@@ -194,4 +200,6 @@
     margin-top: 411px;
     margin-left: 108px;
   }
+  }
+  
 </style>

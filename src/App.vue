@@ -94,6 +94,9 @@
 	.van-tabs__wrap {
 		height: 66px !important;
 	}
+	.van-tabs{
+		height: 100%;
+	}
 	/* .van-tabs {
     height: 1223px !important;
   }

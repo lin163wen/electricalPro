@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="list_div">
     <!-- 'title','hasRight','back','parting','search','upload' -->
     <my-header :title="partingTitle" back="true" hasRight="true" parting="true" search="true" backUrl="/Work"></my-header>
     <div class="material_content">
@@ -46,7 +46,7 @@
       </van-tabs>
     </div>
     <div class="upload_div" v-if="curCagetory==2">
-      <!-- <van-uploader :before-read="getFileInfo" :after-read="uploadComplete" accept="image/*" v-if="active==0">
+       <van-uploader :before-read="getFileInfo" :after-read="uploadComplete" accept="image/*" v-if="active==0">
         <div class="upload_btn">
           <span>上传素材</span>
         </div>
@@ -60,9 +60,9 @@
         <div class="upload_btn">
           <span>上传素材</span>
         </div>
-      </van-uploader> -->
+      </van-uploader> 
       <!-- <input class="upload_btn" type="file" value="上传素材"/> -->
-      <div class="upload_btn" @click="uploaderFile('image')" v-if="active==0">
+      <!--<div class="upload_btn" @click="uploaderFile('image')" v-if="active==0">
         <span>上传素材</span>
       </div>
       <div class="upload_btn" @click="uploaderFile('video')" v-if="active==1">
@@ -70,7 +70,7 @@
       </div>
       <div class="upload_btn" @click="uploaderFile('audio')" v-if="active==2">
         <span>上传素材</span>
-      </div>
+      </div>-->
     </div>
     <div :class="cagetoryClass" @click="changeCagetory()"></div>
   </div>
@@ -83,6 +83,7 @@
     Uploader
   } from 'vant';
   import {
+  	domain,
     OfficialImages,
     PrivateImages,
     PublicImages,
@@ -179,7 +180,7 @@
             'token': localStorage.getItem('token')
           }
         }; //添加请求头
-        this.$http.post('http://testsgcc.xinhuaapp.com:19002/api/asset/common/oss/push-url', data, config)
+        this.$http.post(domain+'/api/asset/common/oss/push-url', data, config)
           .then(response => {
             if (response.data.code == 0) {
               _this.initQueryParams()
@@ -364,6 +365,9 @@
               _this.loading = false
             } else {
               Toast(response.message);
+              if(response.code=401){
+              	_this.$router.push("/");
+              }
             }
           })
           .catch(err => {
@@ -385,7 +389,7 @@
         try{
           this.$plusExtends(function () {
           		plus.gallery.pick(function(path){
-          			var task = plus.uploader.createUpload('http://testsgcc.xinhuaapp.com:19002/api/asset/common/oss/push-url', {
+          			var task = plus.uploader.createUpload(domain+'/api/asset/common/oss/push-url', {
           			  method: "POST",blocksize:20480000000000,priority:100,timeout:10
           			}, function (data, status) {
           			  console.log('88888',data,status);
@@ -474,7 +478,7 @@
           			});
           			//开始上传
           			task.start();
-          		},function(e){console.log("取消选择图片",e)},{filter::filterFileType})
+          		},function(e){console.log("取消选择图片",e)},{filter:filterFileType})
           });
         }catch(err){
           console.log(err);
@@ -488,7 +492,11 @@
 </script>
 
 <style scoped lang="less">
-  .material_content {
+  .list_div{
+  	height: 100%;
+  	padding: 111px 0 0;
+  	box-sizing: border-box;
+  	.material_content {
     height: 1110px;
     max-height: 1110px;
     overflow-y: scroll;
@@ -595,5 +603,6 @@
   .private {
     background: url(../../assets/private@2x.png) no-repeat;
     background-size: 100% 100%;
+  }
   }
 </style>
