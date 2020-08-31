@@ -39,6 +39,7 @@
         password: '', //明文密码
         passwordCoven: '' ,//秘文密码
         message:'',
+        confirmMessage:'',
         comfirmLoginInterval:null,
         comfirmLoginCount:0,
         loginToast:null
@@ -66,10 +67,12 @@
                   var loginId = response.data.loginId;
                   _this.comfirmLoginInterval = setInterval(function(){
                     if(_this.comfirmLoginCount>10){
+                      _this.message = _this.confirmMessage;
                       clearInterval(_this.comfirmLoginInterval);
                       _this.loginToast.clear()
                     }
                     Comfirmlogin({loginId:loginId}).then(response=>{
+                      _this.confirmMessage = response.message;
                       if(response.code==0){
                         _this.comfirmLoginCount = 0;
                         clearInterval(_this.comfirmLoginInterval);
