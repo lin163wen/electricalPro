@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="all_div">
     <!-- 'title','hasRight','back','parting','search','upload' -->
     <my-header title="全部联系人" back="true" backUrl='Connection'></my-header>
     <div class="all_connections">
@@ -127,7 +127,11 @@
 </script>
 
 <style scoped lang="less">
-  .all_connections {
+  .all_div{
+  	height: 100%;
+  	padding: 111px 0 0;
+  	box-sizing: border-box;
+  	.all_connections {
     display: flex;
     align-items: center;
     height: 86px;
@@ -200,5 +204,6 @@
         margin-right: 24px;
       }
     }
+  }
   }
 </style>

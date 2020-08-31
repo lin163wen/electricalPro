@@ -53,6 +53,7 @@
 	.header {
 		height: 111px;
 		background: linear-gradient(#7c5dfb 0%, #41abff 100%);
+		margin:-111px 0 0;
 		.back {
 			height: 47px;
 			width: 25px;

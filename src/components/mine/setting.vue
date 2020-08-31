@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<div class="setting_div">
     <!-- 'title','hasRight','back','parting','search','upload' -->
     <my-header title="设置" back="true"></my-header>
     <div class="clear_cache">
@@ -98,7 +98,11 @@ export default{
 </script>
 
 <style scoped lang="less">
-  .clear_cache{
+  .setting_div{
+  	height: 100%;
+  	padding: 111px 0 0;
+  	box-sizing: border-box;
+  	.clear_cache{
     height: 79px;
     width: 100%;
     background-color: #FFFFFF;
@@ -145,5 +149,6 @@ export default{
       }
     }
 
+  }
   }
 </style>

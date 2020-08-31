@@ -1,5 +1,5 @@
 <template>
-	<div style="height: 100%;">
+	<div class="mission_div" style="height: 100%;box-sizing: border-box;padding: 1.48rem 0 0;">
 		<!-- 'title','hasRight','back','parting','search','upload' -->
 		<my-header title="稿件详情" back="true" ref="header" backUrl='/Mission'></my-header>
 		<van-tabs v-model="active" color="#ffaf6f">
@@ -243,7 +243,11 @@
 
 <style scoped lang="less">
 	@deep: ~'>>>';
-	.content_div {
+	.mission_div{
+		height: 100%;
+    		box-sizing: border-box;
+    		padding: 111px 0px 0px;
+		.content_div {
 		.content {
 			display: flex;
 			flex-direction: column;
@@ -277,8 +281,16 @@
 				color: #666666;
 				letter-spacing: 0px;
 				@{deep} img {
-					max-width: 100%;
-					width: 100%
+					max-width: 100% !important;
+					width: 100% !important;
+				}
+				@{deep} video {
+					max-width: 100% !important;
+					width: 100% !important;
+				}
+				@{deep} audio {
+					max-width: 100% !important;
+					width: 100% !important;
 				}
 			}
 			/* .btn_div{
@@ -305,7 +317,9 @@
 		}
 		.btn_div {
 			background-color: #e5e5e5;
-			padding-top: 12px;
+			position: fixed;
+			bottom: 0px;
+			width: 100%;
 			.next_btn {
 				margin-left: 106px;
 				width: 539px;
@@ -326,7 +340,7 @@
 	}
 	
 	.basic_div {
-		height: 1003px;
+		height: 100%;
 		.basic {
 			margin-top: 12px;
 			padding-left: 21px;
@@ -445,6 +459,9 @@
 			}
 		}
 		.btn_div {
+			position: fixed;
+			bottom:0px;
+			width: 100%;
 			background-color: #e5e5e5;
 			padding-top: 12px;
 			font-size: 33px;
@@ -490,7 +507,8 @@
 		}
 		.btn_div2 {
 			background-color: #e5e5e5;
-			padding-top: 12px;
+			position: fixed;
+			bottom: 0px;
 			font-size: 33px;
 			font-family: Microsoft YaHei Regular;
 			font-weight: 400;
@@ -498,6 +516,7 @@
 			letter-spacing: 1px;
 			display: flex;
 			margin-top: 127px;
+			width: 100%;
 			.pass_btn2 {
 				background-image: url(../../assets/pass2@2x.png);
 				background-size: 100% auto;
@@ -521,4 +540,6 @@
 			}
 		}
 	}
+	}
+	
 </style>

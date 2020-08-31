@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="list_div">
     <!-- 'title','hasRight','back','parting','search','upload' -->
     <my-header title="通讯录"></my-header>
     <!-- <van-cell title="查看全部联系人">
@@ -78,7 +78,11 @@
 </script>
 
 <style scoped lang="less">
-  .all_connections {
+  .list_div{
+  	height: 100%;
+  	padding: 111px 0 0;
+  	box-sizing: border-box;
+  	.all_connections {
     display: flex;
     align-items: center;
     height: 77px;
@@ -138,5 +142,6 @@
         margin-left: 452px;
       }
     }
+  }
   }
 </style>

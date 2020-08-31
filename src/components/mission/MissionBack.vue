@@ -1,5 +1,5 @@
 <template>
-	<div style="height: 100%;">
+	<div class="reject_div">
 		<!-- 'title','hasRight','back','parting','search','upload' -->
 		<my-header title="退回" back="true" ref="header" backUrl='MissionDetail'></my-header>
 		<div class="mission_back">
@@ -163,7 +163,11 @@
 		list-style: none;
 	}
 	
-	.mission_back {
+	.reject_div{
+		height: 100%;
+    		padding: 111px 0 0;
+    		box-sizing: border-box ;
+		.mission_back {
 		display: flex;
 		flex-direction: column;
 		text-align: left;
@@ -308,5 +312,6 @@
 				height: 70px;
 			}
 		}
+	}
 	}
 </style>
