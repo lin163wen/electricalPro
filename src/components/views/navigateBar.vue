@@ -1,21 +1,25 @@
 <template>
 	<van-tabbar v-model="navigateBarIndex" @change="change">
-		<van-tabbar-item to='/Mission' :badge="missionNum" :key="missionNum">
+		<van-tabbar-item to='/Mission'>
+      <span>任务</span>
 			<template #icon="props">
 				<img :src="navigateBarIndex==0 ? icon_mission.active : icon_mission.inactive" class="navigateBar_icon" />
 			</template>
 		</van-tabbar-item>
 		<van-tabbar-item to="/Work">
+      <span>工作</span>
 			<template #icon="props">
 				<img :src="navigateBarIndex==1 ? icon_work.active : icon_work.inactive" class="navigateBar_icon" />
 			</template>
 		</van-tabbar-item>
 		<van-tabbar-item to="/Connection">
+      <span>通讯录</span>
 			<template #icon="props">
 				<img :src="navigateBarIndex==2 ? icon_communication.active : icon_communication.inactive" class="navigateBar_icon" />
 			</template>
 		</van-tabbar-item>
 		<van-tabbar-item to="/Mine">
+      <span>我的</span>
 			<template #icon="props">
 				<img :src="navigateBarIndex==3 ? icon_mine.active : icon_mine.inactive" class="navigateBar_icon" />
 			</template>
@@ -73,7 +77,10 @@
 
 <style scoped="scoped" lang="less">
 	.navigateBar_icon {
-		width: 58px;
-		height: 80px;
+		width: 20px !important;
+		height: 20px !important;
 	}
+  .van-tabbar-item{
+    font-size: 9px !important;
+  }
 </style>

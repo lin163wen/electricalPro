@@ -11,6 +11,9 @@
 </script>
 
 <style>
+  *{
+    box-sizing: border-box;
+  }
 	#app {
 		width: 100%;
 		position: relative;
@@ -46,6 +49,9 @@
 	.van-toast {
 		transform: translateX(-50%) !important;
 		font-size: 26px !important;
+    width: auto !important;
+    height: auto !important;
+    min-height: auto !important;
 	}
 
 	.van-toast--text {
@@ -55,11 +61,11 @@
 	/* 底部导航样式 */
 
 	.van-tabbar-item {
-		font-size: 32px !important;
+		font-size: 9px !important;
 	}
 
 	.van-tabbar {
-		height: 112px !important;
+		height: 78px !important;
 	}
 	/* 底部导航样式‘任务’右上角任务数样式 */
 
@@ -71,13 +77,12 @@
 	/*头部title样式*/
 
 	.van-nav-bar__title {
-		height: 43px !important;
-		font-size: 42px !important;
-		font-family: Microsoft YaHei Regular, Microsoft YaHei Regular-Regular !important;
-		font-weight: 400 !important;
-		color: #ffffff !important;
-		line-height: 43px !important;
-		letter-spacing: 3px !important;
+		height: 22px !important;
+		font-size: 16px !important;
+		font-family: PingFangSC-Medium, PingFang SC !important;
+		font-weight: 500 !important;
+		color: #3F3E3E !important;
+		line-height: 22px !important;
 	}
 	/*任务详情Tab样式*/
 
@@ -125,10 +130,10 @@
 		height: 115px !important;
 	}
 
-	.van-loading__spinner {
+	/* .van-loading__spinner {
 		width: 115px !important;
 		height: 115px !important;
-	}
+	} */
 
 	.van-uploader__mask-icon {
 		font-size: 115px !important;

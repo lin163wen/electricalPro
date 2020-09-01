@@ -51,36 +51,14 @@
 
 <style scoped="scoped" lang="less">
 	.header {
-		height: 111px;
-		background: linear-gradient(#7c5dfb 0%, #41abff 100%);
-		margin:-111px 0 0;
+		height: 44px;
+		background: #FFFFFF;
+    position: fixed;
+    width: 100%;
+    top:0px;
 		.back {
-			height: 47px;
-			width: 25px;
-		}
-		.parting_btn {
-			width: 45px;
-			height: 45px;
-			margin-right: 21px;
-			img {
-				width: 45px;
-				height: 45px;
-			}
-		}
-		.search_btn {
-			width: 41px;
-			height: 42px;
-			margin-right: 18px;
-			img {
-				width: 41px;
-				height: 42px;
-			}
-		}
-		.upload {
-			width: 60px;
-			height: 40px;
-			font-size: 22px;
-			margin: 0 10px;
+			height: 14px;
+			width: 18px;
 		}
 	}
 </style>

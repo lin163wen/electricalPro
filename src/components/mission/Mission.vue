@@ -1,19 +1,25 @@
 <template>
-	<div class="list_div" style="height: 84%;" :key="missionListNum">
+	<div class="list_div" :key="missionListNum">
 		<!-- 'title','hasRight','back','parting','search','upload' -->
 		<my-header title="任务"></my-header>
-		<div class="mission_num" v-if="missionListNum>0">任务数量（{{missionListNum}}）</div>
+		<div class="mission_num" v-if="missionListNum>0" @click="refresh()">有{{missionListNum}}条任务，点击刷新</div>
 		<div class="mission_list" v-if="missionListNum>0">
 			<div class="mission" v-for="(item,index) in missionList">
 				<div class="content" @click="missionDetail(item)">
-					<img class="icon" src="../../assets/check@2x.png" />
+          <div class="icon">
+            审
+          </div>
 					<div class="text">
 						<div class="text_title">{{item.title}}</div>
 						<div class="text_lanmu">{{item.channelName}}</div>
-						<div class="text_time">{{item.updateTime}}</div>
+            <div class="text_author_time">
+              <div class="text_author">作者：{{item.author}}</div>
+              <div class="text_time">{{item.updateTime}}</div>
+            </div>
+
 					</div>
 				</div>
-				<div class="author">作者：{{item.author}}</div>
+
 			</div>
 		</div>
 		<div class="no_mission" v-if="missionListNum<=0">
@@ -40,7 +46,8 @@
 			return {
 				missionListNum: this.common.missionNum,
 				missionList: [],
-				componentKey: 0
+				componentKey: 0,
+        missionListLoading:null
 			}
 		},
 		created() {
@@ -58,9 +65,15 @@
 					}
 				});
 			},
+      refresh(){
+        this.queryMissions();
+      },
 			queryMissions() {
-				console.log(this.missionListNum);
 				var _this = this;
+        this.missionListLoading = Toast.loading({
+          duration: 0, // 持续展示 toast
+          forbidClick: true,
+        });
 				Missions({}).then((response) => {
 					console.log(response);
 					if(response.code == 0) {
@@ -74,6 +87,7 @@
 							_this.$router.push('/Login')
 						}
 					}
+          _this.missionListLoading.clear();
 				}).catch((response) => {
 					console.log(4444);
 					console.log(response);
@@ -87,22 +101,19 @@
 <style scoped lang="less">
 	.list_div {
 		height: 100%;
-		padding: 111px 0 0;
-		box-sizing: border-box;
-		.header {
-			height: 111px;
-			background: linear-gradient(#7c5dfb 0%, #41abff 100%);
-		}
+    background: #999999;
 		.mission_num {
-			font-size: 31px;
-			font-family: Microsoft YaHei Regular, Microsoft YaHei Regular-Regular;
+      width: 375px;
+      height: 40px;
+      background: rgba(62, 126, 255, 0.86);
+			font-size: 12px;
+			font-family: PingFangSC-Regular, PingFang SC;
 			font-weight: 400;
-			text-align: left;
-			color: #666666;
-			letter-spacing: 1px;
-			height: 77px;
-			line-height: 77px;
-			margin-left: 22px;
+			color: #FFFFFF;
+			line-height: 40px;
+      text-align: center;
+      position: fixed;
+      top:44px;
 		}
 		.no_mission {
 			width: 460px;
@@ -115,62 +126,79 @@
 			background-size: 100% auto;
 		}
 		.mission_list {
-			background-color: #f4f4f4;
+      padding-top: 88px;
+      padding-bottom: 78px;
+			background-color: #F0F0F0;
 			display: flex;
 			flex-direction: column;
-			padding-bottom: 1.493333rem;
 			overflow: scroll;
 			.mission {
 				background-color: #ffffff;
 				display: flex;
 				flex-direction: column;
-				margin-bottom: 13px;
-				min-height: 280px;
+				margin-bottom: 3px;
 				.content {
 					display: flex;
 					flex-wrap: nowrap;
-					padding-bottom: 30px;
-					padding-top: 23px;
-					margin-left: 23px;
-					border-bottom: solid #ededed 1px;
+					padding-bottom: 10px;
+					padding-top: 10px;
+					margin-left: 16px;
 					.icon {
-						height: 118px;
-						width: 117px;
+						width: 60px;
+						height: 60px;
+						background: #4783FE;
+						border-radius: 30px;
+            text-align: center;
+            font-size: 24px;
+            font-family: PingFangSC-Regular, PingFang SC;
+            font-weight: 400;
+            color: #FFFFFF;
+            line-height: 60px;
 					}
 					.text {
-						margin: 5px 0px 0px 22px;
-						text-align: left;
-						font-family: Microsoft YaHei Regular, Microsoft YaHei Regular-Regular;
-						font-weight: 400;
-						.text_title {
-							width: 520px;
-							font-size: 30px;
-							color: #333333;
-							letter-spacing: 1px;
-						}
-						.text_lanmu {
-							margin-top: 18px;
-							font-size: 24px;
-							color: #999999;
-							letter-spacing: 0px;
-						}
-						.text_time {
-							margin-top: 19px;
-							font-size: 24px;
-							color: #999999;
-							letter-spacing: 0px;
-						}
+            margin-left: 34px;
+            max-width: 250px;
+            width: 250px;
+            overflow: hidden;
+            .text_title{
+              font-size: 14px;
+              font-family: PingFangSC-Medium, PingFang SC;
+              font-weight: 500;
+              color: #3F3E3E;
+              line-height: 20px;
+              margin-bottom: 5px;
+            }
+            .text_lanmu{
+              font-size: 14px;
+              font-family: PingFangSC-Regular, PingFang SC;
+              font-weight: 400;
+              color: #838383;
+              line-height: 20px;
+              margin-bottom: 6px;
+            }
+            .text_author_time{
+              display: flex;
+              flex-direction: row;
+              justify-content: space-between;
+              .text_author{
+                font-size: 12px;
+                font-family: PingFangSC-Regular, PingFang SC;
+                font-weight: 400;
+                color: #3E7EFF;
+                line-height: 17px;
+              }
+              .text_time {
+                font-size: 12px;
+                font-family: DIN-Regular, DIN;
+                font-weight: 400;
+                color: #BABABA;
+                line-height: 15px;
+              }
+            }
+
 					}
 				}
-				.author {
-					margin: 23px 23px 25px 23px;
-					font-size: 26px;
-					font-family: Microsoft YaHei Regular, Microsoft YaHei Regular-Regular;
-					font-weight: 400;
-					text-align: left;
-					color: #999999;
-					letter-spacing: 1px;
-				}
+
 			}
 		}
 	}

@@ -1,6 +1,18 @@
 <template>
-  <div class="start_img">
-    <div class="logo"></div>
+  <div class="start_page">
+    <div class="logo">
+      <img src="../assets/start@2x.png" />
+    </div>
+    <div class="official">
+      享受最便捷的办公
+    </div>
+    <div class="try">
+      点击一下，立即体验
+    </div>
+    <div class="btn" @click="start()"></div>
+    <div class="service">
+      登陆注册即代表同意《服务条款》
+    </div>
   </div>
 </template>
 
@@ -13,27 +25,71 @@
       }
     },
     created() {
-      var _this = this;
-      setTimeout(function(){
-        _this.$router.push('/Login');
-      },2000)
+    },
+    methods:{
+      start(){
+        this.$router.push('Login')
+      }
     }
   }
 </script>
 <style scoped lang="less">
-  .start_img{
-    background: url(../assets/start@2x.png) no-repeat center center;
-    background-size: 100% 100%;
+  .start_page div{
+      left: 0;
+      bottom: 0;
+      right: 0;
+      margin: 0 auto;
+      position: absolute;
+  }
+  .start_page{
+    background: #F4F7FF;
     width: 100%;
     height: 100%;
     .logo{
-      background: url(../assets/logo@2x.png) no-repeat center center;
+      width: 350px;
+      height: 360px;
+      top: 44px;
+      img{
+        width: 100%;
+        height: 100%;
+      }
+    }
+    .official{
+      width: 160px;
+      height: 28px;
+      font-size: 20px;
+      font-family: PingFangSC-Medium, PingFang SC;
+      font-weight: 500;
+      color: #484747;
+      line-height: 28px;
+      top:438px;
+    }
+    .try{
+      width: 135px;
+      height: 21px;
+      font-size: 15px;
+      font-family: PingFangSC-Regular, PingFang SC;
+      font-weight: 400;
+      color: #939393;
+      line-height: 21px;
+      top: 477px;
+    }
+    .btn{
+      width: 344px;
+      height: 50px;
+      background: url(../assets/start_btn@2x.png);
       background-size: 100% 100%;
-      width: 322px;
-      height: 313px;
-      position: absolute;
-      top:133px;
-      left: 215px;
+      bottom:132px;
+    }
+    .service{
+      width: 180px;
+      height: 17px;
+      font-size: 12px;
+      font-family: PingFangSC-Regular, PingFang SC;
+      font-weight: 400;
+      color: #4783FE;
+      line-height: 17px;
+      bottom: 69px;
     }
   }
 </style>

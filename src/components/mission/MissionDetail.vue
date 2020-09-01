@@ -1,7 +1,30 @@
 <template>
-	<div class="mission_div" style="height: 100%;box-sizing: border-box;padding: 1.48rem 0 0;">
+	<div class="mission_div">
+    <div class="content_mian">
+      <my-header title="正文内容" back="true" ref="header" backUrl='/Mission'></my-header>
+      <div class="content_div">
+      	<div class="content">
+      		<div class="content_title">{{missionDetail.title}}</div>
+      		<div class="content_info">
+      			<span>{{missionDetail.signature}}</span>
+      			<span style="margin-left: 72px;">{{missionDetail.lastModifyTime}}</span>
+      		</div>
+      		<div class="content_detail" v-html="missionDetail.content"></div>
+      	</div>
+      	<div class="author_div">
+      		<span>{{missionDetail.signature}}</span>
+      		<span>作者:{{authorsStr}}</span>
+      		<span>编辑:{{editorsStr}}</span>
+      	</div>
+      	<div class="btn_div">
+      		<div @click="nextStep()" class="next_btn">
+      			<span>下一步</span>
+      		</div>
+      	</div>
+      </div>
+    </div>
 		<!-- 'title','hasRight','back','parting','search','upload' -->
-		<my-header title="稿件详情" back="true" ref="header" backUrl='/Mission'></my-header>
+		<!-- <my-header title="稿件详情" back="true" ref="header" backUrl='/Mission'></my-header>
 		<van-tabs v-model="active" color="#ffaf6f">
 			<van-tab title="正文内容">
 				<div class="content_div">
@@ -114,7 +137,7 @@
 					</div>
 				</div>
 			</van-tab>
-		</van-tabs>
+		</van-tabs> -->
 	</div>
 
 </template>
@@ -245,100 +268,102 @@
 	@deep: ~'>>>';
 	.mission_div{
 		height: 100%;
-    		box-sizing: border-box;
-    		padding: 111px 0px 0px;
-		.content_div {
-		.content {
-			display: flex;
-			flex-direction: column;
-			margin-top: 12px;
-			padding-left: 31px;
-			min-height: 700px;
-			max-width: 690px;
-			.content_title {
-				font-size: 30px;
-				font-family: Microsoft YaHei Regular;
-				font-weight: 400;
-				text-align: left;
-				color: #333333;
-				letter-spacing: 1px;
-			}
-			.content_info {
-				margin-top: 35px;
-				font-size: 24px;
-				font-family: Microsoft YaHei Regular;
-				font-weight: 400;
-				text-align: left;
-				color: #999999;
-				letter-spacing: 0px;
-			}
-			.content_detail {
-				margin-top: 35px;
-				font-size: 28px;
-				font-family: Microsoft YaHei Regular;
-				font-weight: 400;
-				text-align: left;
-				color: #666666;
-				letter-spacing: 0px;
-				@{deep} img {
-					max-width: 100% !important;
-					width: 100% !important;
-				}
-				@{deep} video {
-					max-width: 100% !important;
-					width: 100% !important;
-				}
-				@{deep} audio {
-					max-width: 100% !important;
-					width: 100% !important;
-				}
-			}
-			/* .btn_div{
-        display: flex;
-        position: absolute;
-        bottom: 30px;
-      } */
-		}
-		.author_div {
-			height: 287px;
-			font-size: 24px;
-			font-family: Microsoft YaHei Regular;
-			font-weight: 400;
-			text-align: left;
-			color: #999999;
-			letter-spacing: 0px;
-			background-color: #f4f4f4;
-			padding-top: 47px;
-			span {
-				display: block;
-				margin-bottom: 27px;
-				margin-left: 31px;
-			}
-		}
-		.btn_div {
-			background-color: #e5e5e5;
-			position: fixed;
-			bottom: 0px;
-			width: 100%;
-			.next_btn {
-				margin-left: 106px;
-				width: 539px;
-				height: 99px;
-				background-image: url(../../assets/next_btn@2x.png);
-				background-size: 100% auto;
-				font-size: 36px;
-				font-family: Microsoft YaHei Regular;
-				font-weight: 400;
-				color: #ffffff;
-				letter-spacing: 1px;
-				text-align: center;
-				span {
-					line-height: 83px;
-				}
-			}
-		}
-	}
-	
+    padding-top: 44px;
+    background: #FFFFFF;
+		.content_main{
+      .content_div {
+      	.content {
+      		display: flex;
+      		flex-direction: column;
+      		margin-top: 12px;
+      		padding-left: 31px;
+      		min-height: 700px;
+      		max-width: 690px;
+      		.content_title {
+      			font-size: 30px;
+      			font-family: Microsoft YaHei Regular;
+      			font-weight: 400;
+      			text-align: left;
+      			color: #333333;
+      			letter-spacing: 1px;
+      		}
+      		.content_info {
+      			margin-top: 35px;
+      			font-size: 24px;
+      			font-family: Microsoft YaHei Regular;
+      			font-weight: 400;
+      			text-align: left;
+      			color: #999999;
+      			letter-spacing: 0px;
+      		}
+      		.content_detail {
+      			margin-top: 35px;
+      			font-size: 28px;
+      			font-family: Microsoft YaHei Regular;
+      			font-weight: 400;
+      			text-align: left;
+      			color: #666666;
+      			letter-spacing: 0px;
+      			@{deep} img {
+      				max-width: 100% !important;
+      				width: 100% !important;
+      			}
+      			@{deep} video {
+      				max-width: 100% !important;
+      				width: 100% !important;
+      			}
+      			@{deep} audio {
+      				max-width: 100% !important;
+      				width: 100% !important;
+      			}
+      		}
+      		/* .btn_div{
+            display: flex;
+            position: absolute;
+            bottom: 30px;
+          } */
+      	}
+      	.author_div {
+      		height: 287px;
+      		font-size: 24px;
+      		font-family: Microsoft YaHei Regular;
+      		font-weight: 400;
+      		text-align: left;
+      		color: #999999;
+      		letter-spacing: 0px;
+      		background-color: #f4f4f4;
+      		padding-top: 47px;
+      		span {
+      			display: block;
+      			margin-bottom: 27px;
+      			margin-left: 31px;
+      		}
+      	}
+      	.btn_div {
+      		background-color: #e5e5e5;
+      		position: fixed;
+      		bottom: 0px;
+      		width: 100%;
+      		.next_btn {
+      			margin-left: 106px;
+      			width: 539px;
+      			height: 99px;
+      			background-image: url(../../assets/next_btn@2x.png);
+      			background-size: 100% auto;
+      			font-size: 36px;
+      			font-family: Microsoft YaHei Regular;
+      			font-weight: 400;
+      			color: #ffffff;
+      			letter-spacing: 1px;
+      			text-align: center;
+      			span {
+      				line-height: 83px;
+      			}
+      		}
+      	}
+      }
+    }
+
 	.basic_div {
 		height: 100%;
 		.basic {
@@ -541,5 +566,5 @@
 		}
 	}
 	}
-	
+
 </style>
