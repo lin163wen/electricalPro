@@ -30,7 +30,12 @@
 		methods: {
 			goBack() {
 				if(this.backUrl) {
-					this.$router.push(this.backUrl);
+          if(this.backUrl=='emit'){
+            console.log('emit....');
+            this.$emit('goBack');
+          }else{
+            this.$router.push(this.backUrl);
+          }
 				} else {
 					this.$router.back();
 				}

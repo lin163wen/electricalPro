@@ -23,8 +23,10 @@
 			</div>
 		</div>
 		<div class="no_mission" v-if="missionListNum<=0">
-			<div class="no_mission_img"></div>
-			<div class="no_mission_text"></div>
+			<div class="no_mission_img">
+        <img src="../../assets/no_mission@2x.png" />
+      </div>
+			<div class="no_mission_text">暂时没有待办任务<br/><br/>喝口茶休息下吧~</div>
 		</div>
 		<navigate-bar></navigate-bar>
 	</div>
@@ -77,6 +79,7 @@
 				Missions({}).then((response) => {
 					console.log(response);
 					if(response.code == 0) {
+            _this.missionList = [];
 						_this.missionList = response.data.storyTaskListResponseList;
 						_this.common.setMissionNum(response.data.storyTaskListResponseList.length);
 						_this.missionListNum = response.data.storyTaskListResponseList.length;
@@ -89,8 +92,8 @@
 					}
           _this.missionListLoading.clear();
 				}).catch((response) => {
-					console.log(4444);
 					console.log(response);
+          _this.missionListLoading.clear();
 				})
 
 			}
@@ -116,22 +119,41 @@
       top:44px;
 		}
 		.no_mission {
-			width: 460px;
-			height: 327px;
-			position: absolute;
-			top: 207px;
-			left: 146px;
-			background-image: url(../../assets/no_mission@2x.png);
-			background-repeat: no-repeat;
-			background-size: 100% auto;
+			background:#FFFFFF;
+      height: 100%;
+      div{
+        position: absolute;
+        bottom:0;right: 0;left: 0;
+        margin: 0 auto;
+        width: 110px;
+      }
+      .no_mission_img{
+        top:251px;
+        width: 110px;
+        img{
+          width: 110px;
+          height: 150px;
+        }
+      }
+      .no_mission_text{
+        width: 120px;
+        top:433px;
+        font-size: 14px;
+        font-family: PingFangSC-Regular, PingFang SC;
+        font-weight: 400;
+        color: #BABABA;
+        line-height: 15px;
+      }
+
 		}
 		.mission_list {
-      padding-top: 88px;
+      padding-top: 44px;
       padding-bottom: 78px;
 			background-color: #F0F0F0;
 			display: flex;
 			flex-direction: column;
 			overflow: scroll;
+      height: 100%;
 			.mission {
 				background-color: #ffffff;
 				display: flex;

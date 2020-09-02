@@ -12,7 +12,7 @@
 
 <style>
   *{
-    box-sizing: content-box;
+    box-sizing: border-box;
   }
 	#app {
 		width: 100%;
@@ -38,26 +38,16 @@
   .van-icon-clear{
     display: none !important;
   }
-
-	.van-list__finished-text {
-		font-size: 20px !important;
-		width: 100%;
-		line-height: 20px !important;
-	}
+  
 	/*Toast*/
 
 	.van-toast {
 		transform: translateX(-50%) !important;
-		font-size: 26px !important;
     width: auto !important;
     height: auto !important;
     min-height: auto !important;
 	}
 
-	.van-toast--text {
-		min-width: 200px !important;
-		min-height: 70px !important;
-	}
 	/* 底部导航样式 */
 
 	.van-tabbar-item {

@@ -1,10 +1,16 @@
 <template>
   <div class="list_div">
     <!-- 'title','hasRight','back','parting','search','upload' -->
-    <my-header :title="partingTitle" back="true" hasRight="true" parting="true" search="true" backUrl="/Work"></my-header>
+    <my-header :title="partingTitle" back="true" hasRight="true" backUrl="/Work"></my-header>
+    <div class="my_tab_div">
+      <my-tab @search="search()"></my-tab>
+    </div>
     <div class="material_content">
       <van-tabs v-model="active" color="#ffaf6f">
-        <van-tab title="图片">
+        <van-tab>
+          <template #title>
+            <span>图片</span>
+          </template>
           <div class="content">
             <van-list class="list" style="display: flex;flex-direction: row;flex-wrap: wrap;" v-model="loading"
               :finished="finished" finished-text="没有更多了" @load="queryImages()">
@@ -16,7 +22,10 @@
             </van-list>
           </div>
         </van-tab>
-        <van-tab title="视频">
+        <van-tab>
+          <template #title>
+            <span>视频</span>
+          </template>
           <div class="content">
             <van-list class="list" style="display: flex;flex-direction: row;flex-wrap: wrap;" v-model="loading"
               :finished="finished" finished-text="没有更多了" @load="queryVideos()">
@@ -29,6 +38,12 @@
           </div>
         </van-tab>
         <van-tab title="音频">
+          <template #title>
+            <div>
+              <span>视频</span>
+
+            </div>
+          </template>
           <div class="content">
             <van-list class="list" style="display: flex;flex-direction: row;flex-wrap: wrap;" v-model="loading"
               :finished="finished" finished-text="没有更多了" @load="queryAudios()">
@@ -45,6 +60,8 @@
         </van-tab>
       </van-tabs>
     </div>
+
+
     <div class="upload_div" v-if="curCagetory==2">
        <van-uploader :before-read="getFileInfo" :after-read="uploadComplete" accept="image/*" v-if="active==0">
         <div class="upload_btn">
@@ -60,7 +77,7 @@
         <div class="upload_btn">
           <span>上传素材</span>
         </div>
-      </van-uploader> 
+      </van-uploader>
       <!-- <input class="upload_btn" type="file" value="上传素材"/> -->
       <!--<div class="upload_btn" @click="uploaderFile('image')" v-if="active==0">
         <span>上传素材</span>
@@ -79,6 +96,7 @@
 
 <script>
   import MyHeader from '../views/header.vue'
+  import MyTab from '../views/myTab.vue'
   import {
     Uploader
   } from 'vant';
@@ -103,7 +121,7 @@
   export default {
     name: 'Material',
     components: {
-      MyHeader
+      MyHeader,MyTab
     },
     data() {
       return {
@@ -164,6 +182,9 @@
       }
     },
     methods: {
+      search(params){
+        console.log("search.......",params);
+      },
       getFileInfo(file, detail) {
         //TODO
         return true;
@@ -494,8 +515,11 @@
 <style scoped lang="less">
   .list_div{
   	height: 100%;
-  	padding: 111px 0 0;
+  	padding: 44px 0 0;
   	box-sizing: border-box;
+    .my_tab_div{
+
+    }
   	.material_content {
     height: 1110px;
     max-height: 1110px;
