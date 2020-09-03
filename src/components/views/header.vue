@@ -16,9 +16,11 @@
 </template>
 
 <script>
+	import MySelect from './select.vue'
 	export default {
 		name: 'MyHeader',
 		props: ['title', 'hasRight', 'back', 'parting', 'search', 'upload', 'backUrl','backParams'],
+		components:{MySelect},
 		data() {
 			return {
 				msg: 'Welcome to Your Vue.js App'

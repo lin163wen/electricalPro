@@ -1,14 +1,14 @@
 <template>
   <div class="tab">
-    <div @click="tabChange(1)" :class="getActiveClass()">
+    <div @click="tabChange(1)" :class="getActiveClass(1)">
       图片
       <span class="tab_active" v-if="active==1"></span>
     </div>
-    <div @click="tabChange(2)" :class="getActiveClass()">
+    <div @click="tabChange(2)" :class="getActiveClass(2)">
       视频
       <span class="tab_active" v-if="active==2"></span>
     </div>
-    <div @click="tabChange(3)" :class="getActiveClass()">
+    <div @click="tabChange(3)" :class="getActiveClass(3)">
       音频
       <span class="tab_active" v-if="active==3"></span>
     </div>
@@ -29,11 +29,14 @@
       }
     },
     methods:{
-      getActiveClass(){
-
+      getActiveClass(active){
+		if(this.active==active){
+			return 'active';
+		}
       },
       tabChange(active){
         this.active=active;
+        this.$emit('tabChange',this.active);
       },
       onSearch(){
         this.$emit('search',this.value);
@@ -50,8 +53,10 @@
     display: flex;
     flex-direction: row;
     background: #FFFFFF;
+    
     div{
       width: 32px;
+      min-width: 32px;
       margin-right: 20px;
       font-size: 16px;
       font-family: PingFangSC-Medium, PingFang SC;
@@ -61,6 +66,9 @@
       vertical-align: middle;
       text-align: center;
       position: relative;
+    }
+    .active{
+    		color: #4783FE;
     }
     .tab_active{
       width: 22px;
@@ -73,7 +81,6 @@
       margin: 0 auto;
     }
     .search{
-      width: 181px;
       height: 30px;
       background: #F0F0F0;
       border-radius: 15px;
@@ -81,6 +88,7 @@
       flex-direction: row;
       overflow: hidden;
       align-items: center;
+      flex-grow: 1;
       img{
         width: 17px;
         height: 17px;

@@ -150,20 +150,13 @@
 	/*cell*/
 
 	.van-icon {
-		font-size: 40px !important;
+		font-size: 25px !important;
 		width: 34px;
 		height: 34px;
 	}
 
 	.van-cell {
-		padding-left: 53px !important;
-		margin-bottom: 10px;
-		height: 70px !important;
-		font-size: 30px !important;
-		font-family: Microsoft YaHei Regular !important;
-		font-weight: 400 !important;
-		color: #585858 !important;
-		letter-spacing: 2px !important;
+		font-size: 8px !important;
 	}
 	/*search*/
 
@@ -182,16 +175,11 @@
 	}
 
 	.van-cell__value {
-		line-height: 60px !important;
+		line-height: 30px !important;
 	}
 
 	.van-cell__title {
-		font-size: 30px !important;
-		font-family: Microsoft YaHei Regular !important;
-		color: #8e9291 !important;
-		letter-spacing: 2px !important;
-		height: 50px;
-		line-height: 50px;
+		font-size: 15px !important;
 	}
 
 	.van-cell__right-icon {

@@ -9,9 +9,7 @@ import MissionBack from '../components/mission/MissionBack.vue'
 import Work from '../components/work/work.vue'
 import Material from '../components/work/material.vue'
 import Audit from '../components/work/audit.vue'
-import Parting from '../components/work/parting.vue'
 import MaterialDetail from '../components/work/materialDetail.vue'
-import Search from '../components/work/search.vue'
 import Upload from '../components/work/upload.vue'
 import UploadDetail from '../components/work/uploadDetail.vue'
 import Preview from '../components/work/preview.vue'
@@ -68,17 +66,9 @@ export default new Router({
       name: 'MaterialDetail',
       component: MaterialDetail
     },{
-      path: '/Parting',
-      name: 'Parting',
-      component: Parting
-    },{
       path: '/Preview',
       name: 'Preview',
       component: Preview
-    },{
-      path: '/Search',
-      name: 'Search',
-      component: Search
     },{
       path: '/Upload',
       name: 'Upload',
