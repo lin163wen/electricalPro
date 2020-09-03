@@ -8,6 +8,7 @@
       </template>
     </van-cell> -->
     <div class="all_connections" @click="AllContector()">
+      <img class="icon" src="../../assets/mine_selected@2x.png" />
       <span>查看全部联系人</span>
       <img src="../../assets/all_connections@2x.png" />
     </div>
@@ -80,66 +81,75 @@
 <style scoped lang="less">
   .list_div{
   	height: 100%;
-  	padding: 111px 0 0;
-  	box-sizing: border-box;
+  	padding: 44px 0 0;
+    background: #EDEDED;
   	.all_connections {
     display: flex;
     align-items: center;
-    height: 77px;
+    height: 50px;
     background-color: #FFFFFF;
-
-    span {
-      font-size: 31px;
-      font-family: Microsoft YaHei Regular;
-      color: #666666;
-      letter-spacing: 1px;
-      line-height: 77px;
-      height: 77px;
-      margin-left: 22px;
+    margin-top: 10px;
+    .icon{
+      width: 20px;
+      height: 20px;
+      margin-left: 16px;
+    }
+    span{
+      font-size: 16px;
+      font-family: PingFangSC-Medium, PingFang SC;
+      font-weight: 500;
+      color: #3F3E3E;
+      line-height: 22px;
+      margin-left: 15px;
     }
 
+
     img {
-      width: 38px;
-      margin-left: 449px;
+      width: 8px;
+      height: 14px;
+      margin-left: 193px;
     }
   }
 
   .last_connections {
-    font-size: 31px;
-    font-family: Microsoft YaHei Regular;
-    font-weight: 400;
-    color: #666666;
-    letter-spacing: 1px;
-    height: 94px;
-    line-height: 94px;
-    text-align: center;
+    font-size: 16px;
+    font-family: PingFangSC-Medium, PingFang SC;
+    font-weight: 500;
+    color: #3F3E3E;
+    line-height: 60px;
+    margin-top: 10px;
+    padding-left: 15px;
+    height: 60px;
+    background: #FFFFFF;
   }
 
   .connections {
+    background-color: #FFFFFF;
     .connection {
-      height: 90px;
+      height: 60px;
       display: flex;
       align-items: center;
-      background-color: #FFFFFF;
+      
       border-bottom: ;
       .user_head {
-        width: 71px;
-        height: 71px;
-        margin-left: 22px;
+        width: 40px;
+        height: 40px;
+        margin-left: 16px;
       }
 
       .user_name {
-        font-size: 30px;
-        font-family: Microsoft YaHei Regular;
-        font-weight: 400;
-        color: #333333;
-        margin-left: 22px;
+        font-size: 14px;
+        font-family: PingFangSC-Medium, PingFang SC;
+        font-weight: 500;
+        color: #3F3E3E;
+        line-height: 60px;
+        margin-left: 50px;
       }
 
       .call {
-        width: 70px;
-        height: 70px;
-        margin-left: 452px;
+        width: 26px;
+        height: 26px;
+        margin-left: 215px;
       }
     }
   }

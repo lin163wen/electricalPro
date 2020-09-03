@@ -1,5 +1,5 @@
 <template>
-	<div class="setting_div">
+  <div class="setting_div">
     <!-- 'title','hasRight','back','parting','search','upload' -->
     <my-header title="设置" back="true"></my-header>
     <div class="clear_cache">
@@ -20,135 +20,145 @@
 </template>
 
 <script>
-import MyHeader from '../views/header.vue'
-import {
-		Toast
-	} from 'vant';
-export default{
-  name:'Setting',
-  components:{MyHeader},
-  data(){
-    return{
-      cacheData:0
-    }
-  },
-  created() {
-    this.getCache();
-  },
-  methods:{
-    logout(){
-      localStorage.setItem('token','');
-      this.$router.push('/');
+  import MyHeader from '../views/header.vue'
+  import {
+    Toast
+  } from 'vant';
+  export default {
+    name: 'Setting',
+    components: {
+      MyHeader
     },
-    caching(callback){
-    	if (window.plus) {
-    		plusReady();
-    	}else {
-    		document.addEventListener('plusready', plusReady, false);
-    	}
-      function plusReady(){
-      		plus.cache.calculate( function ( size ) {
-            var fileSizeString = "0B";
-      			if (size == 0) {
-      				fileSizeString = "0B";
-      			} else if (size < 1024) {
-      				fileSizeString = size + "B";
-      			} else if (size < 1048576) {
-      				fileSizeString = (size / 1024).toFixed(2) + "KB";
-      			} else if (size < 1073741824) {
-      				fileSizeString = (size / 1048576).toFixed(2) + "MB";
-      			} else {
-      				fileSizeString = (size / 1073741824).toFixed(2) + "GB";
-      			}
+    data() {
+      return {
+        cacheData: 0
+      }
+    },
+    created() {
+      this.getCache();
+    },
+    methods: {
+      logout() {
+        localStorage.setItem('token', '');
+        this.$router.push('/');
+      },
+      caching(callback) {
+        if (window.plus) {
+          plusReady();
+        } else {
+          document.addEventListener('plusready', plusReady, false);
+        }
 
-      			callback(fileSizeString);
-      		});
-      	}
-    },
-    clearCaching(callback){
-    	if (window.plus) {
-    		plusReady();
-    	}else {
-    		document.addEventListener('plusready', plusReady, false);
-    	}
-      function plusReady(){
-      		plus.cache.clear(function () {
-      			callback();
-      		});
-      	}
-    },
-    getCache(){
-      var _this = this;
-    	this.caching(function(data){
-    		console.log("缓存为"+data);
-        _this.cacheData = data;
-    	});
-    },
-    remove(){
-      localStorage.setItem('token','')
-      /* var _this = this;
+        function plusReady() {
+          plus.cache.calculate(function(size) {
+            var fileSizeString = "0B";
+            if (size == 0) {
+              fileSizeString = "0B";
+            } else if (size < 1024) {
+              fileSizeString = size + "B";
+            } else if (size < 1048576) {
+              fileSizeString = (size / 1024).toFixed(2) + "KB";
+            } else if (size < 1073741824) {
+              fileSizeString = (size / 1048576).toFixed(2) + "MB";
+            } else {
+              fileSizeString = (size / 1073741824).toFixed(2) + "GB";
+            }
+
+            callback(fileSizeString);
+          });
+        }
+      },
+      clearCaching(callback) {
+        if (window.plus) {
+          plusReady();
+        } else {
+          document.addEventListener('plusready', plusReady, false);
+        }
+
+        function plusReady() {
+          plus.cache.clear(function() {
+            callback();
+          });
+        }
+      },
+      getCache() {
+        var _this = this;
+        this.caching(function(data) {
+          console.log("缓存为" + data);
+          _this.cacheData = data;
+        });
+      },
+      remove() {
+        localStorage.setItem('token', '')
+        /* var _this = this;
     	this.clearCaching(function(){
     		Toast("缓存清除成功！");
         _this.getCache();
     	}); */
-    }
+      }
 
+    }
   }
-}
 </script>
 
 <style scoped lang="less">
-  .setting_div{
-  	height: 100%;
-  	padding: 111px 0 0;
-  	box-sizing: border-box;
-  	.clear_cache{
-    height: 79px;
-    width: 100%;
+  .setting_div {
+    height: 100%;
+    padding: 44px 0 0;
     background-color: #FFFFFF;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    span{
-      font-size: 36px;
-      font-family: Microsoft YaHei Regular;
-      color: #888b8d;
-      letter-spacing: 1px;
-    }
-    .clear{
-      margin-left: 26px;
-    }
-    .clear_go{
-      width: 15px;
-      height: 25px;
-      margin-right: 26px;
-      margin-left: 16px;
-    }
-  }
-  .logout{
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    height: 112px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #e5e5e5;
-    .logout_btn{
-      background: url(../../assets/logo_out@2x.png) no-repeat center;
-      background-size: 100% 100%;
-      width: 539px;
-      height: 99px;
-      text-align: center;
-      span{
-        font-size: 36px;
-        font-family: Microsoft YaHei Regular;
-        color: #ffffff;
-        letter-spacing: 1px;
-        line-height: 99px;
+    .clear_cache {
+      height: 50px;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      span {
+        font-size: 16px;
+        font-family: PingFangSC-Regular, PingFang SC;
+        font-weight: 400;
+        color: #3F3E3E;
+        line-height: 50px;
+      }
+
+      .clear {
+        margin-left: 26px;
+      }
+
+      .clear_go {
+        width: 6px;
+        height: 10px;
+        margin-right: 26px;
+        margin-left: 16px;
       }
     }
 
-  }
+    .logout {
+      position: fixed;
+      bottom: 20px;
+      width: 100%;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #FFFFFF;
+
+      .logout_btn {
+        width: 341px;
+        height: 40px;
+        background: #4783FE;
+        border-radius: 10px;
+        text-align: center;
+
+        span {
+          font-size: 15px;
+          font-family: PingFangSC-Medium, PingFang SC;
+          font-weight: 500;
+          color: #FFFFFF;
+          line-height: 40px;
+        }
+      }
+
+    }
   }
 </style>

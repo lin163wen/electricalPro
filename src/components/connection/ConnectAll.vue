@@ -3,6 +3,7 @@
     <!-- 'title','hasRight','back','parting','search','upload' -->
     <my-header title="全部联系人" back="true" backUrl='Connection'></my-header>
     <div class="all_connections">
+      <span v-if="index!=0">联系人></span>
       <template v-for="(item,index) in curOriganizationDeep">
         <span v-if="index!=0">></span>
         <span :value="item.deptId" @click="returnLastDept(item)">{{item.deptName}}</span>
@@ -18,6 +19,9 @@
     </div>
 
     <div class="connections">
+        <div class="text">
+          最近联系人
+        </div>
         <template v-for="(item,index) in members">
           <div class="connection" @click="ConnectDetail(item)">
             <div class="connection_user">
@@ -129,52 +133,63 @@
 <style scoped lang="less">
   .all_div{
   	height: 100%;
-  	padding: 111px 0 0;
+  	padding: 44px 0 0;
   	box-sizing: border-box;
   	.all_connections {
     display: flex;
     align-items: center;
-    height: 86px;
-
+    height: 50px;
+    background: #FFFFFF;
+    margin: 10px 0px;
     span {
-      font-size: 31px;
-      font-family: Microsoft YaHei Regular;
-      color: #666666;
-      letter-spacing: 1px;
-      line-height: 77px;
-      height: 77px;
-      margin-left: 22px;
+      font-size: 16px;
+      font-family: PingFangSC-Medium, PingFang SC;
+      font-weight: 500;
+      color: #4783FE;
+      line-height: 22px;
     }
   }
 
   .partments {
-    margin-bottom: 23px;
-
+    margin-bottom: 10px;
+    background-color: #FFFFFF;
     .partment {
       display: flex;
       align-items: center;
-      height: 90px;
-      background-color: #FFFFFF;
+      height: 62px;
+      margin-left: 16px;
       justify-content: space-between;
+      border-bottom: solid #F0F0F0 1px;
+      width: 343px;
       span {
-        font-size: 30px;
-        font-family: Microsoft YaHei Regular;
-        color: #333333;
-        line-height: 90px;
-        height: 90px;
-        margin-left: 27px;
+        font-size: 16px;
+        font-family: PingFangSC-Medium, PingFang SC;
+        font-weight: 500;
+        color: #3F3E3E;
+        line-height: 22px;
       }
 
       img {
-        width: 27px;
-        margin-right: 33px;
+        width:8px;
+        height: 14px;
+        margin-right: 16px;
       }
     }
   }
 
   .connections {
+    background: #FFFFFF;
+    .text{
+      font-size: 16px;
+      font-family: PingFangSC-Medium, PingFang SC;
+      font-weight: 500;
+      color: #3F3E3E;
+      line-height: 22px;
+      padding-left: 15px;
+      padding-top: 19px;
+    }
     .connection {
-      height: 90px;
+      height: 60px;
       display: flex;
       align-items: center;
       background-color: #FFFFFF;
@@ -183,25 +198,26 @@
         display: flex;
         align-items: center;
         .user_head {
-          width: 71px;
-          height: 71px;
-          margin-left: 22px;
+          width: 40px;
+          height: 40px;
+          margin-left: 16px;
         }
         .user_name {
-          font-size: 30px;
-          font-family: Microsoft YaHei Regular;
-          font-weight: 400;
-          color: #333333;
-          margin-left: 22px;
+          font-size: 14px;
+          font-family: PingFangSC-Medium, PingFang SC;
+          font-weight: 500;
+          color: #3F3E3E;
+          line-height: 40px;
           align-self: unset;
+          margin-left: 20px;
         }
       }
 
 
       .call {
-        width: 70px;
-        height: 70px;
-        margin-right: 24px;
+        width: 26px;
+        height: 26px;
+        margin-right: 16px;
       }
     }
   }

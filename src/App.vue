@@ -38,7 +38,13 @@
   .van-icon-clear{
     display: none !important;
   }
-  
+  .van-list__finished-text{
+    width: 100%;
+    line-height: 20px !important;
+  }
+
+
+
 	/*Toast*/
 
 	.van-toast {

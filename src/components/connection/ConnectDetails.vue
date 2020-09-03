@@ -4,7 +4,6 @@
       <!-- 'title','hasRight','back','parting','search','upload' -->
       <div class="header">
         <img src="../../assets/back@2x.png" class="back" @click="goBack()" />
-        <span>联系人</span>
       </div>
       <div class="connector_info">
         <div class="connector_first_name">
@@ -14,23 +13,20 @@
           <span>{{userInfo.name}}</span>
         </div>
         <div class="connector_info_details">
-          <div class="phone">
-            <span>电话</span>
-            <br />
-            <span>{{userInfo.phone}}</span>
-          </div>
-          <div class="separator">
-          </div>
-          <div class="section">
-            <span>部门</span>
-            <br />
-            <span>{{userInfo.orgName}}</span>
-          </div>
+          <span>{{userInfo.orgName}}</span>
         </div>
       </div>
     </div>
+    <div class="partment">
+      部门
+      <div class="partment_text">{{userInfo.orgName}}</div>
+    </div>
+    <div class="phone">
+      联系方式
+      <div class="phone_text">{{userInfo.phone}}</div>
+    </div>
     <div class="call_div">
-    		<div class="call_btn" @click="call()"></div>
+      <div class="call_btn" @click="call()">拨打电话</div>
     </div>
   </div>
 
@@ -44,44 +40,44 @@
     components: {
       MyHeader
     },
-    data(){
-      return{
-        userInfo:null,
+    data() {
+      return {
+        userInfo: null,
       }
     },
     created() {
       console.log(this.$route.params.user)
       this.userInfo = this.$route.params.user;
     },
-    computed:{
-      firstName:function(){
+    computed: {
+      firstName: function() {
         var userName = this.userInfo.name;
-        return userName.substr(0,1);
+        return userName.substr(0, 1);
       }
     },
-    methods:{
-      goBack(){
+    methods: {
+      goBack() {
         this.$router.push('ConnectAll');
       },
-      call(){
+      call() {
         //localStorage.setItem('lastestConnector','')
         //设置最近联系人
         var lastestConnector = localStorage.getItem('lastestConnector');
 
-        if(!lastestConnector){
+        if (!lastestConnector) {
           console.log(11111);
           lastestConnector = new Array();
-        }else{
+        } else {
           lastestConnector = JSON.parse(lastestConnector)
         }
         console.log(lastestConnector)
         console.log(typeof lastestConnector)
         lastestConnector.push(this.userInfo);
-        localStorage.setItem('lastestConnector',JSON.stringify(lastestConnector))
+        localStorage.setItem('lastestConnector', JSON.stringify(lastestConnector))
         this.$router.push({
-          name:'Calling',
-          params:{
-            userInfo:this.userInfo
+          name: 'Calling',
+          params: {
+            userInfo: this.userInfo
           }
         })
       }
@@ -91,115 +87,134 @@
 
 <style scoped lang="less">
   .connector {
-    background: url(../../assets/connection_bg@2x.png) no-repeat center center;
+    height: 304px;
     width: 100%;
-    height: 770px;
+    background: linear-gradient(225deg, #407CFE 0%, #6EAFFF 100%);
 
     .header {
-      height: 111px;
+      height: 44px;
       display: flex;
       align-items: center;
 
       img {
-        height: 47px;
-        width: 25px;
-        margin-left: 16px;
-      }
-
-      span {
-        font-size: 42px;
-        font-family: Microsoft YaHei Regular;
-        color: #ffffff;
-        letter-spacing: 3px;
-        margin-left: 268px;
+        height: 15px;
+        width: 18px;
+        margin-left: 18px;
       }
     }
 
     .connector_info {
-      margin-top: 91px;
+      margin-top: 44px;
       display: flex;
       flex-direction: column;
       align-items: center;
 
       .connector_first_name {
-        width: 223px;
-        height: 223px;
-        background: #f4f4f4;
-        border: 5px solid #1f7ee5;
-        border-radius: 50%;
+        width: 80px;
+        height: 80px;
+        background: #4783FE;
+        border-radius: 40px;
         display: flex;
         align-items: center;
         justify-content: center;
 
         span {
-          font-size: 73px;
-          font-family: Microsoft YaHei Regular;
-          color: #181717;
-          line-height: 11px;
-          letter-spacing: 5px;
+          font-size: 24px;
+          font-family: PingFangSC-Medium, PingFang SC;
+          font-weight: 500;
+          color: #FFFFFF;
+          line-height: 80px;
         }
       }
 
       .connector_name {
-        margin-top: 27px;
+        margin-top: 20px;
 
         span {
-          font-size: 45px;
-          font-family: Microsoft YaHei Regular;
-          color: #ffffff;
-          letter-spacing: 3px;
+          font-size: 25px;
+          font-family: PingFangSC-Medium, PingFang SC;
+          font-weight: 500;
+          color: #FFFFFF;
+          line-height: 36px;
         }
       }
 
       .connector_info_details {
-        margin-top: 60px;
+        margin-top: 10px;
         display: flex;
 
-        .phone {
-          width: 160px;
-          height: 48px;
-          font-size: 20px;
-          font-family: Microsoft YaHei Regular;
-          font-weight: 400;
-          text-align: left;
-          color: #ffffff;
-          letter-spacing: 2px;
-        }
-
-        .separator {
-          width: 3px;
-          height: 51px;
-          background: #f4f4f4;
-          margin-left: 27px;
-        }
-
-        .section {
-          width: 160px;
-          height: 48px;
-          font-size: 20px;
-          font-family: Microsoft YaHei Regular;
-          font-weight: 400;
-          text-align: left;
-          color: #ffffff;
-          letter-spacing: 2px;
-          margin-left: 52px;
+        span {
+          font-size: 14px;
+          font-family: PingFangSC-Medium, PingFang SC;
+          font-weight: 500;
+          color: #FFFFFF;
+          line-height: 20px;
         }
       }
 
     }
   }
-  .call_div{
-  	width: 100%;
-  	position: fixed;
-  	bottom: 0px;
-  	.call_btn{
-    width: 534px;
-    height: 112px;
-    background: url(../../assets/call_btn@2x.png) no-repeat center center;
-    background-size: 100% 100%;
-    margin-top: 411px;
-    margin-left: 108px;
+
+  .partment {
+    height: 70px;
+    width: 100%;
+    background: #FFFFFF;
+    padding-left: 16px;
+    padding-top: 10px;
+    font-size: 13px;
+    font-family: PingFangSC-Regular, PingFang SC;
+    font-weight: 400;
+    color: #939393;
+    line-height: 18px;
+
+    .partment_text {
+      margin-top: 10px;
+      font-size: 16px;
+      font-family: PingFangSC-Medium, PingFang SC;
+      font-weight: 500;
+      color: #3F3E3E;
+      line-height: 22px;
+    }
   }
+
+  .phone {
+    height: 70px;
+    width: 100%;
+    background: #FFFFFF;
+    padding-left: 16px;
+    padding-top: 10px;
+    font-size: 13px;
+    font-family: PingFangSC-Regular, PingFang SC;
+    font-weight: 400;
+    color: #939393;
+    line-height: 18px;
+
+    .phone_text {
+      margin-top: 10px;
+      font-size: 16px;
+      font-family: PingFangSC-Medium, PingFang SC;
+      font-weight: 500;
+      color: #3F3E3E;
+      line-height: 22px;
+    }
   }
-  
+
+  .call_div {
+    width: 100%;
+    margin-top: 222px;
+    display: flex;
+    justify-content: center;
+    .call_btn {
+      width: 341px;
+      height: 40px;
+      background: #4783FE;
+      border-radius: 10px;
+      text-align: center;
+      font-size: 15px;
+      font-family: PingFangSC-Medium, PingFang SC;
+      font-weight: 500;
+      color: #FFFFFF;
+      line-height: 40px;
+    }
+  }
 </style>

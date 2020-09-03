@@ -7,28 +7,40 @@
 				<img :src="materialDetail.accessUrl" style="width: 100%;height: 100%;" v-if="common.materialType==3"  @click="showPreview=!showPreview"/>
 				<video :src="materialDetail.accessUrl" controls="controls" style="width: 100%;height: 100%;" v-if="common.materialType==1 || common.materialType==2"></video>
 			</div>
-			<div class="material_info">
-				<ul class="basic_name">
-					<li>标题</li>
-					<li>ID</li>
-					<li>大小</li>
-					<li>尺寸</li>
-					<li>上传人</li>
-					<li>上传时间</li>
-					<li>来源</li>
-					<li>描述</li>
-				</ul>
-				<ul class="basic_value">
-					<li>{{materialDetail.objKey}}</li>
-					<li>{{materialDetail.id}}</li>
-					<li>{{materialDetail.size}}</li>
-					<li>{{materialDetail.dpi}}</li>
-					<li>{{materialDetail.userName}}</li>
-					<li>{{materialDetail.updateTime}}</li>
-					<li>{{materialDetail.source}}</li>
-					<li>{{materialDetail.remark}}</li>
-				</ul>
-			</div>
+      <div class="material_info">
+        <div class="material_item">
+          <div class="basic_name">标题</div>
+          <div class="basic_value">{{materialDetail.objKey}}</div>
+        </div>
+        <div class="material_item">
+          <div class="basic_name">ID</div>
+          <div class="basic_value">{{materialDetail.id}}</div>
+        </div>
+        <div class="material_item">
+          <div class="basic_name">大小</div>
+          <div class="basic_value">{{materialDetail.size}}</div>
+        </div>
+        <div class="material_item">
+          <div class="basic_name">尺寸</div>
+          <div class="basic_value">{{materialDetail.dpi}}</div>
+        </div>
+        <div class="material_item">
+          <div class="basic_name">上传人</div>
+          <div class="basic_value">{{materialDetail.userName}}</div>
+        </div>
+        <div class="material_item">
+          <div class="basic_name">上传时间</div>
+          <div class="basic_value">{{materialDetail.updateTime}}</div>
+        </div>
+        <div class="material_item">
+          <div class="basic_name">来源</div>
+          <div class="basic_value">{{materialDetail.source}}</div>
+        </div>
+        <div class="material_item">
+          <div class="basic_name">描述</div>
+          <div class="basic_value">{{materialDetail.remark}}</div>
+        </div>
+      </div>
 		</div>
 		<div class="preview" v-if="showPreview" @click="showPreview=!showPreview">
 			<div class="preview_img">
@@ -103,61 +115,47 @@
 
 <style scoped lang="less">
 	.material {
-		margin-top: 19px;
-		margin-left: 14px;
+		margin-top: 63px;
+		margin-left: 16px;
 		.material_content {
-			width: 722px;
-			height: 472px;
-			background: #b4c4d5;
+			width: 343px;
+      height: 200px;
+			background: #FFFFFF;
 			video {
 				width: 100%;
 				height: 100%;
 			}
 		}
 		.material_info {
-			display: flex;
-			flex-direction: row;
-			margin-left: 46px;
-			margin-top: 45px;
-			min-height: 701px;
-			max-width: 633px;
-			.basic_name {
-				font-size: 26px;
-				font-family: Microsoft YaHei Bold-Bold;
-				font-weight: 700;
-				color: #333333;
-				letter-spacing: 1px;
-				li {
-					margin-bottom: 35px;
-					text-align: right;
-					min-width: 110px;
-					img {
-						width: 36px;
-						height: 36px;
-						margin-left: 15px;
-					}
-				}
-			}
-			.basic_value {
-				margin-left: 80px;
-				font-size: 25px;
-				font-family: Microsoft YaHei Bold;
-				font-weight: 400;
-				color: #333333;
-				letter-spacing: 1px;
-				max-width: 480px;
-				li {
-					//margin-bottom: 35px;
-					height: 70px;
-					word-wrap: break-word;
-					word-break: normal;
-					img {
-						width: 28px;
-						height: 28px;
-						margin-left: 10px;
-					}
-				}
-			}
+      display: flex;
+      flex-direction: column;
+      margin-top: 45px;
+      .material_item{
+        display: flex;
+        flex-direction: row;
+        margin-bottom: 20px;
+        .basic_name {
+        	font-size: 15px;
+        	font-family: PingFangSC-Regular, PingFang SC;
+        	font-weight: 400;
+        	color: #939393;
+        	line-height: 28px;
+        	min-width: 60px;
+        }
+        .basic_value {
+        	margin-left: 40px;
+        	font-size: 12px;
+        	font-family: Microsoft YaHei Bold;
+        	font-weight: 400;
+        	color: #333333;
+        	letter-spacing: 1px;
+        	max-width: 200px;
+          line-height: 28px;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+      }
 		}
 	}
 
