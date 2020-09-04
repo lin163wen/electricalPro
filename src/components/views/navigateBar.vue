@@ -61,8 +61,16 @@
 				}
 			}
 		},
-
+    created() {
+      this.initPage();
+    },
 		methods: {
+      initPage(index){
+        var index = this.$route.index;
+        console.log(this.$route);
+        this.navigateBarIndex = index;
+        this.common.setNavigateBarIndex(index);
+      },
 			change(index){
 				this.navigateBarIndex = index;
 				this.common.setNavigateBarIndex(index);

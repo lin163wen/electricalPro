@@ -14,10 +14,12 @@
       </van-dropdown-menu>
     </div>
     <div class="material_content">
+      <!-- 图片 -->
       <div class="content" v-if="tabActive==1">
+        <!-- 个人 -->
         <van-list class="list_private" v-model="loading" :finished="finished" finished-text="没有更多了" @load="queryImages()"
           v-if="curCagetory==2">
-          <div class="list_item" v-for="(item,index) in list" @click="goDetail(item)">
+          <div class="list_item" v-for="(item,index) in list" @click="goDetailPrivate(item)">
             <div class="item_preview">
               <img :src="item.accessUrl" />
             </div>
@@ -27,25 +29,62 @@
             </div>
           </div>
         </van-list>
+        <!-- 成品 -->
         <van-list class="list_official" v-model="loading" :finished="finished" finished-text="没有更多了" @load="queryImages()"
-          v-if="curCagetory==0 || curCagetory==1">
+          v-if=" curCagetory==0">
           <div class="list_item" v-for="(item,index) in mapKeys(listWithTime)">
             <!--<em class="item_mask"><span>{{item.status==0?"未标引":(item.status==1?"审核中":"已标引")}}</span></em>-->
             <div class="list_time">
               {{item}}
             </div>
             <div class="imgs">
-              <div class="img_item" v-for="(item2,index) in listWithTime[item]" @click="goDetail(item2)">
+              <div class="img_item" v-for="(item2,index) in listWithTime[item]" @click="goDetailOfficial(item2)">
                 <img :src="item2.accessUrl" />
               </div>
             </div>
 
           </div>
         </van-list>
+        <!-- 共享 -->
+        <van-list class="list_public" v-model="loading" :finished="finished" finished-text="没有更多了" @load="queryImages()"
+          v-if="curCagetory==1">
+          <div class="list_item" v-for="(item,index) in mapKeys(listWithTime)">
+            <!--<em class="item_mask"><span>{{item.status==0?"未标引":(item.status==1?"审核中":"已标引")}}</span></em>-->
+            <div class="list_time">
+              {{item}}
+            </div>
+            <div class="imgs">
+              <div class="img_item" v-for="(item2,index) in listWithTime[item]" @touchstart.stop="start()" @touchend.stop="end(item2)"
+                @touchmove="move()">
+                <div class="normal" :style="{backgroundImage:'url('+item2.accessUrl+')'}" v-if="!showOperation">
+                </div>
+                <div class="operation" v-if="showOperation">
+                  <div v-if="!item2.selected">
+                    <div class="curcle" @click="chooseImg(item,item2,index)">
+                    </div>
+                    <div class="normal" :style="{backgroundImage:'url('+item2.accessUrl+')'}">
+                    </div>
+                  </div>
+                  <div class="selected_div" v-if="item2.selected">
+                    <div class="selected">
+                      <div class="curcle" @click="unchooseImg(item,item2,index)">
+                      </div>
+                      <div class="normal" :style="{backgroundImage:'url('+item2.accessUrl+')'}">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </van-list>
       </div>
+      <!-- 视频 -->
       <div class="content" v-if="tabActive==2">
-        <van-list class="list_private" v-model="loading" :finished="finished" finished-text="没有更多了" @load="queryVideos()" v-if="curCagetory==2">
-          <div class="list_item" v-for="(item,index) in list" @click="goDetail(item)">
+        <!-- 个人 -->
+        <van-list class="list_private" v-model="loading" :finished="finished" finished-text="没有更多了" @load="queryVideos()"
+          v-if="curCagetory==2">
+          <div class="list_item" v-for="(item,index) in list" @click="goDetailPrivate(item)">
             <!--<em class="item_mask"><span>{{item.status==0?"未标引":(item.status==1?"审核中":"已标引")}}</span></em>-->
             <div class="item_preview">
               <video :src="item.accessUrl" />
@@ -56,24 +95,61 @@
             </div>
           </div>
         </van-list>
+        <!-- 成品 -->
         <van-list class="list_official" v-model="loading" :finished="finished" finished-text="没有更多了" @load="queryImages()"
-          v-if="curCagetory==0 || curCagetory==1">
+          v-if="curCagetory==0">
           <div class="list_item" v-for="(item,index) in mapKeys(listWithTime)">
             <!--<em class="item_mask"><span>{{item.status==0?"未标引":(item.status==1?"审核中":"已标引")}}</span></em>-->
             <div class="list_time">
               {{item}}
             </div>
             <div class="imgs">
-              <div class="img_item" v-for="(item2,index) in listWithTime[item]" @click="goDetail(item2)">
+              <div class="img_item" v-for="(item2,index) in listWithTime[item]" @click="goDetailOfficial(item2)">
                 <video :src="item2.accessUrl" />
               </div>
             </div>
           </div>
         </van-list>
+        <!-- 共享 -->
+        <van-list class="list_public" v-model="loading" :finished="finished" finished-text="没有更多了" @load="queryImages()"
+          v-if="curCagetory==1">
+          <div class="list_item" v-for="(item,index) in mapKeys(listWithTime)">
+            <!--<em class="item_mask"><span>{{item.status==0?"未标引":(item.status==1?"审核中":"已标引")}}</span></em>-->
+            <div class="list_time">
+              {{item}}
+            </div>
+            <div class="imgs">
+              <div class="img_item" v-for="(item2,index) in listWithTime[item]" @touchstart.stop="start()" @touchend.stop="end(item2)"
+                @touchmove="move()">
+                <div class="normal" :style="{backgroundImage:'url('+item2.accessUrl+')'}" v-if="!showOperation">
+                </div>
+                <div class="operation" v-if="showOperation">
+                  <div v-if="!item2.selected">
+                    <div class="curcle" @click="chooseImg(item,item2,index)">
+                    </div>
+                    <div class="normal" :style="{backgroundImage:'url('+item2.accessUrl+')'}">
+                    </div>
+                  </div>
+                  <div class="selected_div" v-if="item2.selected">
+                    <div class="selected">
+                      <div class="curcle" @click="unchooseImg(item,item2,index)">
+                      </div>
+                      <div class="normal" :style="{backgroundImage:'url('+item2.accessUrl+')'}">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </van-list>
       </div>
+      <!-- 音频 -->
       <div class="content" v-if="tabActive==3">
-        <van-list class="list_private" v-model="loading" :finished="finished" finished-text="没有更多了" @load="queryAudios()" v-if="curCagetory==2">
-          <div class="list_item audio_img" v-for="(item,index) in list" @click="goDetail(item)">
+        <!-- 个人 -->
+        <van-list class="list_private" v-model="loading" :finished="finished" finished-text="没有更多了" @load="queryAudios()"
+          v-if="curCagetory==2">
+          <div class="list_item audio_img" v-for="(item,index) in list" @click="goDetailPrivate(item)">
             <!--<em class="item_mask"><span>{{item.status==0?"未标引":(item.status==1?"审核中":"已标引")}}</span></em>-->
             <div class="item_preview">
               <audio>
@@ -87,34 +163,75 @@
             </div>
           </div>
         </van-list>
+        <!-- 成品 -->
         <van-list class="list_official" v-model="loading" :finished="finished" finished-text="没有更多了" @load="queryImages()"
-          v-if="curCagetory==0 || curCagetory==1">
+          v-if="curCagetory==0">
           <div class="list_item" v-for="(item,index) in mapKeys(listWithTime)">
             <!--<em class="item_mask"><span>{{item.status==0?"未标引":(item.status==1?"审核中":"已标引")}}</span></em>-->
             <div class="list_time">
               {{item}}
             </div>
             <div class="imgs">
-              <div class="img_item" v-for="(item2,index) in listWithTime[item]" @click="goDetail(item2)">
+              <div class="img_item" v-for="(item2,index) in listWithTime[item]" @click="goDetailOfficial(item2)">
                 <audio :src="item2.accessUrl" />
+              </div>
+            </div>
+          </div>
+        </van-list>
+        <!-- 共享 -->
+        <van-list class="list_public" v-model="loading" :finished="finished" finished-text="没有更多了" @load="queryImages()"
+          v-if="curCagetory==1">
+          <div class="list_item" v-for="(item,index) in mapKeys(listWithTime)">
+            <!--<em class="item_mask"><span>{{item.status==0?"未标引":(item.status==1?"审核中":"已标引")}}</span></em>-->
+            <div class="list_time">
+              {{item}}
+            </div>
+            <div class="imgs">
+              <div class="img_item" v-for="(item2,index) in listWithTime[item]" @touchstart.stop="start()" @touchend.stop="end(item2)"
+                @touchmove="move()">
+                <div class="normal" :style="{backgroundImage:'url('+item2.accessUrl+')'}" v-if="!showOperation">
+                </div>
+                <div class="operation" v-if="showOperation">
+                  <div v-if="!item2.selected">
+                    <div class="curcle" @click="chooseImg(item,item2,index)">
+                    </div>
+                    <div class="normal" :style="{backgroundImage:'url('+item2.accessUrl+')'}">
+                    </div>
+                  </div>
+                  <div class="selected_div" v-if="item2.selected">
+                    <div class="selected">
+                      <div class="curcle" @click="unchooseImg(item,item2,index)">
+                      </div>
+                      <div class="normal" :style="{backgroundImage:'url('+item2.accessUrl+')'}">
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </van-list>
       </div>
     </div>
+    <div class="multdown_div" v-if="curCagetory==1 && showOperation">
+      <div class="multdown" @click="multDownload()">下载({{selectedUrls.length}})</div>
+      <div class="cancel" @click="cancel()">取消</div>
+    </div>
     <div class="upload_div" v-if="curCagetory==2">
-      <van-uploader :before-read="getFileInfo" :after-read="uploadComplete" accept="image/*" v-if="tabActive==1">
+      <van-uploader :before-read="getFileInfo" :after-read="uploadComplete" @change="changeImg($event)" accept="image/*"
+        v-if="tabActive==1">
         <div class="upload_btn">
           上传素材
         </div>
       </van-uploader>
-      <van-uploader :before-read="getFileInfo" :after-read="uploadComplete" accept="video/*" v-if="tabActive==2">
+      <van-uploader :before-read="getFileInfo" :after-read="uploadComplete" @change="changeImg($event)" accept="video/*"
+        v-if="tabActive==2">
         <div class="upload_btn">
           上传素材
         </div>
       </van-uploader>
-      <van-uploader :before-read="getFileInfo" :after-read="uploadComplete" accept="audio/*" v-if="tabActive==3">
+      <van-uploader :before-read="getFileInfo" :after-read="uploadComplete" @change="changeImg($event)" accept="audio/*"
+        v-if="tabActive==3">
         <div class="upload_btn">
           上传素材
         </div>
@@ -130,13 +247,24 @@
         <span>上传素材</span>
       </div>-->
     </div>
-    <navigate-bar></navigate-bar>
+    <!-- <navigate-bar></navigate-bar> -->
     <van-overlay :show="showPreview">
-      <div class="wrapper" @click="hidePreview()">
+      <div class="wrapper">
         <div class="block" @click.stop>
-          <img :src="previewSrc" v-if="tabActive==1"/>
-          <video :src="previewSrc" controls="controls" v-if="tabActive==2"/>
-          <audio :src="previewSrc" controls="controls" v-if="tabActive==3"/>
+          <img :src="previewSrc" v-if="tabActive==1" />
+          <video :src="previewSrc" controls="controls" v-if="tabActive==2" />
+          <audio :src="previewSrc" controls="controls" v-if="tabActive==3" />
+        </div>
+        <div class="upload_cancel_div" v-if="privatePreviewBtn">
+          <div class="upload_cancel_btn" style="background: #E9021E;" @click="showPreview = false;">取消</div>
+        </div>
+        <div class="upload_cancel_div" v-if="uploadPreviewBtn">
+          <div class="upload_cancel_btn" @click="upload()">上传</div>
+          <div class="upload_cancel_btn" style="background: #E9021E;" @click="showPreview = false;">取消</div>
+        </div>
+        <div class="upload_cancel_div" v-if="officialPreviewBtn">
+          <div class="upload_cancel_btn" @click="downloadByBlob(previewSrc,new Date().getTime())">下载</div>
+          <div class="upload_cancel_btn" style="background: #E9021E;" @click="showPreview = false;">取消</div>
         </div>
       </div>
     </van-overlay>
@@ -150,7 +278,8 @@
   import NavigateBar from '../views/navigateBar.vue'
   import MySelect from '../views/select.vue'
   import {
-    Uploader,Overlay
+    Uploader,
+    Overlay
   } from 'vant';
   import {
     domain,
@@ -184,7 +313,7 @@
         pageSize: 20,
         partingTitle: this.common.parting.value ? this.common.parting.value : '素材',
         partingCode: this.common.parting.code ? this.common.parting.code : '',
-        curCagetory: 2,
+        curCagetory:2,
         list: [],
         listWithTime: {},
         loading: false,
@@ -197,16 +326,20 @@
           text: '全部',
           value: ''
         }],
-        previewSrc:'',
-        showPreview:false
+        previewSrc: '',
+        showPreview: false,
+        uploadPreviewBtn:false,
+        privatePreviewBtn: false,
+        officialPreviewBtn: false,
+        formData: null,
+        showOperation: false,
+        timeOutEvent: 0,
+        imgSelected: false,
+        selectedUrls: []
       }
     },
     watch: {
-      loading: function(val, oldVal) {
-        console.log("loading change.....", val, oldVal);
-      },
       tabActive: function(val, oldVal) {
-
         this.curCagetory = 2; //默认显示个人
         this.initQueryParams();
         this.common.setParting('', ''); //清空分类
@@ -260,8 +393,101 @@
       }
     },
     methods: {
-      hidePreview(){
-        this.showPreview=false;
+      chooseImg(item,item2, index) {
+        console.log(333333)
+        var itemTemp = this.listWithTime[item][index];
+        itemTemp.selected=true;
+        this.listWithTime[item].splice(index,1,itemTemp);
+        this.selectedUrls.push(item2.accessUrl);
+        console.log(this.selectedUrls)
+      },
+      unchooseImg(item,item2, index) {
+        var itemTemp = this.listWithTime[item][index];
+        itemTemp.selected=false;
+        this.listWithTime[item].splice(index,1,itemTemp);
+        var urlIndex = this.selectedUrls.indexOf(item2.accessUrl);
+        this.selectedUrls.splice(urlIndex, 1);
+        console.log(this.selectedUrls)
+      },
+      start() {
+        let _this = this;
+        clearTimeout(this.timeOutEvent); //清除定时器
+        this.timeOutEvent = setTimeout(function() {
+          _this.showOperation = true;
+        }, 2000); //这里设置定时
+      },
+      move() {
+        clearTimeout(this.timeOutEvent); //清除定时器
+        this.timeOutEvent = 0;
+      },
+      end(item2) {
+        clearTimeout(this.timeOutEvent);
+        if (!this.showOperation && this.timeOutEvent != 0) {
+          this.goDetailOfficial(item2)
+        }
+      },
+      multDownload(){
+        if(this.selectedUrls.length>0){
+          this.selectedUrls.forEach(item=>{
+            this.downloadByBlob(item,new Date().getTime());
+          })
+        }
+        this.showOperation=false;
+        this.resetMutiSelected();
+      },
+      cancel(){
+        this.showOperation=false;
+        this.resetMutiSelected();
+      },
+      resetMutiSelected(){
+        this.selectedUrls=[];
+        for(var key in this.listWithTime){
+          var arr = this.listWithTime[key];
+          for(var i=0;i<arr.length;i++){
+            this.listWithTime[key][i].selected=false;
+          }
+        }
+      },
+      downloadByBlob(url,name) {
+        let image = new Image()
+        image.setAttribute('crossOrigin', 'anonymous')
+        image.src = url;
+        var _this = this;
+        image.onload = () => {
+          let canvas = document.createElement('canvas')
+          canvas.width = image.width
+          canvas.height = image.height
+          let ctx = canvas.getContext('2d')
+          ctx.drawImage(image, 0, 0, image.width, image.height)
+          canvas.toBlob((blob) => {
+            let url = URL.createObjectURL(blob)
+            _this.download(url, name)
+            // 用完释放URL对象
+            URL.revokeObjectURL(url)
+          })
+        }
+      },
+      download(href, name) {
+        let eleLink = document.createElement('a')
+        eleLink.download = name
+        eleLink.href = href
+        eleLink.click()
+        eleLink.remove()
+      },
+      changeImg(e) {
+        console.log('changeImg', e);
+        var file = e.target.files[0]
+        var reader = new FileReader()
+        var _this = this
+        reader.readAsDataURL(file)
+        reader.onload = function(e) {
+          _this.previewSrc = this.result;
+          _this.showPreview = true;
+        }
+      },
+      hidePreview() {
+        console.log('hidePreview......');
+        this.showPreview = false;
       },
       mapKeys(map) {
         var keys = []
@@ -336,18 +562,15 @@
       },
       tabChange(params) {
         this.tabActive = params;
-        console.log("tabChange.....", params);
       },
       getFileInfo(file, detail) {
-        //TODO
         return true;
       },
-      uploadComplete(file) {
+      upload() {
         var _this = this;
-        var size = file.file.size;
-        file.file.duration
+        var size = this.formData.file.size;
         const data = new FormData();
-        data.append("file", file.file);
+        data.append("file", this.formData.file);
         let config = {
           headers: {
             'Content-Type': 'multipart/form-data',
@@ -420,6 +643,16 @@
           }).catch(err => {
             console.log(err);
           });
+      },
+      uploadComplete(file) {
+        var _this = this;
+        this.formData = file;
+        this.previewSrc = file.content;
+        this.showPreview = true;
+        this.uploadPreviewBtn = true;
+        this.privatePreviewBtn = false;
+        this.officialPreviewBtn = false;
+
       },
       getImgParamsFromOssPush(data, size) {
         console.log(data);
@@ -527,15 +760,26 @@
           }));
         }
       },
-      goDetail(item) {
+      goDetailOfficial(item) {
         this.showPreview = true;
+        this.privatePreviewBtn = false;
+        this.officialPreviewBtn = true;
+        this.uploadPreviewBtn = false;
         this.previewSrc = item.accessUrl;
+
         /* this.$router.push({
           name: 'MaterialDetail',
           params: {
             id: item.id
           }
         }) */
+      },
+      goDetailPrivate(item) {
+        this.showPreview = true;
+        this.privatePreviewBtn = true;
+        this.officialPreviewBtn = false;
+        this.uploadPreviewBtn = false;
+        this.previewSrc = item.accessUrl;
       },
       queryMaterial(queryFuc) {
         var _this = this;
@@ -552,6 +796,7 @@
               var listItemTemp = {};
               if (_this.curCagetory == 0 || _this.curCagetory == 1) {
                 _this.list.forEach(item => {
+                  item['selected'] = false;
                   var time = item.createTime.split(' ')[0];
                   var listTemp = listItemTemp[time];
                   if (!listTemp || listTemp.length <= 0) {
@@ -631,11 +876,13 @@
             display: flex;
             flex-direction: row;
             overflow: hidden;
-            .item_preview{
+
+            .item_preview {
               width: 50px;
               height: 50px;
               background: url(../../assets/pic.png) no-repeat center;
               background-size: 20% 20%;
+
               video {
                 width: 50px;
                 height: 50px;
@@ -703,11 +950,13 @@
               display: flex;
               flex-direction: row;
               flex-wrap: wrap;
+
               .img_item {
                 background: url(../../assets/pic.png) no-repeat center;
                 background-size: 20% 20%;
                 width: 85px;
                 height: 85px;
+
                 video {
                   width: 85px;
                   height: 85px;
@@ -730,6 +979,103 @@
 
           }
         }
+
+        .list_public {
+          display: flex;
+          flex-direction: column;
+          margin-left: 18px;
+          flex-wrap: wrap;
+
+          .list_item {
+            display: flex;
+            flex-direction: column;
+
+            .list_time {
+              font-size: 12px;
+              font-family: PingFangSC-Regular, PingFang SC;
+              color: #3F3E3E;
+              line-height: 17px;
+              margin-bottom: 20px;
+              margin-top: 20px;
+            }
+
+            .imgs {
+              display: flex;
+              flex-direction: row;
+              flex-wrap: wrap;
+
+              .img_item {
+                background: url(../../assets/pic.png) no-repeat center;
+                background-size: 20% 20%;
+                width: 85px;
+                height: 85px;
+
+                .normal {
+                  width: 85px;
+                  height: 85px;
+                  margin: 1px;
+                  background-size: 100% 100%;
+                }
+
+                .operation {
+                  width: 85px;
+                  height: 85px;
+                  margin: 1px;
+                  position: relative;
+
+                  .curcle {
+                    position: absolute;
+                    top: 10px;
+                    left: 10px;
+                    width: 10px;
+                    height: 10px;
+                    background: url(../../assets/img_unselected@2x.png) no-repeat center;
+                    background-size: 100% 100%;
+                  }
+
+                  .normal {
+                    width: 85px;
+                    height: 85px;
+                    margin: 1px;
+                  }
+
+                  .selected_div {
+                    width: 85px;
+                    height: 85px;
+                    margin: 1px;
+                    background: #CDDEFF;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    .selected {
+                      width: 60px;
+                      height: 60px;
+                      position: relative;
+
+                      .curcle {
+                        width: 10px;
+                        height: 10px;
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        background: url(../../assets/img_selected@2x.png) no-repeat center;
+                        background-size: 100% 100%;
+                      }
+
+                      .normal {
+                        width: 60px;
+                        height: 60px;
+                      }
+                    }
+                  }
+                }
+
+              }
+
+            }
+          }
+
+        }
       }
     }
 
@@ -737,7 +1083,7 @@
       width: 100%;
       height: 60px;
       position: fixed;
-      bottom: 75px;
+      bottom: 0px;
       background: #FFFFFF;
       padding-left: 18px;
       padding-top: 10px;
@@ -756,24 +1102,88 @@
       }
     }
 
+
+    .multdown_div{
+      width: 100%;
+      height: 80px;
+      position: fixed;
+      bottom: 0;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      background: #3F3E3E;
+      div{
+        width: 160px;
+        height: 40px;
+        border-radius: 10px;
+        font-size: 15px;
+        font-family: PingFangSC-Medium, PingFang SC;
+        font-weight: 500;
+        color: #FFFFFF;
+        line-height: 40px;
+        text-align: center;
+      }
+      .multdown{
+        background: #4783FE;
+        margin-right: 23px;
+      }
+      .cancel{
+        background: #E9021E;
+      }
+    }
     .wrapper {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        height: 100%;
-        z-index: 9999;
-        .block {
-            width: 100%;
-            img{
-              width: 100%;
-            }
-            video{
-              width: 100%;
-            }
-            audio{
-              width: 100%;
-            }
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      z-index: 9999;
+
+      .block {
+        width: 100%;
+
+        img {
+          max-width: 100%;
+          display: block;
+          margin: auto;
         }
+
+        video {
+          max-width: 100%;
+          display: block;
+          margin: auto;
+        }
+
+        audio {
+          max-width: 100%;
+          display: block;
+          margin: auto;
+        }
+      }
+
+      .upload_cancel_div {
+        height: 120px;
+        width: 100%;
+        position: fixed;
+        bottom: 0;
+        display: flex;
+        flex-direction: row;
+
+        .upload_cancel_btn {
+          width: 140px;
+          height: 40px;
+          background: #4783FE;
+          border-radius: 10px;
+          margin: auto;
+          font-size: 15px;
+          font-family: PingFangSC-Medium, PingFang SC;
+          font-weight: 500;
+          color: #FFFFFF;
+          line-height: 40px;
+          text-align: center;
+        }
+
+      }
     }
   }
 </style>

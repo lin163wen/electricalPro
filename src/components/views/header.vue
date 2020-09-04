@@ -4,13 +4,13 @@
 			<img src="../../assets/back@2x.png" class="back" @click="goBack()" />
 		</template>
 		<template #right v-if='hasRight'>
-			<div class="parting_btn" v-if="parting">
+			<!-- <div class="parting_btn" v-if="parting">
 				<img src="../../assets/parting_btn@2x.png" @click="goParting()" />
 			</div>
 			<div class="search_btn" v-if="search">
 				<img src="../../assets/search_btn@2x.png" @click="goSearch()" />
 			</div>
-			<div v-if="upload" class="upload">上传</div>
+			<div v-if="upload" class="upload">上传</div> -->
 		</template>
 	</van-nav-bar>
 </template>

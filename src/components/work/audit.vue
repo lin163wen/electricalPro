@@ -17,7 +17,7 @@
 					<div class="text_lanmu">{{item.channelName}}</div>
 				  <div class="text_author_time">
 				    <div class="text_author">作者：{{item.author}}</div>
-				    <div class="text_time">{{item.updateTime}}</div>
+				    <div class="text_time">{{item.lastModifyTime}}</div>
 				  </div>
 				</div>
 			</div>
@@ -58,9 +58,13 @@
 		methods: {
       order(){
         if(this.timeOrder){
-          console.log("正序")
+          this.auditList.sort(function(a,b){
+            return new Date(a.lastModifyTime).getTime()-new Date(b.lastModifyTime).getTime();
+          })
         }else{
-          console.log("反序")
+          this.auditList.sort(function(a,b){
+            return new Date(b.lastModifyTime).getTime()-new Date(a.lastModifyTime).getTime();
+          })
         }
         this.timeOrder = !this.timeOrder;
       },

@@ -34,6 +34,10 @@
 		/*早期浏览器*/
 		user-select: none;
 	}
+  
+  .van-overlay{
+    background-color: #3F3E3E !important;
+  }
 
   .van-icon-clear{
     display: none !important;
