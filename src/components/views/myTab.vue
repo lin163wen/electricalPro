@@ -55,7 +55,7 @@
     background: #FFFFFF;
     
     div{
-      width: 32px;
+      width: 36px;
       min-width: 32px;
       margin-right: 20px;
       font-size: 16px;

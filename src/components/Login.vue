@@ -1,23 +1,8 @@
 <template>
   <div class="login">
-    <!-- <div class="login_div">
-      <div class="user_pwd">
-        <div class="username">用户名</div>
-        <input type="text" v-model="username" class="username_input"></input>
-        <div class="password">密码</div>
-        <div class="password_div" v-show="!showPwdInput">
-          <img class="password_img" src="../assets/pwd_hide@2x.png" @click="showPwd()" />
-          <input type="password" v-model="passwordCoven" class="password_input"></input>
-        </div>
-        <div class="password_div" v-show="showPwdInput">
-          <img class="password_img" src="../assets/pwd_show@3x.png" @click="hidenPwd()" />
-          <input type="text" v-model="password" class="password_input"></input>
-        </div>
-
-      </div>
-      <div class="login_tip">{{message}}</div>
-      <div class="login_btn" @click="goto()"></div>
-    </div> -->
+  	<div class="login_bg">
+  		<img src="../assets/login_bg@2x.png" />
+  	</div>
     <div class="logo">
       <img src="../assets/logo@2x.png" />
     </div>
@@ -182,14 +167,12 @@
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="less">
   .login {
-    background-image: url(../assets/login_bg@2x.png);
-    background-repeat: no-repeat;
-    background-size: 100% 258px;
     background-color: #FFFFFF;
     width: 100%;
     height: 100%;
     position: relative;
-
+    overflow-y: auto;
+    overflow-x: hidden;
     div {
       position: absolute;
       left: 0;
@@ -197,7 +180,16 @@
       bottom: 0;
       margin: 0 auto;
     }
-
+	.login_bg{
+		width: 100%;
+		height: 258px;
+		top: 0;
+		left: 0;
+		img{
+			width: 100%;
+			height: 100%;
+		}
+	}
     .logo {
       width: 104px;
       height: 102px;
@@ -278,7 +270,7 @@
       font-weight: 400;
       color: #E81616;
       line-height: 20px;
-      bottom: 238px;
+      top: 510px;
       left:42px;
 
     }
@@ -288,7 +280,7 @@
       height: 50px;
       background: #4783FE;
       border-radius: 10px;
-      bottom: 138px;
+      top: 580px;
       line-height: 50px;
       text-align: center;
       font-size: 16px;
@@ -298,14 +290,15 @@
     }
 
     .no_login {
-      width: 139px;
+      width: 100%;
+      text-align: center;
       height: 17px;
       font-size: 12px;
       font-family: PingFangSC-Regular, PingFang SC;
       font-weight: 400;
       color: #2E2D2D;
       line-height: 17px;
-      bottom: 75px;
+      top: 676px;
     }
   }
 </style>

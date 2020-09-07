@@ -12,7 +12,7 @@
 		</div>
 		<div class="operations">
 			<div class="operation audio">
-				<img src="../../assets/call_audio@2x.png" />
+				<img src="../../assets/close_audio@2x.png" />
 				<span>麦克风</span>
 			</div>
 			<div class="operation hang_out">
@@ -20,7 +20,7 @@
 				<span>挂断</span>
 			</div>
 			<div class="operation video">
-				<img src="../../assets/call_video@2x.png" />
+				<img src="../../assets/close_video@2x.png" />
 				<span>摄像头</span>
 			</div>
 		</div>
@@ -31,7 +31,7 @@
 <script>
 	import MyHeader from '../views/header.vue'
 	export default {
-		name: 'VideoCall',
+		name: 'VideoClose',
 		components: {
 			MyHeader
 		},

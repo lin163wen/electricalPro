@@ -53,7 +53,7 @@
       var _this = this;
       setTimeout(function(){
         _this.showFresh = false;
-      },10000)
+      },5000)
     },
 		methods: {
       order(){
@@ -121,7 +121,6 @@
 <style scoped lang="less">
 	.list_div{
 		height: 100%;
-		box-sizing: border-box;
     .audit_num {
       width: 375px;
       height: 40px;

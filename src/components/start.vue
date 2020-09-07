@@ -40,11 +40,15 @@
       right: 0;
       margin: 0 auto;
       position: absolute;
+      text-align: center;
+      width: 100%;
   }
   .start_page{
     background: #F4F7FF;
     width: 100%;
     height: 100%;
+    position: relative;
+    overflow-y: auto;
     .logo{
       width: 350px;
       height: 360px;
@@ -55,7 +59,7 @@
       }
     }
     .official{
-      width: 160px;
+      
       height: 28px;
       font-size: 20px;
       font-family: PingFangSC-Medium, PingFang SC;
@@ -63,9 +67,9 @@
       color: #484747;
       line-height: 28px;
       top:438px;
+      
     }
     .try{
-      width: 135px;
       height: 21px;
       font-size: 15px;
       font-family: PingFangSC-Regular, PingFang SC;
@@ -79,16 +83,16 @@
       height: 50px;
       background: url(../assets/start_btn@2x.png);
       background-size: 100% 100%;
-      bottom:132px;
+      top:583px;
     }
     .service{
-      width: 180px;
       height: 17px;
       font-size: 12px;
       font-family: PingFangSC-Regular, PingFang SC;
       font-weight: 400;
       color: #4783FE;
       line-height: 17px;
+      top: 679px;
       bottom: 69px;
     }
   }

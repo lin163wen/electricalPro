@@ -1,25 +1,25 @@
 <template>
 	<van-tabbar v-model="navigateBarIndex" @change="change">
 		<van-tabbar-item to='/Mission'>
-      <span>任务</span>
+			<span>任务{{navigateBarIndex}}</span>
 			<template #icon="props">
 				<img :src="navigateBarIndex==0 ? icon_mission.active : icon_mission.inactive" class="navigateBar_icon" />
 			</template>
 		</van-tabbar-item>
 		<van-tabbar-item to="/Work">
-      <span>工作</span>
+			<span>工作</span>
 			<template #icon="props">
 				<img :src="navigateBarIndex==1 ? icon_work.active : icon_work.inactive" class="navigateBar_icon" />
 			</template>
 		</van-tabbar-item>
 		<van-tabbar-item to="/Connection">
-      <span>通讯录</span>
+			<span>通讯录</span>
 			<template #icon="props">
 				<img :src="navigateBarIndex==2 ? icon_communication.active : icon_communication.inactive" class="navigateBar_icon" />
 			</template>
 		</van-tabbar-item>
 		<van-tabbar-item to="/Mine">
-      <span>我的</span>
+			<span>我的</span>
 			<template #icon="props">
 				<img :src="navigateBarIndex==3 ? icon_mine.active : icon_mine.inactive" class="navigateBar_icon" />
 			</template>
@@ -41,8 +41,8 @@
 		name: "NavigateBar",
 		data() {
 			return {
-				navigateBarIndex:this.common.navigateBarIndex,
-				missionNum:this.common.missionNum,
+				navigateBarIndex: this.common.navigateBarIndex,
+				missionNum: this.common.missionNum,
 				icon_mission: {
 					active: mission_selected,
 					inactive: mission_unselected,
@@ -61,17 +61,17 @@
 				}
 			}
 		},
-    created() {
-      this.initPage();
-    },
+		created() {
+			//this.initPage();
+		},
 		methods: {
-      initPage(index){
-        var index = this.$route.index;
-        console.log(this.$route);
-        this.navigateBarIndex = index;
-        this.common.setNavigateBarIndex(index);
-      },
-			change(index){
+			initPage(index) {
+				var index = this.$route.index;
+				console.log(this.$route);
+				this.navigateBarIndex = index;
+				this.common.setNavigateBarIndex(index);
+			},
+			change(index) {
 				this.navigateBarIndex = index;
 				this.common.setNavigateBarIndex(index);
 				console.log(this.navigateBarIndex);
@@ -88,7 +88,8 @@
 		width: 20px !important;
 		height: 20px !important;
 	}
-  .van-tabbar-item{
-    font-size: 9px !important;
-  }
+	
+	.van-tabbar-item {
+		font-size: 9px !important;
+	}
 </style>

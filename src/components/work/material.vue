@@ -857,8 +857,8 @@
 
     .material_content {
       background: #FFFFFF;
-      padding-top: 90px;
-      padding-bottom: 150px;
+      margin-top: 90px;
+      margin-bottom: 90px;
       width: 100%;
 
       .content {

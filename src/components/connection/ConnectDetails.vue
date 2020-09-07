@@ -202,6 +202,7 @@
   .call_div {
     width: 100%;
     margin-top: 222px;
+    margin-bottom: 20px;
     display: flex;
     justify-content: center;
     .call_btn {

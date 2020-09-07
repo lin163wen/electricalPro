@@ -143,7 +143,7 @@
         font-weight: 500;
         color: #3F3E3E;
         line-height: 60px;
-        margin-left: 50px;
+        margin-left: 20px;
       }
 
       .call {

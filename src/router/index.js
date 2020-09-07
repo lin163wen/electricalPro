@@ -20,6 +20,8 @@ import ConnectDetails from '../components/connection/ConnectDetails.vue'
 import Calling from '../components/connection/Calling.vue'
 import Called from '../components/connection/Called.vue'
 import VideoCall from '../components/connection/VideoCall.vue'
+import VideoClose from '../components/connection/VideoClose.vue'
+
 
 import Mine from '../components/mine/mine.vue'
 import Setting from '../components/mine/setting.vue'
@@ -101,6 +103,10 @@ export default new Router({
       path: '/VideoCall',
       name: 'VideoCall',
       component: VideoCall
+    },{
+      path: '/VideoClose',
+      name: 'VideoClose',
+      component: VideoClose
     },{
       path: '/Mine',
       name: 'Mine',
