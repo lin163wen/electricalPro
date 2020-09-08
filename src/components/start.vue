@@ -10,9 +10,9 @@
       点击一下，立即体验
     </div>
     <div class="btn" @click="start()"></div>
-    <div class="service">
+    <!-- <div class="service">
       登陆注册即代表同意《服务条款》
-    </div>
+    </div> -->
   </div>
 </template>
 
@@ -25,8 +25,21 @@
       }
     },
     created() {
+      this.hasToken();
     },
     methods:{
+      hasToken(){
+        var _this = this;
+        var token = localStorage.getItem('token');
+        console.log('Start......',token)
+        if(token){
+          this.$router.push('Mission');
+        }else{
+          setTimeout(function(){
+            _this.$router.push('Login')
+          },3000)
+        }
+      },
       start(){
         this.$router.push('Login')
       }
@@ -59,7 +72,7 @@
       }
     }
     .official{
-      
+
       height: 28px;
       font-size: 20px;
       font-family: PingFangSC-Medium, PingFang SC;
@@ -67,7 +80,7 @@
       color: #484747;
       line-height: 28px;
       top:438px;
-      
+
     }
     .try{
       height: 21px;
@@ -93,7 +106,7 @@
       color: #4783FE;
       line-height: 17px;
       top: 679px;
-      bottom: 69px;
+      padding-bottom: 69px;
     }
   }
 </style>

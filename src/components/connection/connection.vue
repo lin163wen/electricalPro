@@ -1,30 +1,31 @@
 <template>
-  <div class="list_div">
+  <div>
     <!-- 'title','hasRight','back','parting','search','upload' -->
     <my-header title="通讯录"></my-header>
-    <!-- <van-cell title="查看全部联系人">
-      <template #right-icon>
-        <img class="all_connections" src="../../assets/all_connections@2x.png" />
-      </template>
-    </van-cell> -->
-    <div class="all_connections" @click="AllContector()">
-      <img class="icon" src="../../assets/mine_selected@2x.png" />
-      <span>查看全部联系人</span>
-      <img src="../../assets/all_connections@2x.png" />
+    <div class="list_div">
+      <!-- <van-cell title="查看全部联系人">
+        <template #right-icon>
+          <img class="all_connections" src="../../assets/all_connections@2x.png" />
+        </template>
+      </van-cell> -->
+      <div class="all_connections" @click="AllContector()">
+        <img class="icon" src="../../assets/mine_selected@2x.png" />
+        <span>查看全部联系人</span>
+        <img src="../../assets/all_connections@2x.png" />
+      </div>
+      <div class="last_connections">
+        <span>最近联系人</span>
+      </div>
+      <div class="connections">
+        <template v-for="(item,index) in lastestConnector">
+          <div class="connection" :ke="index">
+            <img class="user_head" src="../../assets/head@2x.png" />
+            <span class="user_name">{{item.name}}</span>
+            <img class="call" src="../../assets/call@2x.png" @click="goConnectDetail(item)"/>
+          </div>
+        </template>
+      </div>
     </div>
-    <div class="last_connections">
-      <span>最近联系人</span>
-    </div>
-    <div class="connections">
-      <template v-for="(item,index) in lastestConnector">
-        <div class="connection" :ke="index">
-          <img class="user_head" src="../../assets/head@2x.png" />
-          <span class="user_name">{{item.name}}</span>
-          <img class="call" src="../../assets/call@2x.png" @click="goConnectDetail(item)"/>
-        </div>
-      </template>
-    </div>
-
     <navigate-bar></navigate-bar>
   </div>
 
@@ -81,14 +82,16 @@
 <style scoped lang="less">
   .list_div{
   	height: 100%;
-  	padding: 44px 0 0;
+  	margin: 54px 0 0;
     background: #EDEDED;
+    position: relative;
+    overflow-y: auto;
+    overflow-x: hidden;
   	.all_connections {
     display: flex;
     align-items: center;
     height: 50px;
     background-color: #FFFFFF;
-    margin-top: 10px;
     .icon{
       width: 20px;
       height: 20px;
@@ -129,7 +132,7 @@
       height: 60px;
       display: flex;
       align-items: center;
-      
+
       border-bottom: ;
       .user_head {
         width: 40px;

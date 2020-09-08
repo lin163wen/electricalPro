@@ -13,8 +13,9 @@
       <span class="tab_active" v-if="active==3"></span>
     </div>
     <div class="search">
-      <img src="../../assets/search_btn@2x.png" @click="onSearch()"/>
-      <input v-model="value"/>
+      <img class="search_img" src="../../assets/search_btn@2x.png"/>
+      <input v-model="value" @input="onSearch()"/>
+      <img class="clear_img" src="../../assets/clear@2x.png" v-if="hasValue" @click="clear()" />
     </div>
   </div>
 </template>
@@ -26,13 +27,27 @@
       return{
         value:'',
         active:1,
+        hasValue:false,
+      }
+    },
+    watch:{
+      value:function(val,oldVal){
+        if(val && val!=''){
+          this.hasValue=true;
+        }else{
+          this.hasValue=false;
+        }
       }
     },
     methods:{
+      clear(){
+        this.value='';
+        this.$emit('search',this.value);
+      },
       getActiveClass(active){
-		if(this.active==active){
-			return 'active';
-		}
+        if(this.active==active){
+          return 'active';
+        }
       },
       tabChange(active){
         this.active=active;
@@ -53,7 +68,7 @@
     display: flex;
     flex-direction: row;
     background: #FFFFFF;
-    
+
     div{
       width: 36px;
       min-width: 32px;
@@ -89,13 +104,18 @@
       overflow: hidden;
       align-items: center;
       flex-grow: 1;
-      img{
+      .clear_img{
+        width: 15px;
+        height: 15px;
+      }
+      .search_img{
         width: 17px;
         height: 17px;
         margin-left: 20px;
       }
       input{
-        margin-left: 8px;
+        width: 80px;
+        margin-left: 15px;
         border: none;
         background: #F0F0F0;
         font-size: 14px;
@@ -103,7 +123,6 @@
         font-weight: 400;
         color: #CCCCCC;
         line-height: 20px;
-        width: auto;
       }
     }
   }

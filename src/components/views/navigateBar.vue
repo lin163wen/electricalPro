@@ -1,7 +1,7 @@
 <template>
 	<van-tabbar v-model="navigateBarIndex" @change="change">
 		<van-tabbar-item to='/Mission'>
-			<span>任务{{navigateBarIndex}}</span>
+			<span>任务</span>
 			<template #icon="props">
 				<img :src="navigateBarIndex==0 ? icon_mission.active : icon_mission.inactive" class="navigateBar_icon" />
 			</template>

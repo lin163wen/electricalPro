@@ -41,7 +41,9 @@
   .work_div {
     background: #FFFFFF;
     height: 100%;
-
+    position: relative;
+    overflow-y: auto;
+    overflow-x: hidden;
     .text1 {
       padding-top: 108px;
       padding-left: 16px;
@@ -63,9 +65,9 @@
     }
 
     .work {
-      padding-top: 130px;
+      padding-top: 80px;
       padding-left: 16px;
-
+      padding-bottom: 200px;
       div {
         width: 343px;
         height: 110px;

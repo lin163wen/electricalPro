@@ -266,7 +266,7 @@
 				.content {
 					display: flex;
 					flex-direction: column;
-					padding-top: 22px;
+					padding-top: 64px;
 					padding-left: 17px;
 					max-width: 341px;
 					width: 341px;
@@ -348,7 +348,7 @@
 		.basic_div {
 			.basic {
 				padding-left: 14px;
-				padding-top: 20px;
+				padding-top: 64px;
 				background: #FFFFFF;
 				width: 100%;
 				min-height: 307px;
@@ -484,6 +484,9 @@
 					height: 40px;
 					border-radius: 10px;
 					flex-grow: 1;
+          -webkit-flex-grow:1;
+          flex-basis:0;
+          -webkit-flex-basis:0;
 					font-size: 15px;
 					font-family: PingFangSC-Medium, PingFang SC;
 					font-weight: 500;

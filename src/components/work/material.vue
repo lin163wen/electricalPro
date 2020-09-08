@@ -21,7 +21,7 @@
           v-if="curCagetory==2">
           <div class="list_item" v-for="(item,index) in list" @click="goDetailPrivate(item)">
             <div class="item_preview">
-              <img :src="item.accessUrl" />
+              <img :src="item.accessUrl" @error="imgError(item)" />
             </div>
             <div class="list_info">
               <div class="info_name">{{item.name}}</div>
@@ -39,7 +39,7 @@
             </div>
             <div class="imgs">
               <div class="img_item" v-for="(item2,index) in listWithTime[item]" @click="goDetailOfficial(item2)">
-                <img :src="item2.accessUrl" />
+                <img :src="item2.accessUrl" @error="imgError(item)" />
               </div>
             </div>
 
@@ -105,7 +105,7 @@
             </div>
             <div class="imgs">
               <div class="img_item" v-for="(item2,index) in listWithTime[item]" @click="goDetailOfficial(item2)">
-                <video :src="item2.accessUrl" />
+                <video :src="item2.accessUrl" @error="imgError(item)"/>
               </div>
             </div>
           </div>
@@ -173,7 +173,7 @@
             </div>
             <div class="imgs">
               <div class="img_item" v-for="(item2,index) in listWithTime[item]" @click="goDetailOfficial(item2)">
-                <audio :src="item2.accessUrl" />
+                <audio :src="item2.accessUrl"  @error="imgError(item)"/>
               </div>
             </div>
           </div>
@@ -251,9 +251,9 @@
     <van-overlay :show="showPreview">
       <div class="wrapper">
         <div class="block" @click.stop>
-          <img :src="previewSrc" v-if="tabActive==1" />
-          <video :src="previewSrc" controls="controls" v-if="tabActive==2" />
-          <audio :src="previewSrc" controls="controls" v-if="tabActive==3" />
+          <img :src="previewSrc" @error="previewSrc=nofoundImg" v-if="tabActive==1" />
+          <video :src="previewSrc" @error="previewSrc=nofoundImg" controls="controls" v-if="tabActive==2" />
+          <audio :src="previewSrc" @error="previewSrc=nofoundImg" controls="controls" v-if="tabActive==3" />
         </div>
         <div class="upload_cancel_div" v-if="privatePreviewBtn">
           <div class="upload_cancel_btn" style="background: #E9021E;" @click="showPreview = false;">取消</div>
@@ -277,6 +277,7 @@
   import MyTab from '../views/myTab.vue'
   import NavigateBar from '../views/navigateBar.vue'
   import MySelect from '../views/select.vue'
+  import nofoundImg from '../../assets/nofound.png'
   import {
     Uploader,
     Overlay
@@ -310,6 +311,7 @@
     },
     data() {
       return {
+        nofoundImg:nofoundImg,
         pageSize: 20,
         partingTitle: this.common.parting.value ? this.common.parting.value : '素材',
         partingCode: this.common.parting.code ? this.common.parting.code : '',
@@ -393,6 +395,9 @@
       }
     },
     methods: {
+      imgError(item){
+        item.accessUrl=nofoundImg;
+      },
       chooseImg(item,item2, index) {
         console.log(333333)
         var itemTemp = this.listWithTime[item][index];
@@ -586,6 +591,7 @@
                 ImageUpload(params)
                   .then(response => {
                     if (response.code == 0) {
+                      this.showPreview = false;
                       Toast('上传成功');
                       _this.queryImages();
                     } else {
@@ -603,6 +609,7 @@
                 VideoUpload(params)
                   .then(response => {
                     if (response.code == 0) {
+                      this.showPreview = false;
                       Toast('上传成功');
                       _this.queryVideos();
                     } else {
@@ -620,6 +627,7 @@
                 AudioUpload(params)
                   .then(response => {
                     if (response.code == 0) {
+                      this.showPreview = false;
                       Toast('上传成功');
                       _this.queryAudios();
                     } else {
@@ -652,7 +660,6 @@
         this.uploadPreviewBtn = true;
         this.privatePreviewBtn = false;
         this.officialPreviewBtn = false;
-
       },
       getImgParamsFromOssPush(data, size) {
         console.log(data);
@@ -824,7 +831,6 @@
 
 <style scoped lang="less">
   .list_div {
-    height: 100%;
     padding: 44px 0 0;
     background: #FFFFFF;
     position: relative;
@@ -844,12 +850,11 @@
       right: 16px;
       top: 12px;
       width: 48px;
-      height: 134px;
+      height: 20px;
     }
 
     .parting {
       position: fixed;
-      padding-left: 10px;
       top: 83px;
       width: 100%;
       background: #FFFFFF;
@@ -858,7 +863,7 @@
     .material_content {
       background: #FFFFFF;
       margin-top: 90px;
-      margin-bottom: 90px;
+      margin-bottom: 70px;
       width: 100%;
 
       .content {
@@ -880,8 +885,6 @@
             .item_preview {
               width: 50px;
               height: 50px;
-              background: url(../../assets/pic.png) no-repeat center;
-              background-size: 20% 20%;
 
               video {
                 width: 50px;
@@ -952,8 +955,8 @@
               flex-wrap: wrap;
 
               .img_item {
-                background: url(../../assets/pic.png) no-repeat center;
-                background-size: 20% 20%;
+                background: url(../../assets/nofound.png) no-repeat center;
+                background-size: 70% 70%;
                 width: 85px;
                 height: 85px;
 
@@ -1005,8 +1008,8 @@
               flex-wrap: wrap;
 
               .img_item {
-                background: url(../../assets/pic.png) no-repeat center;
-                background-size: 20% 20%;
+                background: url(../../assets/nofound.png) no-repeat center;
+                background-size: 70% 70%;
                 width: 85px;
                 height: 85px;
 

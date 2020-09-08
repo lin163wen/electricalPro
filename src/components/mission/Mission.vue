@@ -1,7 +1,8 @@
 <template>
+  <div>
+  <!-- 'title','hasRight','back','parting','search','upload' -->
+  <my-header title="任务"></my-header>
 	<div class="list_div" :key="missionListNum">
-		<!-- 'title','hasRight','back','parting','search','upload' -->
-		<my-header title="任务"></my-header>
 		<div class="mission_num" v-if="missionListNum>0 && showFresh" @click="refresh()">有{{missionListNum}}条任务，点击刷新</div>
 		<div class="mission_list" v-if="missionListNum>0">
 			<div class="mission" v-for="(item,index) in missionList">
@@ -28,9 +29,10 @@
 			</div>
 			<div class="no_mission_text">暂时没有待办任务<br/><br/>喝口茶休息下吧~</div>
 		</div>
-		<navigate-bar></navigate-bar>
-	</div>
 
+	</div>
+  <navigate-bar></navigate-bar>
+  </div>
 </template>
 
 <script>
@@ -46,7 +48,7 @@
 		},
 		data() {
 			return {
-				missionListNum: this.common.missionNum,
+				missionListNum: this.common.missionNum?this.common.missionNum:0,
 				missionList: [],
 				componentKey: 0,
 				missionListLoading: null,
@@ -108,11 +110,12 @@
 
 <style scoped lang="less">
 	.list_div {
-		height: 100%;
-		background: #999999;
-		position: relative;
-		overflow-y: auto;
-		overflow-x: hidden;
+		background: #f4f4f4;
+    margin-top: 50px;
+    margin-bottom: 80px;
+    position: relative;
+    overflow-y: auto;
+    overflow-x: hidden;
 		.mission_num {
 			width: 375px;
 			height: 40px;
@@ -156,8 +159,6 @@
 			}
 		}
 		.mission_list {
-			padding-top: 44px;
-			padding-bottom: 78px;
 			background-color: #F0F0F0;
 			display: flex;
 			flex-direction: column;

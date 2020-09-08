@@ -299,6 +299,7 @@
       color: #2E2D2D;
       line-height: 17px;
       top: 676px;
+      padding-bottom: 75px;
     }
   }
 </style>

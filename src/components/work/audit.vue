@@ -4,8 +4,11 @@
 		<my-header title="审稿" back="true" backUrl="Work"></my-header>
     <div class="audit_num" v-if="auditNum>0 && showFresh" @click="refresh()">有{{auditNum}}条任务，点击刷新</div>
     <div class="order">
-      <img src="../../assets/order@2x.png" v-if="!timeOrder" @click="order()">
-      <img src="../../assets/order_reverse@2x.png" v-if="timeOrder" @click="order()">
+      <div class="order_text" @click="order()">
+        时间
+        <img src="../../assets/order@2x.png" v-if="!timeOrder">
+        <img src="../../assets/order_reverse@2x.png" v-if="timeOrder">
+      </div>
     </div>
 		<van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="queryAudits" class="list">
 			<div class="content" @click="missionDetail(item)" :key="index" v-for="(item,index) in auditList">
@@ -46,7 +49,7 @@
 				rows: 10,
         auditNum:0,
         showFresh:true,
-        timeOrder:true,
+        timeOrder:false,
 			}
 		},
     created() {
@@ -57,16 +60,20 @@
     },
 		methods: {
       order(){
+        this.timeOrder = !this.timeOrder;
         if(this.timeOrder){
-          this.auditList.sort(function(a,b){
-            return new Date(a.lastModifyTime).getTime()-new Date(b.lastModifyTime).getTime();
+          this.auditList = this.auditList.sort(function(a,b){
+            var time = new Date(a.lastModifyTime.replace(/\-/g,'/')).getTime()-new Date(b.lastModifyTime.replace(/\-/g,'/')).getTime();
+            return time;
           })
         }else{
-          this.auditList.sort(function(a,b){
-            return new Date(b.lastModifyTime).getTime()-new Date(a.lastModifyTime).getTime();
+          this.auditList = this.auditList.sort(function(a,b){
+            var time = new Date(b.lastModifyTime.replace(/\-/g,'/')).getTime()-new Date(a.lastModifyTime.replace(/\-/g,'/')).getTime();
+            return time;
           })
         }
-        this.timeOrder = !this.timeOrder;
+
+        console.log(this.auditList[0]);
       },
       resetData(){
         this.auditList=[];
@@ -140,14 +147,19 @@
       height: 40px;
       background:#FFFFFF;
       position: relative;
-      img{
-        height: 16px;
-        padding-right: 14px;
-        position: absolute;
-        top:50%;
-        right:14px;
-        transform: translateY(-50%);
+
+
+      .order_text{
+        line-height: 40px;
+        float: right;
+        position: relative;
+        margin-right: 15px;
+        img{
+          height: 16px;
+          transform: translateY(4px);
+        }
       }
+
     }
 		.list{
       background:#FFFFFF;

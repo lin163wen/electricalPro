@@ -81,6 +81,7 @@
 				flex-direction: row;
 				.input {
 					width: auto;
+          min-width: 30px;
 					font-size: 14px;
 					font-family: PingFangSC-Medium, PingFang SC;
 					font-weight: 500;
