@@ -332,7 +332,7 @@
 					.next_btn {
 						width: 341px;
 						height: 40px;
-						background: #4783FE;
+						background: #009C86;
 						border-radius: 10px;
 						font-size: 15px;
 						font-family: PingFangSC-Medium, PingFang SC;
@@ -393,7 +393,7 @@
 							line-height: 28px;
 							.channel_author {
 								height: 28px;
-								background: #4783FE;
+								background: #009C86;
 								border-radius: 14px;
 								padding: 4px 10px;
 								font-size: 15px;
@@ -500,10 +500,10 @@
 					background: #E9021E;
 				}
 				.publish_btn {
-					background: #72be1d;
+					background: #009C86;
 				}
 				.pass_btn {
-					background: #4783FE;
+					background: #009C86;
 				}
 			}
 		}

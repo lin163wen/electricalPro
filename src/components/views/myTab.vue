@@ -76,14 +76,14 @@
       font-size: 16px;
       font-family: PingFangSC-Medium, PingFang SC;
       font-weight: 500;
-      color: #3F3E3E;
+      color: #009C86;
       line-height: 30px;
       vertical-align: middle;
       text-align: center;
       position: relative;
     }
     .active{
-    		color: #4783FE;
+    		color: #009C86;
     }
     .tab_active{
       width: 22px;

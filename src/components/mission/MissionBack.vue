@@ -290,7 +290,7 @@
 				justify-content: space-between;
 			}
 			.cancel_btn {
-				background: #4783FE;
+				background: #009C86;
 			}
 			.reject_btn {
 				background: #E9021E;

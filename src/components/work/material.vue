@@ -1094,7 +1094,7 @@
       .upload_btn {
         width: 341px;
         height: 40px;
-        background: #4783FE;
+        background: #009C86;
         border-radius: 10px;
         font-size: 15px;
         font-family: PingFangSC-Medium, PingFang SC;
@@ -1128,7 +1128,7 @@
         text-align: center;
       }
       .multdown{
-        background: #4783FE;
+        background: #009C86;
         margin-right: 23px;
       }
       .cancel{
@@ -1175,7 +1175,7 @@
         .upload_cancel_btn {
           width: 140px;
           height: 40px;
-          background: #4783FE;
+          background: #009C86;
           border-radius: 10px;
           margin: auto;
           font-size: 15px;

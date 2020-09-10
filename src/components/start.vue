@@ -33,7 +33,16 @@
         var token = localStorage.getItem('token');
         console.log('Start......',token)
         if(token){
-          this.$router.push('Mission');
+          var navigateIndex = localStorage.getItem('navigateIndex');
+          if(navigateIndex==0){
+            this.$router.push('Mission');
+          }else if(navigateIndex==1){
+            this.$router.push('Work');
+          }else if(navigateIndex==2){
+            this.$router.push('Connection');
+          }else if(navigateIndex==3){
+            this.$router.push('Mine');
+          }
         }else{
           setTimeout(function(){
             _this.$router.push('Login')
@@ -103,7 +112,7 @@
       font-size: 12px;
       font-family: PingFangSC-Regular, PingFang SC;
       font-weight: 400;
-      color: #4783FE;
+      color: #009C86;
       line-height: 17px;
       top: 679px;
       padding-bottom: 69px;

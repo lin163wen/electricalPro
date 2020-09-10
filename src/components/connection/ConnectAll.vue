@@ -18,9 +18,9 @@
       </template>
     </div>
 
-    <div class="connections">
+    <div class="connections" v-if="members.length>0">
         <div class="text">
-          最近联系人
+          联系人
         </div>
         <template v-for="(item,index) in members">
           <div class="connection" @click="ConnectDetail(item)">
@@ -31,7 +31,19 @@
             <img class="call" src="../../assets/call@2x.png" @click="Call()"/>
           </div>
         </template>
+    </div>
 
+    <div class="last_connections_text">
+      <span>最近联系人</span>
+    </div>
+    <div class="last_connections">
+      <template v-for="(item,index) in lastestConnector">
+        <div class="connection" :ke="index">
+          <img class="user_head" src="../../assets/head@2x.png" />
+          <span class="user_name">{{item.name}}</span>
+          <img class="call" src="../../assets/call@2x.png" @click="ConnectDetail(item)"/>
+        </div>
+      </template>
     </div>
   </div>
 
@@ -56,7 +68,8 @@
         origanizations: [],//所有部门
         members: [],//存放当前部分人员列表
         curOriganization:{},//存放当前部门
-        curOriganizationDeep:[]//顶部"xxx>xxx>xxx"处使用
+        curOriganizationDeep:[],//顶部"xxx>xxx>xxx"处使用
+        lastestConnector:[]
       }
     },
     watch:{
@@ -66,6 +79,10 @@
     },
     created() {
       this.getOriganizations();
+      if(localStorage.getItem('lastestConnector')){
+        this.lastestConnector = JSON.parse(localStorage.getItem('lastestConnector'));
+        this.lastestConnector = this.lastestConnectorUnique(this.lastestConnector);
+      }
     },
     methods: {
       ConnectDetail(item){
@@ -141,11 +158,12 @@
     height: 50px;
     background: #FFFFFF;
     margin: 10px 0px;
+    padding-left: 17px;
     span {
       font-size: 16px;
       font-family: PingFangSC-Medium, PingFang SC;
       font-weight: 500;
-      color: #4783FE;
+      color: #009C86;
       line-height: 22px;
     }
   }
@@ -218,6 +236,50 @@
         width: 26px;
         height: 26px;
         margin-right: 16px;
+      }
+    }
+
+  }
+
+  .last_connections_text {
+    font-size: 16px;
+    font-family: PingFangSC-Medium, PingFang SC;
+    font-weight: 500;
+    color: #3F3E3E;
+    line-height: 60px;
+    margin-top: 10px;
+    padding-left: 15px;
+    height: 60px;
+    background: #FFFFFF;
+  }
+
+  .last_connections {
+    background-color: #FFFFFF;
+    .connection {
+      height: 60px;
+      display: flex;
+      align-items: center;
+
+      border-bottom: ;
+      .user_head {
+        width: 40px;
+        height: 40px;
+        margin-left: 16px;
+      }
+
+      .user_name {
+        font-size: 14px;
+        font-family: PingFangSC-Medium, PingFang SC;
+        font-weight: 500;
+        color: #3F3E3E;
+        line-height: 60px;
+        margin-left: 20px;
+      }
+
+      .call {
+        width: 26px;
+        height: 26px;
+        margin-left: 215px;
       }
     }
   }

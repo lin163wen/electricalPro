@@ -41,7 +41,7 @@
 		name: "NavigateBar",
 		data() {
 			return {
-				navigateBarIndex: this.common.navigateBarIndex,
+				navigateBarIndex: localStorage.getItem('navigateIndex')?localStorage.getItem('navigateIndex'):0,
 				missionNum: this.common.missionNum,
 				icon_mission: {
 					active: mission_selected,
@@ -73,6 +73,7 @@
 			},
 			change(index) {
 				this.navigateBarIndex = index;
+        localStorage.setItem('navigateIndex',index);
 				this.common.setNavigateBarIndex(index);
 				console.log(this.navigateBarIndex);
 			},
@@ -88,8 +89,11 @@
 		width: 20px !important;
 		height: 20px !important;
 	}
-	
+
 	.van-tabbar-item {
 		font-size: 9px !important;
 	}
+  .van-tabbar-item--active{
+    color: #009C86 !important;
+  }
 </style>

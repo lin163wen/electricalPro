@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="mine_div">
     <!-- 'title','hasRight','back','parting','search','upload' -->
     <div>
       <div class="mine">
@@ -89,135 +89,138 @@
 </script>
 
 <style scoped lang="less">
-  .mine {
-    background: url(../../assets/mine_bg@2x.png) no-repeat center;
-    background-size: 100% 100%;
-    width: 100%;
-    height: 244px;
+  .mine_div{
+    height: 100%;
+    background-color: #FFFFFF;
+    .mine {
+      background: url(../../assets/mine_bg@2x.png) no-repeat center;
+      background-size: 100% 100%;
+      width: 100%;
+      height: 244px;
 
-
-    .mine_info {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      padding-top: 91px;
-      padding-left: 29px;
-      height: 80px;
-
-      .first_name {
-        width: 80px;
-        height: 80px;
-        background: #4783FE;
-        border-radius: 40px;
+      .mine_info {
         display: flex;
+        flex-direction: row;
         align-items: center;
-        justify-content: center;
+        padding-top: 91px;
+        padding-left: 29px;
+        height: 80px;
 
-        span {
-          font-size: 24px;
-          font-family: PingFangSC-Medium, PingFang SC;
-          font-weight: 500;
-          color: #FFFFFF;
-          line-height: 80px;
-        }
-      }
-
-      .name_section {
-        display: flex;
-        flex-direction: column;
-        margin-left: 20px;
-
-        .name {
-          margin-top: 14px;
+        .first_name {
+          width: 80px;
+          height: 80px;
+          background: #009C86;
+          border-radius: 40px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
 
           span {
-            font-size: 18px;
+            font-size: 24px;
             font-family: PingFangSC-Medium, PingFang SC;
             font-weight: 500;
             color: #FFFFFF;
-            line-height: 25px;
+            line-height: 80px;
           }
         }
 
-        .section {
-          margin-top: 10px;
+        .name_section {
+          display: flex;
+          flex-direction: column;
+          margin-left: 20px;
 
-          span {
-            font-size: 12px;
-            font-family: PingFangSC-Regular, PingFang SC;
-            font-weight: 400;
-            color: #FFFFFF;
-            line-height: 17px;
+          .name {
+            margin-top: 14px;
+
+            span {
+              font-size: 18px;
+              font-family: PingFangSC-Medium, PingFang SC;
+              font-weight: 500;
+              color: #FFFFFF;
+              line-height: 25px;
+            }
           }
+
+          .section {
+            margin-top: 10px;
+
+            span {
+              font-size: 12px;
+              font-family: PingFangSC-Regular, PingFang SC;
+              font-weight: 400;
+              color: #FFFFFF;
+              line-height: 17px;
+            }
+          }
+        }
+
+      }
+    }
+
+    .others {
+      padding-top: 20px;
+      padding-left: 16px;
+      font-size: 18px;
+      font-family: PingFangSC-Medium, PingFang SC;
+      font-weight: 500;
+      color: #3F3E3E;
+      line-height: 25px;
+      background: #FFFFFF;
+      .setting {
+        height: 60px;
+        width: 100%;
+        display: flex;
+        background-color: #FFFFFF;
+        align-items: center;
+
+        .setting_icon {
+          width: 20px;
+          height: 20px;
+          margin-right: 19px;
+        }
+
+        .setting_go {
+          width: 10px;
+          height: 14px;
+          margin-left: 270px;
+        }
+
+        span {
+          font-size: 14px;
+          font-family: PingFangSC-Regular, PingFang SC;
+          font-weight: 400;
+          color: #3F3E3E;
+          line-height: 60px;
         }
       }
 
-    }
-  }
+      .about {
+        height: 60px;
+        width: 100%;
+        display: flex;
+        background-color: #FFFFFF;
+        align-items: center;
 
-  .others {
-    padding-top: 20px;
-    padding-left: 16px;
-    font-size: 18px;
-    font-family: PingFangSC-Medium, PingFang SC;
-    font-weight: 500;
-    color: #3F3E3E;
-    line-height: 25px;
-    background: #FFFFFF;
-    .setting {
-      height: 60px;
-      width: 100%;
-      display: flex;
-      background-color: #FFFFFF;
-      align-items: center;
+        .about_icon {
+          width: 20px;
+          height: 20px;
+          margin-right: 19px;
+        }
 
-      .setting_icon {
-        width: 20px;
-        height: 20px;
-        margin-right: 19px;
-      }
+        .about_go {
+          width: 10px;
+          height: 14px;
+          margin-left: 270px;
+        }
 
-      .setting_go {
-        width: 10px;
-        height: 14px;
-        margin-left: 270px;
-      }
+        span {
 
-      span {
-        font-size: 14px;
-        font-family: PingFangSC-Regular, PingFang SC;
-        font-weight: 400;
-        color: #3F3E3E;
-        line-height: 60px;
-      }
-    }
-
-    .about {
-      height: 60px;
-      width: 100%;
-      display: flex;
-      background-color: #FFFFFF;
-      align-items: center;
-
-      .about_icon {
-        width: 20px;
-        height: 20px;
-        margin-right: 19px;
-      }
-
-      .about_go {
-        width: 10px;
-        height: 14px;
-        margin-left: 270px;
-      }
-
-      span {
-
-        font-size: 14px;
-        font-family: PingFangSC-Regular, PingFang SC;
-        font-weight: 400;
-        color: #3F3E3E;
-        line-height: 60px;
+          font-size: 14px;
+          font-family: PingFangSC-Regular, PingFang SC;
+          font-weight: 400;
+          color: #3F3E3E;
+          line-height: 60px;
+        }
       }
     }
   }

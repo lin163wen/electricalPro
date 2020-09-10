@@ -40,6 +40,7 @@
     methods: {
       logout() {
         localStorage.setItem('token', '');
+        localStorage.setItem('navigateIndex', '');
         this.$router.push('/');
       },
       caching(callback) {
@@ -146,7 +147,7 @@
       .logout_btn {
         width: 341px;
         height: 40px;
-        background: #4783FE;
+        background: #009C86;
         border-radius: 10px;
         text-align: center;
 

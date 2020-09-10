@@ -65,15 +65,20 @@
         var lastestConnector = localStorage.getItem('lastestConnector');
 
         if (!lastestConnector) {
-          console.log(11111);
           lastestConnector = new Array();
         } else {
           lastestConnector = JSON.parse(lastestConnector)
         }
-        console.log(lastestConnector)
-        console.log(typeof lastestConnector)
-        lastestConnector.push(this.userInfo);
-        localStorage.setItem('lastestConnector', JSON.stringify(lastestConnector))
+        var isPush = true;
+        lastestConnector.forEach(item=>{
+          if(item.name==this.userInfo.name && item.phone==this.userInfo.phone){
+            isPush = false;
+          }
+        })
+        if(isPush){
+          lastestConnector.push(this.userInfo);
+          localStorage.setItem('lastestConnector', JSON.stringify(lastestConnector))
+        }
         this.$router.push({
           name: 'Calling',
           params: {
@@ -89,7 +94,7 @@
   .connector {
     height: 304px;
     width: 100%;
-    background: linear-gradient(225deg, #407CFE 0%, #6EAFFF 100%);
+    background: linear-gradient(46deg, #14B3D7 0%, #A7FFF3 100%);
 
     .header {
       height: 44px;
@@ -112,7 +117,7 @@
       .connector_first_name {
         width: 80px;
         height: 80px;
-        background: #4783FE;
+        background: #009C86;
         border-radius: 40px;
         display: flex;
         align-items: center;
@@ -208,7 +213,7 @@
     .call_btn {
       width: 341px;
       height: 40px;
-      background: #4783FE;
+      background: #009C86;
       border-radius: 10px;
       text-align: center;
       font-size: 15px;

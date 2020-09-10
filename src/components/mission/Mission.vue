@@ -119,7 +119,7 @@
 		.mission_num {
 			width: 375px;
 			height: 40px;
-			background: rgba(62, 126, 255, 0.86);
+			background: rgba(0, 156, 134, 0.9);
 			font-size: 12px;
 			font-family: PingFangSC-Regular, PingFang SC;
 			font-weight: 400;
@@ -176,7 +176,7 @@
 					.icon {
 						width: 60px;
 						height: 60px;
-						background: #4783FE;
+						background: #009C86;
 						border-radius: 30px;
 						text-align: center;
 						font-size: 24px;
@@ -214,7 +214,7 @@
 								font-size: 12px;
 								font-family: PingFangSC-Regular, PingFang SC;
 								font-weight: 400;
-								color: #3E7EFF;
+								color: #009C86;
 								line-height: 17px;
 							}
 							.text_time {

@@ -9,7 +9,7 @@
         </template>
       </van-cell> -->
       <div class="all_connections" @click="AllContector()">
-        <img class="icon" src="../../assets/mine_selected@2x.png" />
+        <img class="icon" src="../../assets/collection_all@2x.png" />
         <span>查看全部联系人</span>
         <img src="../../assets/all_connections@2x.png" />
       </div>

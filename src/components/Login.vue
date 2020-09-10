@@ -278,7 +278,7 @@
     .login_btn {
       width: 344px;
       height: 50px;
-      background: #4783FE;
+      background: #009C86;
       border-radius: 10px;
       top: 580px;
       line-height: 50px;
