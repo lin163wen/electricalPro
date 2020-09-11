@@ -84,13 +84,11 @@
 					forbidClick: true,
 				});
 				Missions({}).then((response) => {
-					console.log(response);
 					if(response.code == 0) {
 						_this.missionList = [];
 						_this.missionList = response.data.storyTaskListResponseList;
 						_this.common.setMissionNum(response.data.storyTaskListResponseList.length);
 						_this.missionListNum = response.data.storyTaskListResponseList.length;
-						console.log(_this.missionListNum);
 					} else {
 						Toast(response.message);
 						if(response.code == 401) {

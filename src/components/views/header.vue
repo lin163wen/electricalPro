@@ -33,7 +33,6 @@
 			goBack() {
 				if(this.backUrl) {
           if(this.backUrl=='emit'){
-            console.log('emit....');
             this.$emit('goBack');
           }else{
             this.$router.push(this.backUrl);

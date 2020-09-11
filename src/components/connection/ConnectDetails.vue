@@ -46,7 +46,6 @@
       }
     },
     created() {
-      console.log(this.$route.params.user)
       this.userInfo = this.$route.params.user;
     },
     computed: {

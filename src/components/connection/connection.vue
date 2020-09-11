@@ -53,7 +53,6 @@
     },
     methods:{
       goConnectDetail(item){
-        console.log(item);
         this.$router.push({
           name:'ConnectDetails',
           params:{

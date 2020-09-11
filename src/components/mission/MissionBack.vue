@@ -69,7 +69,6 @@
 		mounted() {
 			var _this = this;
 			$("#reason").on("input propertychange", function() {
-				console.log(11111)
 				var $this = $(this),
 					_val = $this.val(),
 					count = "";
@@ -122,7 +121,6 @@
 			},
 			reject() {
 				var _this = this;
-				console.log(this.selectedValue);
 				if(this.selectedValue === '') {
 					Toast('请选择退回节点');
 					return;

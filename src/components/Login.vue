@@ -27,7 +27,7 @@
       {{message}}
     </div>
     <div class="login_btn" @click="goto()">
-      同意协议并登陆
+      登陆
     </div>
     <div class="no_login">登陆成功后7天内免登陆</div>
   </div>
@@ -227,7 +227,8 @@
         margin-left: 50px;
         border: none;
         background: #F0F0F0;
-
+        width: 45%;
+        max-width: 45%;
         font-size: 14px;
         font-family: PingFangSC-Regular, PingFang SC;
         font-weight: 400;
@@ -262,6 +263,8 @@
         font-weight: 400;
         color: #BABABA;
         line-height: 20px;
+        width: 45%;
+        max-width: 45%;
       }
     }
     .login_tip{

@@ -3,7 +3,7 @@
     <!-- 'title','hasRight','back','parting','search','upload' -->
     <my-header title="全部联系人" back="true" backUrl='Connection'></my-header>
     <div class="all_connections">
-      <span v-if="index!=0">联系人></span>
+      <span v-if="curOriganizationDeep.length>0">联系人></span>
       <template v-for="(item,index) in curOriganizationDeep">
         <span v-if="index!=0">></span>
         <span :value="item.deptId" @click="returnLastDept(item)">{{item.deptName}}</span>
@@ -28,7 +28,7 @@
               <img class="user_head" src="../../assets/head@2x.png" />
               <span class="user_name">{{item.name}}</span>
             </div>
-            <img class="call" src="../../assets/call@2x.png" @click="Call()"/>
+            <img class="call" src="../../assets/call@2x.png"/>
           </div>
         </template>
     </div>
@@ -85,8 +85,17 @@
       }
     },
     methods: {
+      lastestConnectorUnique(arr){
+        for(var i=0;i<arr.length;i++){
+          for(var j=i+1;j<arr.length;j++){
+            if(arr[i].id ==arr[j].id){
+              arr.splice(j,1);
+            }
+          }
+        }
+        return arr;
+      },
       ConnectDetail(item){
-        console.log(item);
         this.$router.push({
           name:'ConnectDetails',
           params:{
@@ -108,7 +117,6 @@
       getOriganizations() {
         var _this = this;
         Organizations({}).then((response) => {
-          console.log(response);
           if (response.code == 0) {
             _this.origanizations = response.list;
             if(_this.origanizations.length>0){

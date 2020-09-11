@@ -67,7 +67,6 @@
 		methods: {
 			initPage(index) {
 				var index = this.$route.index;
-				console.log(this.$route);
 				this.navigateBarIndex = index;
 				this.common.setNavigateBarIndex(index);
 			},
@@ -75,7 +74,6 @@
 				this.navigateBarIndex = index;
         localStorage.setItem('navigateIndex',index);
 				this.common.setNavigateBarIndex(index);
-				console.log(this.navigateBarIndex);
 			},
 			addClassName: function(path) {
 				this.$router.replace(path);

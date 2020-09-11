@@ -88,7 +88,7 @@
     .tab_active{
       width: 22px;
       height: 3px;
-      background: #4783FE;
+      background: #009C86;
       border-radius: 2px;
       display: block;
       position: absolute;

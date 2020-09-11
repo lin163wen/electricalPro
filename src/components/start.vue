@@ -21,7 +21,7 @@
     name:'Start',
     data(){
       return{
-
+        autoToLogin:null
       }
     },
     created() {
@@ -44,12 +44,13 @@
             this.$router.push('Mine');
           }
         }else{
-          setTimeout(function(){
+          this.autoToLogin = setTimeout(function(){
             _this.$router.push('Login')
           },3000)
         }
       },
       start(){
+        clearTimeout(this.autoToLogin);
         this.$router.push('Login')
       }
     }

@@ -47,7 +47,6 @@
 			}
 		},
 		created() {
-			console.log(this.$route.params.userInfo)
 			this.userInfo = this.$route.params.userInfo;
 		},
 		methods: {
