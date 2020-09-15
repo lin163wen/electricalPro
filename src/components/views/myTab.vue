@@ -14,7 +14,7 @@
     </div>
     <div class="search">
       <img class="search_img" src="../../assets/search_btn@2x.png"/>
-      <input v-model="value" @input="onSearch()"/>
+      <input v-model="value" @change="onSearch()"/>
       <img class="clear_img" src="../../assets/clear@2x.png" v-if="hasValue" @click="clear()" />
     </div>
   </div>

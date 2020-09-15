@@ -33,7 +33,8 @@
         var token = localStorage.getItem('token');
         console.log('Start......',token)
         if(token){
-          var navigateIndex = localStorage.getItem('navigateIndex');
+          var navigateIndex = localStorage.getItem('navigateIndex')?localStorage.getItem('navigateIndex'):0;
+          console.log(navigateIndex)
           if(navigateIndex==0){
             this.$router.push('Mission');
           }else if(navigateIndex==1){

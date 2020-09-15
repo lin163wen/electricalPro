@@ -11,18 +11,18 @@ module.exports = {
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     proxyTable: {
-       '/api': {
+       /* '/api': {
         //target: 'https://business-h5-test.motree.cn',//motree测试环境
         // target: 'http://h5-test.test.lemobar.cn',//内网测试
         target: 'http://testsgcc.xinhuaapp.com:19002', //本地测试环境
         pathRewrite: {},
         changeOrigin: true,
         cookieDomainRewrite: ''
-      }
+      } */
     },
 
     // Various Dev Server settings
-    host: '192.168.31.139', // can be overwritten by process.env.HOST
+    host: 'localhost', // can be overwritten by process.env.HOST
     //host: 'localhost',
     port: 8080, // can be overwritten by process.env.PORT, if port is in use, a free one will be determined
 

@@ -84,12 +84,12 @@
 
 <style scoped="scoped" lang="less">
 	.navigateBar_icon {
-		width: 20px !important;
-		height: 20px !important;
+		width: 24px !important;
+		height: 24px !important;
 	}
 
 	.van-tabbar-item {
-		font-size: 9px !important;
+		font-size: 12px !important;
 	}
   .van-tabbar-item--active{
     color: #009C86 !important;
