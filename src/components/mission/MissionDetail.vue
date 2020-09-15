@@ -267,7 +267,7 @@
 					display: flex;
 					flex-direction: column;
 					padding-top: 64px;
-					padding-left: 17px;
+					margin: 0 auto;
 					max-width: 341px;
 					width: 341px;
 					.content_title {
@@ -311,6 +311,9 @@
 							max-width: 100% !important;
 							width: 100% !important;
 						}
+            @{deep}{
+              font-size: 12px !important;
+            }
 					}
 				}
 				.author_div {

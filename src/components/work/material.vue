@@ -87,7 +87,7 @@
           <div class="list_item" v-for="(item,index) in list" @click="goDetailPrivate(item)">
             <!--<em class="item_mask"><span>{{item.status==0?"未标引":(item.status==1?"审核中":"已标引")}}</span></em>-->
             <div class="item_preview">
-              <video :src="item.accessUrl" />
+              <video :src="item.accessUrl" @error="imgError(item)"/>
             </div>
             <div class="list_info">
               <div class="info_name">{{item.name}}</div>
@@ -152,9 +152,7 @@
           <div class="list_item audio_img" v-for="(item,index) in list" @click="goDetailPrivate(item)">
             <!--<em class="item_mask"><span>{{item.status==0?"未标引":(item.status==1?"审核中":"已标引")}}</span></em>-->
             <div class="item_preview">
-              <audio>
-                <source :src="item.accessUrl">
-                </source>
+              <audio :src="item.accessUrl" @error="imgError(item)">
               </audio>
             </div>
             <div class="list_info">
@@ -885,7 +883,8 @@
             .item_preview {
               width: 50px;
               height: 50px;
-
+              background: url(../../assets/nofound.png) no-repeat center;
+              background-size: 50% 50%;
               video {
                 width: 50px;
                 height: 50px;
@@ -1068,6 +1067,8 @@
                       .normal {
                         width: 60px;
                         height: 60px;
+                        background: url(../../assets/nofound.png) no-repeat center;
+                        background-size: 80% 80%;
                       }
                     }
                   }

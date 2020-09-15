@@ -19,7 +19,7 @@
 					<div class="text_title">{{item.title}}</div>
 					<div class="text_lanmu">{{item.channelName}}</div>
 				  <div class="text_author_time">
-				    <div class="text_author">作者：{{item.author}}</div>
+				    <div class="text_author">作者：{{item.authorName}}</div>
 				    <div class="text_time">{{item.lastModifyTime}}</div>
 				  </div>
 				</div>
