@@ -311,8 +311,8 @@
 							max-width: 100% !important;
 							width: 100% !important;
 						}
-            @{deep}{
-              font-size: 12px !important;
+            @{deep} table{
+              font-size: 6px !important;
             }
 					}
 				}

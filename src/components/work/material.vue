@@ -18,7 +18,7 @@
       <div class="content" v-if="tabActive==1">
         <!-- 个人 -->
         <van-list class="list_private" v-model="loading" :finished="finished" finished-text="没有更多了" @load="queryImages()"
-          v-if="curCagetory==2">
+          v-if="curCagetory==2" :offset="10">
           <div class="list_item" v-for="(item,index) in list" @click="goDetailPrivate(item)">
             <div class="item_preview">
               <img :src="item.accessUrl" @error="imgError(item)" />
@@ -31,7 +31,7 @@
         </van-list>
         <!-- 成品 -->
         <van-list class="list_official" v-model="loading" :finished="finished" finished-text="没有更多了" @load="queryImages()"
-          v-if=" curCagetory==0">
+          v-if=" curCagetory==0" :offset="10">
           <div class="list_item" v-for="(item,index) in mapKeys(listWithTime)">
             <!--<em class="item_mask"><span>{{item.status==0?"未标引":(item.status==1?"审核中":"已标引")}}</span></em>-->
             <div class="list_time">
@@ -39,7 +39,7 @@
             </div>
             <div class="imgs">
               <div class="img_item" v-for="(item2,index) in listWithTime[item]" @click="goDetailOfficial(item2)">
-                <img :src="item2.accessUrl" @error="imgError(item)" />
+                <img :src="item2.accessUrl" @error="imgError(item2)" />
               </div>
             </div>
 
@@ -47,7 +47,7 @@
         </van-list>
         <!-- 共享 -->
         <van-list class="list_public" v-model="loading" :finished="finished" finished-text="没有更多了" @load="queryImages()"
-          v-if="curCagetory==1">
+          v-if="curCagetory==1" :offset="10">
           <div class="list_item" v-for="(item,index) in mapKeys(listWithTime)">
             <!--<em class="item_mask"><span>{{item.status==0?"未标引":(item.status==1?"审核中":"已标引")}}</span></em>-->
             <div class="list_time">
@@ -56,20 +56,23 @@
             <div class="imgs">
               <div class="img_item" v-for="(item2,index) in listWithTime[item]" @touchstart.stop="start()" @touchend.stop="end(item2)"
                 @touchmove="move()">
-                <div class="normal" :style="{backgroundImage:'url('+item2.accessUrl+')'}" v-if="!showOperation">
+                <div class="normal" v-if="!showOperation">
+                  <img :src="item2.accessUrl" @error="imgError(item2)"/>
                 </div>
                 <div class="operation" v-if="showOperation">
                   <div v-if="!item2.selected">
                     <div class="curcle" @click="chooseImg(item,item2,index)">
                     </div>
-                    <div class="normal" :style="{backgroundImage:'url('+item2.accessUrl+')'}">
+                    <div class="normal">
+                      <img :src="item2.accessUrl" @error="imgError(item2)"/>
                     </div>
                   </div>
                   <div class="selected_div" v-if="item2.selected">
                     <div class="selected">
                       <div class="curcle" @click="unchooseImg(item,item2,index)">
                       </div>
-                      <div class="normal" :style="{backgroundImage:'url('+item2.accessUrl+')'}">
+                      <div class="normal">
+                        <img :src="item2.accessUrl" @error="imgError(item2)"/>
                       </div>
                     </div>
                   </div>
@@ -83,11 +86,13 @@
       <div class="content" v-if="tabActive==2">
         <!-- 个人 -->
         <van-list class="list_private" v-model="loading" :finished="finished" finished-text="没有更多了" @load="queryVideos()"
-          v-if="curCagetory==2">
+          v-if="curCagetory==2" :offset="10">
           <div class="list_item" v-for="(item,index) in list" @click="goDetailPrivate(item)">
             <!--<em class="item_mask"><span>{{item.status==0?"未标引":(item.status==1?"审核中":"已标引")}}</span></em>-->
             <div class="item_preview">
-              <video :src="item.accessUrl" @error="imgError(item)"/>
+              <img src="../../assets/video.png"/>
+              <!-- <video :src="item.accessUrl" @error="imgError(item)" v-if="item.useful"/>
+              <img src="../../assets/nofound.png" v-if="!item.useful"/> -->
             </div>
             <div class="list_info">
               <div class="info_name">{{item.name}}</div>
@@ -97,7 +102,7 @@
         </van-list>
         <!-- 成品 -->
         <van-list class="list_official" v-model="loading" :finished="finished" finished-text="没有更多了" @load="queryImages()"
-          v-if="curCagetory==0">
+          v-if="curCagetory==0" :offset="10">
           <div class="list_item" v-for="(item,index) in mapKeys(listWithTime)">
             <!--<em class="item_mask"><span>{{item.status==0?"未标引":(item.status==1?"审核中":"已标引")}}</span></em>-->
             <div class="list_time">
@@ -105,14 +110,16 @@
             </div>
             <div class="imgs">
               <div class="img_item" v-for="(item2,index) in listWithTime[item]" @click="goDetailOfficial(item2)">
-                <video :src="item2.accessUrl" @error="imgError(item)"/>
+                <img src="../../assets/video.png" v-if="item2.useful"/>
+                <!-- <video :src="item2.accessUrl" @error="imgError(item2)" v-if="item2.useful"/>
+                <img src="../../assets/nofound.png" v-if="!item2.useful"/> -->
               </div>
             </div>
           </div>
         </van-list>
         <!-- 共享 -->
         <van-list class="list_public" v-model="loading" :finished="finished" finished-text="没有更多了" @load="queryImages()"
-          v-if="curCagetory==1">
+          v-if="curCagetory==1" :offset="10">
           <div class="list_item" v-for="(item,index) in mapKeys(listWithTime)">
             <!--<em class="item_mask"><span>{{item.status==0?"未标引":(item.status==1?"审核中":"已标引")}}</span></em>-->
             <div class="list_time">
@@ -121,20 +128,29 @@
             <div class="imgs">
               <div class="img_item" v-for="(item2,index) in listWithTime[item]" @touchstart.stop="start()" @touchend.stop="end(item2)"
                 @touchmove="move()">
-                <div class="normal" :style="{backgroundImage:'url('+item2.accessUrl+')'}" v-if="!showOperation">
+                <div class="normal" v-if="!showOperation">
+                  <img src="../../assets/video.png" v-if="item2.useful"/>
+                  <!-- <video :src="item2.accessUrl" @error="imgError(item2)" v-if="item2.useful"></video>
+                  <img src="../../assets/nofound.png" v-if="!item2.useful"/> -->
                 </div>
                 <div class="operation" v-if="showOperation">
                   <div v-if="!item2.selected">
                     <div class="curcle" @click="chooseImg(item,item2,index)">
                     </div>
-                    <div class="normal" :style="{backgroundImage:'url('+item2.accessUrl+')'}">
+                    <div class="normal">
+                      <img src="../../assets/video.png" v-if="item2.useful"/>
+                      <!-- <video :src="item2.accessUrl" @error="imgError(item2)" v-if="item2.useful"></video>
+                      <img src="../../assets/nofound.png" v-if="!item2.useful"/> -->
                     </div>
                   </div>
                   <div class="selected_div" v-if="item2.selected">
                     <div class="selected">
                       <div class="curcle" @click="unchooseImg(item,item2,index)">
                       </div>
-                      <div class="normal" :style="{backgroundImage:'url('+item2.accessUrl+')'}">
+                      <div class="normal">
+                        <img src="../../assets/video.png" v-if="item2.useful"/>
+                        <!-- <video :src="item2.accessUrl" @error="imgError(item2)" v-if="item2.useful"></video>
+                        <img src="../../assets/nofound.png" v-if="!item2.useful"/> -->
                       </div>
                     </div>
                   </div>
@@ -148,12 +164,13 @@
       <div class="content" v-if="tabActive==3">
         <!-- 个人 -->
         <van-list class="list_private" v-model="loading" :finished="finished" finished-text="没有更多了" @load="queryAudios()"
-          v-if="curCagetory==2">
+          v-if="curCagetory==2" :offset="10">
           <div class="list_item audio_img" v-for="(item,index) in list" @click="goDetailPrivate(item)">
             <!--<em class="item_mask"><span>{{item.status==0?"未标引":(item.status==1?"审核中":"已标引")}}</span></em>-->
             <div class="item_preview">
-              <audio :src="item.accessUrl" @error="imgError(item)">
-              </audio>
+              <!-- <audio :src="item.accessUrl" @error="imgError(item)" v-if="item.useful"/> -->
+              <img src="../../assets/folder@2x.png"/>
+              <!-- <img src="../../assets/nofound.png" v-if="!item.useful"/> -->
             </div>
             <div class="list_info">
               <div class="info_name">{{item.name}}</div>
@@ -163,7 +180,7 @@
         </van-list>
         <!-- 成品 -->
         <van-list class="list_official" v-model="loading" :finished="finished" finished-text="没有更多了" @load="queryImages()"
-          v-if="curCagetory==0">
+          v-if="curCagetory==0" :offset="10">
           <div class="list_item" v-for="(item,index) in mapKeys(listWithTime)">
             <!--<em class="item_mask"><span>{{item.status==0?"未标引":(item.status==1?"审核中":"已标引")}}</span></em>-->
             <div class="list_time">
@@ -171,14 +188,16 @@
             </div>
             <div class="imgs">
               <div class="img_item" v-for="(item2,index) in listWithTime[item]" @click="goDetailOfficial(item2)">
-                <audio :src="item2.accessUrl"  @error="imgError(item)"/>
+                <!-- <audio :src="item2.accessUrl"  @error="imgError(item2)" v-if="item2.useful"/> -->
+                <img src="../../assets/folder@2x.png"/>
+                <!-- <img src="../../assets/nofound.png" v-if="!item2.useful"/> -->
               </div>
             </div>
           </div>
         </van-list>
         <!-- 共享 -->
         <van-list class="list_public" v-model="loading" :finished="finished" finished-text="没有更多了" @load="queryImages()"
-          v-if="curCagetory==1">
+          v-if="curCagetory==1" :offset="10">
           <div class="list_item" v-for="(item,index) in mapKeys(listWithTime)">
             <!--<em class="item_mask"><span>{{item.status==0?"未标引":(item.status==1?"审核中":"已标引")}}</span></em>-->
             <div class="list_time">
@@ -187,20 +206,29 @@
             <div class="imgs">
               <div class="img_item" v-for="(item2,index) in listWithTime[item]" @touchstart.stop="start()" @touchend.stop="end(item2)"
                 @touchmove="move()">
-                <div class="normal" :style="{backgroundImage:'url('+item2.accessUrl+')'}" v-if="!showOperation">
+                <div class="normal" v-if="!showOperation">
+                  <!-- <audio :src="item2.accessUrl"  @error="imgError(item2)" v-if="item2.useful"/> -->
+                  <img src="../../assets/folder@2x.png"/>
+                  <!-- <img src="../../assets/nofound.png" v-if="!item2.useful"/> -->
                 </div>
                 <div class="operation" v-if="showOperation">
                   <div v-if="!item2.selected">
                     <div class="curcle" @click="chooseImg(item,item2,index)">
                     </div>
-                    <div class="normal" :style="{backgroundImage:'url('+item2.accessUrl+')'}">
+                    <div class="normal">
+                      <!-- <audio :src="item2.accessUrl"  @error="imgError(item2)" v-if="item2.useful"/> -->
+                      <img src="../../assets/folder@2x.png" v-if="item2.useful"/>
+                      <!-- <img src="../../assets/nofound.png" v-if="!item2.useful"/> -->
                     </div>
                   </div>
                   <div class="selected_div" v-if="item2.selected">
                     <div class="selected">
                       <div class="curcle" @click="unchooseImg(item,item2,index)">
                       </div>
-                      <div class="normal" :style="{backgroundImage:'url('+item2.accessUrl+')'}">
+                      <div class="normal">
+                        <!-- <audio :src="item2.accessUrl"  @error="imgError(item2)" v-if="item2.useful"/> -->
+                        <img src="../../assets/folder@2x.png" v-if="item2.useful"/>
+                        <!-- <img src="../../assets/nofound.png" v-if="!item2.useful"/> -->
                       </div>
                     </div>
                   </div>
@@ -250,19 +278,19 @@
       <div class="wrapper">
         <div class="block" @click.stop>
           <img :src="previewSrc" @error="previewSrc=nofoundImg" v-if="tabActive==1" />
-          <video :src="previewSrc" @error="previewSrc=nofoundImg" controls="controls" v-if="tabActive==2" />
-          <audio :src="previewSrc" @error="previewSrc=nofoundImg" controls="controls" v-if="tabActive==3" />
+          <video id="myVideo" :src="previewSrc" @error="previewSrc=nofoundImg" controls="controls" v-if="tabActive==2" />
+          <audio id="myAudio" :src="previewSrc" @error="previewSrc=nofoundImg" controls="controls" v-if="tabActive==3" />
         </div>
         <div class="upload_cancel_div" v-if="privatePreviewBtn">
-          <div class="upload_cancel_btn" style="background: #E9021E;" @click="showPreview = false;">取消</div>
+          <div class="upload_cancel_btn" style="background: #E9021E;" @click="previewCancel();">取消</div>
         </div>
         <div class="upload_cancel_div" v-if="uploadPreviewBtn">
           <div class="upload_cancel_btn" @click="upload()">上传</div>
-          <div class="upload_cancel_btn" style="background: #E9021E;" @click="showPreview = false;">取消</div>
+          <div class="upload_cancel_btn" style="background: #E9021E;" @click="previewCancel();">取消</div>
         </div>
         <div class="upload_cancel_div" v-if="officialPreviewBtn">
           <div class="upload_cancel_btn" @click="downloadByBlob(previewSrc,new Date().getTime())">下载</div>
-          <div class="upload_cancel_btn" style="background: #E9021E;" @click="showPreview = false;">取消</div>
+          <div class="upload_cancel_btn" style="background: #E9021E;" @click="previewCancel();">取消</div>
         </div>
       </div>
     </van-overlay>
@@ -310,7 +338,7 @@
     data() {
       return {
         nofoundImg:nofoundImg,
-        pageSize: 20,
+        pageSize: 10,
         partingTitle: this.common.parting.value ? this.common.parting.value : '素材',
         partingCode: this.common.parting.code ? this.common.parting.code : '',
         curCagetory:2,
@@ -335,7 +363,8 @@
         showOperation: false,
         timeOutEvent: 0,
         imgSelected: false,
-        selectedUrls: []
+        selectedUrls: [],
+        play:true
       }
     },
     watch: {
@@ -393,11 +422,23 @@
       }
     },
     methods: {
+      previewCancel(){
+        this.showPreview = false;
+        if(this.tabActive==2){//video
+          var video = document.getElementById('myVideo');
+          video.pause();
+        }else if(this.tabActive==3){
+          var audio = document.getElementById('myAudio');
+          audio.pause();
+        }
+
+      },
       imgError(item){
+        console.log(item.name+"####"+item.useful);
+        item.useful=false;
         item.accessUrl=nofoundImg;
       },
       chooseImg(item,item2, index) {
-        console.log(333333)
         var itemTemp = this.listWithTime[item][index];
         itemTemp.selected=true;
         this.listWithTime[item].splice(index,1,itemTemp);
@@ -799,6 +840,10 @@
               _this.loading = false
 
               var listItemTemp = {};
+              _this.list.forEach(item =>{
+                item['useful'] = true;
+              })
+
               if (_this.curCagetory == 0 || _this.curCagetory == 1) {
                 _this.list.forEach(item => {
                   item['selected'] = false;
@@ -883,8 +928,6 @@
             .item_preview {
               width: 50px;
               height: 50px;
-              background: url(../../assets/nofound.png) no-repeat center;
-              background-size: 50% 50%;
               video {
                 width: 50px;
                 height: 50px;
@@ -954,26 +997,24 @@
               flex-wrap: wrap;
 
               .img_item {
-                background: url(../../assets/nofound.png) no-repeat center;
-                background-size: 70% 70%;
                 width: 85px;
                 height: 85px;
 
                 video {
-                  width: 85px;
-                  height: 85px;
+                  width: 60px;
+                  height: 60px;
                   margin: 1px;
                 }
 
                 audio {
-                  width: 85px;
-                  height: 85px;
+                  width: 60px;
+                  height: 60px;
                   margin: 1px;
                 }
 
                 img {
-                  width: 85px;
-                  height: 85px;
+                  width: 60px;
+                  height: 60px;
                   margin: 1px;
                 }
               }
@@ -1007,16 +1048,26 @@
               flex-wrap: wrap;
 
               .img_item {
-                background: url(../../assets/nofound.png) no-repeat center;
-                background-size: 70% 70%;
                 width: 85px;
                 height: 85px;
 
                 .normal {
-                  width: 85px;
-                  height: 85px;
+                  width: 60px;
+                  height: 60px;
                   margin: 1px;
                   background-size: 100% 100%;
+                  video{
+                    width: 60px;
+                    height: 60px;
+                  }
+                  audio{
+                    width: 60px;
+                    height: 60px;
+                  }
+                  img{
+                    width: 60px;
+                    height: 60px;
+                  }
                 }
 
                 .operation {
@@ -1033,12 +1084,28 @@
                     height: 10px;
                     background: url(../../assets/img_unselected@2x.png) no-repeat center;
                     background-size: 100% 100%;
+                    z-index: 9999;
                   }
 
                   .normal {
                     width: 85px;
                     height: 85px;
                     margin: 1px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    video{
+                      width: 60px;
+                      height: 60px;
+                    }
+                    audio{
+                      width: 60px;
+                      height: 60px;
+                    }
+                    img{
+                      width: 60px;
+                      height: 60px;
+                    }
                   }
 
                   .selected_div {
@@ -1062,13 +1129,24 @@
                         left: 0;
                         background: url(../../assets/img_selected@2x.png) no-repeat center;
                         background-size: 100% 100%;
+                        z-index: 9999;
                       }
 
                       .normal {
                         width: 60px;
                         height: 60px;
-                        background: url(../../assets/nofound.png) no-repeat center;
-                        background-size: 80% 80%;
+                        video{
+                          width: 60px;
+                          height: 60px;
+                        }
+                        audio{
+                          width: 60px;
+                          height: 60px;
+                        }
+                        img{
+                          width: 60px;
+                          height: 60px;
+                        }
                       }
                     }
                   }
@@ -1145,7 +1223,6 @@
 
       .block {
         width: 100%;
-
         img {
           max-width: 100%;
           display: block;
@@ -1166,13 +1243,13 @@
       }
 
       .upload_cancel_div {
-        height: 120px;
+        height: 40px;
         width: 100%;
         position: fixed;
         bottom: 0;
         display: flex;
         flex-direction: row;
-
+        margin-bottom: 40px;
         .upload_cancel_btn {
           width: 140px;
           height: 40px;
