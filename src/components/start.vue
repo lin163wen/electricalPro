@@ -17,40 +17,90 @@
 </template>
 
 <script>
-  export default{
-    name:'Start',
-    data(){
-      return{
-        autoToLogin:null
+  import {
+    updateLocation
+  } from '../utils/request.js'
+  export default {
+    name: 'Start',
+    data() {
+      return {
+        autoToLogin: null,
+        longitude: null,
+        latitude: null
       }
     },
     created() {
+      this.getLaLongtitude();
       this.hasToken();
     },
-    methods:{
-      hasToken(){
+    methods: {
+      hasToken() {
         var _this = this;
         var token = localStorage.getItem('token');
-        console.log('Start......',token)
-        if(token){
-          var navigateIndex = localStorage.getItem('navigateIndex')?localStorage.getItem('navigateIndex'):0;
+        console.log('Start......', token)
+        if (token) {
+          var navigateIndex = localStorage.getItem('navigateIndex') ? localStorage.getItem('navigateIndex') : 0;
           console.log(navigateIndex)
-          if(navigateIndex==0){
+          this.updateLocation();
+          if (navigateIndex == 0) {
             this.$router.push('Mission');
-          }else if(navigateIndex==1){
+          } else if (navigateIndex == 1) {
             this.$router.push('Work');
-          }else if(navigateIndex==2){
+          } else if (navigateIndex == 2) {
             this.$router.push('Connection');
-          }else if(navigateIndex==3){
+          } else if (navigateIndex == 3) {
             this.$router.push('Mine');
           }
-        }else{
-          this.autoToLogin = setTimeout(function(){
+
+        } else {
+          this.autoToLogin = setTimeout(function() {
             _this.$router.push('Login')
-          },3000)
+          }, 3000)
         }
       },
-      start(){
+      getLaLongtitude() {
+        var _this = this;
+        AMap.plugin('AMap.Geolocation', function() {
+          var geolocation = new AMap.Geolocation({
+            enableHighAccuracy: true,
+            timeout: 10000 //超过10秒后停止定位，默认：无穷大
+          })
+          geolocation.getCurrentPosition();
+          AMap.event.addListener(geolocation, 'complete', function onComplete(data) {
+            console.log('具体的定位信息', data.position.getLng(), data.position.getLat());
+            localStorage.setItem('longtitude', data.position.getLng())
+            localStorage.setItem('latitude', data.position.getLat())
+          });
+          AMap.event.addListener(geolocation, 'error', function onError(data) {
+            AMap.plugin('AMap.CitySearch', function() {
+              var citySearch = new AMap.CitySearch();
+              citySearch.getLocalCity(function(status, result) {
+                if (status === 'complete' && result.info === 'OK') {
+                  console.log(result);
+                  console.log('通过ip获取当前城市：', result.bounds.northeast.lng, result.bounds.northeast.lat);
+                  localStorage.setItem('longtitude', result.bounds.northeast.lng)
+                  localStorage.setItem('latitude', result.bounds.northeast.lat)
+                }
+              })
+            })
+          });
+
+
+        })
+      },
+      updateLocation() {
+        updateLocation({
+          clientId: 1,
+          longitude: localStorage.getItem('latitude'),
+          latitude: localStorage.getItem('longtitude'),
+        }).then(resp => {
+          console.log(resp);
+        }, err => {
+          console.log(err);
+          _this.loginToast.clear()
+        })
+      },
+      start() {
         clearTimeout(this.autoToLogin);
         this.$router.push('Login')
       }
@@ -58,31 +108,35 @@
   }
 </script>
 <style scoped lang="less">
-  .start_page div{
-      left: 0;
-      bottom: 0;
-      right: 0;
-      margin: 0 auto;
-      position: absolute;
-      text-align: center;
-      width: 100%;
+  .start_page div {
+    left: 0;
+    bottom: 0;
+    right: 0;
+    margin: 0 auto;
+    position: absolute;
+    text-align: center;
+    width: 100%;
   }
-  .start_page{
+
+  .start_page {
     background: #F4F7FF;
     width: 100%;
     height: 100%;
     position: relative;
     overflow-y: auto;
-    .logo{
+
+    .logo {
       width: 350px;
       height: 360px;
       top: 44px;
-      img{
+
+      img {
         width: 100%;
         height: 100%;
       }
     }
-    .official{
+
+    .official {
 
       height: 28px;
       font-size: 20px;
@@ -90,10 +144,11 @@
       font-weight: 500;
       color: #484747;
       line-height: 28px;
-      top:438px;
+      top: 438px;
 
     }
-    .try{
+
+    .try {
       height: 21px;
       font-size: 15px;
       font-family: PingFangSC-Regular, PingFang SC;
@@ -102,14 +157,16 @@
       line-height: 21px;
       top: 477px;
     }
-    .btn{
+
+    .btn {
       width: 344px;
       height: 50px;
       background: url(../assets/start_btn@2x.png);
       background-size: 100% 100%;
-      top:583px;
+      top: 583px;
     }
-    .service{
+
+    .service {
       height: 17px;
       font-size: 12px;
       font-family: PingFangSC-Regular, PingFang SC;

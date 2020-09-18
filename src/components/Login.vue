@@ -38,6 +38,7 @@
     Prelogin,
     Trylogin,
     Comfirmlogin,
+    updateLocation,
     Test,
     Test2
   } from '../utils/request.js'
@@ -65,6 +66,18 @@
     created() {
     },
     methods: {
+      updateLocation(){
+        updateLocation({
+          clientId:1,
+          longitude:localStorage.getItem('latitude'),
+          latitude:localStorage.getItem('latitude'),
+        }).then(resp=>{
+          console.log(resp);
+        }, err => {
+              console.log(err);
+              _this.loginToast.clear()
+        })
+      },
       goto() {
         var _this = this;
         this.loginToast = Toast.loading({
@@ -103,6 +116,17 @@
                       clearInterval(_this.comfirmLoginInterval);
                       _this.loginToast.clear()
                       localStorage.setItem('token', response.data.token);
+
+                      updateLocation({
+                        clientId:1,
+                        longitude:localStorage.getItem('latitude'),
+                        latitude:localStorage.getItem('longtitude'),
+                      }).then(resp=>{
+                        console.log(resp);
+                      }, err => {
+                        console.log(err);
+                      })
+
                       _this.$router.push('/Mission')
                     } else {
                       _this.comfirmLoginCount++;

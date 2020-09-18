@@ -58,7 +58,10 @@
       }
     },
     created() {
-      this.queryUserInfo()
+      this.queryUserInfo();
+    },
+    mounted() {
+
     },
     methods: {
       goSetting() {
@@ -89,9 +92,10 @@
 </script>
 
 <style scoped lang="less">
-  .mine_div{
+  .mine_div {
     height: 100%;
     background-color: #FFFFFF;
+
     .mine {
       background: url(../../assets/mine_bg@2x.png) no-repeat center;
       background-size: 100% 100%;
@@ -166,6 +170,7 @@
       color: #3F3E3E;
       line-height: 25px;
       background: #FFFFFF;
+
       .setting {
         height: 60px;
         width: 100%;

@@ -6,7 +6,7 @@ export const domain = '';
 export const Prelogin = params =>   { return axios.post(domain+'/api/rmt/pre-login',params, {showLoading: true}) }
 export const Trylogin = params =>   { return axios.post(domain+'/api/rmt/try-login',params, {showLoading: true}) }
 export const Comfirmlogin = params =>   { return axios.post(domain+'/api/rmt/confirm-login',params, {showLoading: true}) }
-
+export const updateLocation = params =>   { return axios.post(domain+'/api/cms/updateUserLiveInformation',params, {showLoading: true}) }
 //mine
 export const getUserInfo = params =>   { return axios.post(domain+'/api/m/member/info',params, {showLoading: true}) }
 
