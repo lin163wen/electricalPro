@@ -11,14 +11,14 @@ module.exports = {
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     proxyTable: {
-       '/api': {
+       /* '/api': {
         //target: 'https://business-h5-test.motree.cn',//motree测试环境
         // target: 'http://h5-test.test.lemobar.cn',//内网测试
         target: 'http://testsgcc.xinhuaapp.com:19002', //本地测试环境
         pathRewrite: {},
         changeOrigin: true,
         cookieDomainRewrite: ''
-      }
+      } */
     },
 
     // Various Dev Server settings

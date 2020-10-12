@@ -1,7 +1,8 @@
 import * as axios from './client'
 
-//export const domain = 'http://testsgcc.xinhuaapp.com:19002'
-export const domain = '';
+export const domain = 'http://testsgcc.xinhuaapp.com:19002'
+//export const domain = '';
+//export const domain = 'http://192.168.220.82:18080'
 //登陆
 export const Prelogin = params =>   { return axios.post(domain+'/api/rmt/pre-login',params, {showLoading: true}) }
 export const Trylogin = params =>   { return axios.post(domain+'/api/rmt/try-login',params, {showLoading: true}) }

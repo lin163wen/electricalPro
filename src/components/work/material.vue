@@ -369,7 +369,7 @@
     },
     watch: {
       tabActive: function(val, oldVal) {
-        this.curCagetory = 2; //默认显示个人
+        //this.curCagetory = 2; //默认显示个人
         this.initQueryParams();
         this.common.setParting('', ''); //清空分类
         this.partingTitle = '素材'
@@ -403,7 +403,7 @@
         this.getParting();
       },
       curCagetory: function(val, oldVal) {
-        console.log(val);
+        //console.log(val);
       }
     },
     created() {
